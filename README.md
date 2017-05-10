@@ -2,14 +2,14 @@
 OOP2 assignment
 
 
-#Functioins
+# Functions
 1. User Profile
 2. Admin profile 
 3. Location or address cinema selection 
 4. Movie and seat selection 
 5. Purchase confirmation
 
-#Task Distribution 
+# Task Distribution
 1. Qing
 - Cinema Hall
 - Option
