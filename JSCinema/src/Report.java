@@ -1,29 +1,19 @@
-import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Dashboard{
-	
-	public Scene getDashboard(Stage stage) throws Exception{
-		stage.setTitle("Dashboard");
+public class Report {
+	public Scene getReport(Stage stage) throws Exception{
+		stage.setTitle("Report");
 		Pane root = new Pane();// root pane 
 		
 		//Setting Background Image
@@ -88,7 +78,8 @@ public class Dashboard{
 		
     	btn1.setOnAction(e -> {
     		try {
-				stage.setScene(getDashboard(stage));
+    			Dashboard dashboard = new Dashboard();
+				stage.setScene(dashboard.getDashboard(stage));
 			} catch (Exception e1) {
 				System.out.println("Scene not found");
 			}
@@ -121,9 +112,8 @@ public class Dashboard{
     			+ "-fx-background-color: transparent;");
     	
     	btn3.setOnAction(e -> {
-    		Report report = new Report();
     		try {
-				stage.setScene(report.getReport(stage));
+				stage.setScene(getReport(stage));
 			} catch (Exception e1) {
 				System.out.println("Scene not found");
 			}
@@ -172,143 +162,12 @@ public class Dashboard{
     	leftOutline.getChildren().add(hb5);
     	
     	left.getChildren().add(leftOutline);
-
-		// Center content
-		Pane centTop = new Pane();
-    	StackPane centerTop = new StackPane();
-    	centerTop.setPadding(new Insets(185,50,50,400));	
-		GridPane ctop1 = new GridPane();
-		//ctop1.setGridLinesVisible(true);
-		ctop1.setPadding(new Insets(70, 50,50,15));
-		ctop1.setHgap(40);
 		
-		FileInputStream imageStream10 = new FileInputStream("4.png");
-		Image image10 = new Image(imageStream10);
-		ImageView imgview10 = new ImageView(image10);
-		imgview10.setFitHeight(100);
-		imgview10.setFitWidth(100);
-		GridPane.setRowSpan(imgview10, 5);
-		ctop1.add(imgview10, 0, 0);
-		
-		FileInputStream imageStream11 = new FileInputStream("LeftDashboard/4.png");
-		Image image11 = new Image(imageStream11);
-		ImageView imgview11 = new ImageView(image11);
-		imgview11.setFitHeight(80);
-		imgview11.setFitWidth(80);
-		GridPane.setRowSpan(imgview11, 5);
-		ctop1.add(imgview11, 4, 0);
-		
-		FileInputStream imageStream12 = new FileInputStream("LeftDashboard/5.png");
-		Image image12 = new Image(imageStream12);
-		ImageView imgview12 = new ImageView(image12);
-		imgview12.setFitHeight(90);
-		imgview12.setFitWidth(90);
-		GridPane.setRowSpan(imgview12, 5);
-		ctop1.add(imgview12, 8, 0);
-		
-		centerTop.getChildren().add(ctop1);
-		
-		FileInputStream imageStream13 = new FileInputStream("5.png");
-		Image image13 = new Image(imageStream13);
-		ImageView imgview13 = new ImageView(image13);
-		imgview13.setFitWidth(960);
-		imgview13.setFitHeight(180);
-		
-		centerTop.getChildren().add(imgview13);
-		
-		centTop.getChildren().add(centerTop);
-		
-		Text ctText1 = new Text("3");
-		Text ctText2 = new Text("movie showing today");
-		ctText1.setFont(Font.font(28));
-		ctText2.setFont(Font.font(14));
-		ctText1.setFill(Color.WHITE);
-		ctText2.setFill(Color.WHITE);
-		ctop1.add(ctText1, 1, 3);
-		ctop1.add(ctText2, 1, 4);
-		Text ctText3 = new Text("0");
-		Text ctText4 = new Text("booking made today");
-		ctText3.setFont(Font.font(28));
-		ctText4.setFont(Font.font(14));
-		ctText3.setFill(Color.WHITE);
-		ctText4.setFill(Color.WHITE);
-		ctop1.add(ctText3, 5, 3);
-		ctop1.add(ctText4, 5, 4);
-		Text ctText5 = new Text("5");
-		Text ctText6 = new Text("halls");
-		ctText5.setFont(Font.font(28));
-		ctText6.setFont(Font.font(14));
-		ctText5.setFill(Color.WHITE);
-		ctText6.setFill(Color.WHITE);
-		ctop1.add(ctText5, 9, 3);
-		ctop1.add(ctText6, 9, 4);
-		
-		root.getChildren().add(centTop);
-		
-		// 2nd heading
-		HBox headingContainer = new HBox();
-		headingContainer.setPadding(new Insets(400,50,50,430));
-		Text heading1 = new Text("Now Showing:");
-		heading1.setFont(Font.font(45));
-		heading1.setStyle("-fx-font-weight: bold;");
-		heading1.setFill(Color.WHITE);
-		
-		headingContainer.getChildren().add(heading1);
-		root.getChildren().add(headingContainer);
-		
-		// bottom content
-		ScrollPane container = new ScrollPane();
-		container.setPrefHeight(200);
-		container.setPrefWidth(500);
-		container.setPadding(new Insets(50,50,50,50));
-		container.setStyle("-fx-background-color : transparent; -fx-background: transparent; ");
-		container.setHbarPolicy(ScrollBarPolicy.NEVER);
-		container.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		
-		StackPane nowShowing = new StackPane();
-		nowShowing.setPadding(new Insets(400,50,50,400));
-		
-		FileInputStream imageStream14 = new FileInputStream("LeftDashboard/container.png");
-		Image image14 = new Image(imageStream14);
-		ImageView imgview14 = new ImageView(image14);
-		imgview14.setFitWidth(1000);
-		imgview14.setFitHeight(400);
-		nowShowing.getChildren().add(imgview14);
-		
-		nowShowing.getChildren().add(container);
-		root.getChildren().add(nowShowing);
-		
-		root.getChildren().add(left);
+    	// Graph
+    	
+    	
+    	root.getChildren().add(left);
 		Scene scene = new Scene(root, 1440, 960);
 		return scene;
-	}
-	
-	public void displayNowShowing() throws Exception{
-		File file = new File("Exercise1.txt");
-		Scanner input = new Scanner(file);
-		
-		while(input.hasNext()){
-			String word = input.nextLine();
-			
-			String[] splitter = word.split(",");
-			
-			for(String list: splitter){
-				
-			}
-		}
-		
-		ArrayList<String> list = new ArrayList<String>();
-	}
-	
-	public String getNowShowingNo() throws Exception{
-		
-		
-		return null;
-	}
-	
-	public String getTotalBookingMade() throws Exception{
-		
-		
-		return null;
 	}
 }

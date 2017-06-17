@@ -3,6 +3,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class AdminPage extends Application{
+	
 	public void start(Stage primaryStage) throws Exception{
 		startAdminPage(primaryStage);
 	}
@@ -10,8 +11,8 @@ public class AdminPage extends Application{
 	public void startAdminPage(Stage primaryStage) throws Exception{
 		Dashboard dashboard = new Dashboard();
 		
-		Scene scene = dashboard.getDashboard();
-		primaryStage.setTitle("Admin dashboard"); //Set the stage title 
+		Scene scene = dashboard.getDashboard(primaryStage);
+		primaryStage.setTitle("Dashboard"); //Set the stage title 
 		primaryStage.setScene(scene); //Place the scene in the stage
 		primaryStage.show();
 	}
