@@ -16,7 +16,9 @@ public class AdminPage extends Application {
 
 	public void start(Stage primaryStage) throws Exception{
 		setMainStage(primaryStage);
-		startAdminPage(getMainStage());
+		//startAdminPage(getMainStage());
+		getMainStage().setScene(LoginPage.generateLoginScreen());
+		getMainStage().show();
 	}
 	
 	public void startAdminPage(Stage primaryStage) throws Exception{
@@ -25,7 +27,6 @@ public class AdminPage extends Application {
 		Scene scene = dashboard.getDashboard(primaryStage);
 		primaryStage.setTitle("Dashboard"); //Set the stage title 
 		primaryStage.setScene(scene); //Place the scene in the stage
-		primaryStage.show();
 	}
 	
 	public static void main(String[] args){
