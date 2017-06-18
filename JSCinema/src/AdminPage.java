@@ -2,10 +2,21 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class AdminPage extends Application{
+public class AdminPage extends Application {
+
+	private Stage mainStage;
 	
+	public Stage getMainStage() {
+		return mainStage;
+	}
+
+	public void setMainStage(Stage mainStage) {
+		this.mainStage = mainStage;
+	}
+
 	public void start(Stage primaryStage) throws Exception{
-		startAdminPage(primaryStage);
+		setMainStage(primaryStage);
+		startAdminPage(getMainStage());
 	}
 	
 	public void startAdminPage(Stage primaryStage) throws Exception{
