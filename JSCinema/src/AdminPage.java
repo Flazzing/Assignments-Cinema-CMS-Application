@@ -4,14 +4,23 @@ import javafx.stage.Stage;
 
 public class AdminPage extends Application {
 
-	private Stage mainStage;
+	private static Stage mainStage;
+	private static User userLoggedIn;
 	
-	public Stage getMainStage() {
+	public static Stage getMainStage() {
 		return mainStage;
 	}
 
-	public void setMainStage(Stage mainStage) {
-		this.mainStage = mainStage;
+	public static void setMainStage(Stage mainStage) {
+		AdminPage.mainStage = mainStage;
+	}
+
+	public static User getUserLoggedIn() {
+		return userLoggedIn;
+	}
+
+	public static void setUserLoggedIn(User userLoggedIn) {
+		AdminPage.userLoggedIn = userLoggedIn;
 	}
 
 	public void start(Stage primaryStage) throws Exception{
