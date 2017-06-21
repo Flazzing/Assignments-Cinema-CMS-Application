@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -24,10 +25,11 @@ public class Dashboard{
 	
 	public Scene getDashboard(Stage stage) throws Exception{
 		stage.setTitle("Dashboard");
+		System.out.println("Entered Admin's Dashboard!");
 		Pane root = new Pane();// root pane 
 		
 		//Setting Background Image
-		FileInputStream imageStream1 = new FileInputStream("1.png");
+		FileInputStream imageStream1 = new FileInputStream("PageLayout/1.png");
 		Image image = new Image(imageStream1);
 		ImageView imgview = new ImageView(image);
 		imgview.setFitHeight(960);
@@ -36,7 +38,7 @@ public class Dashboard{
 		
 		//Create Header
 		Pane header = new Pane();
-		FileInputStream imageStream2 = new FileInputStream("2.png");
+		FileInputStream imageStream2 = new FileInputStream("PageLayout/2.png");
 		Image image2 = new Image(imageStream2);
 		ImageView imgview2 = new ImageView(image2);
 		imgview2.setLayoutY(0);
@@ -46,7 +48,7 @@ public class Dashboard{
 		
 		// Title on header
 		Pane title = new Pane();
-		FileInputStream imageStream3 = new FileInputStream("3.png");
+		FileInputStream imageStream3 = new FileInputStream("PageLayout/3.png");
 		Image image3 = new Image(imageStream3);
 		ImageView imgview3 = new ImageView(image3);
 		imgview3.setLayoutX(542);
@@ -88,7 +90,7 @@ public class Dashboard{
 		
     	btn1.setOnAction(e -> {
     		try {
-				stage.setScene(getDashboard(stage));
+				stage.setScene(getDashboard(stage)); // back to dashboard
 			} catch (Exception e1) {
 				System.out.println("Scene not found");
 			}
@@ -121,10 +123,10 @@ public class Dashboard{
     			+ "-fx-background-color: transparent;");
     	
     	btn3.setOnAction(e -> {
-    		Report report = new Report();
+    		Report report = new Report(); // Create report object from report class
     		try {
-				stage.setScene(report.getReport(stage));
-			} catch (Exception e1) {
+				stage.setScene(report.getReport(stage));// Change to report scene
+			} catch (Exception ex) {
 				System.out.println("Scene not found");
 			}
     	});
@@ -153,9 +155,29 @@ public class Dashboard{
     	
     	btn5.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
     			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			);
+    			+ "-fx-background-color: transparent;");
     	
     	btn5.setOnAction(e -> {
+    		Pane exitPane = new Pane();
+    		Text msg = new Text("Are you sure?");
+    		exitPane.getChildren().add(msg);
+    		Button btnA = new Button("Yes");
+    		Button btnB = new Button("No");
+    		
+    		btnA.setOnAction(e1 -> {
+    			System.out.println("Good work, enjoy your day! :)");
+    			System.exit(1);
+    		});
+    		
+    		btnB.setOnAction(e1 -> {
+    			System.exit(2);
+    		});
+    		
+    		exitPane.getChildren().add(btnA);
+    		exitPane.getChildren().add(btnB);
+    		
+    		Scene exitscene = new Scene(exitPane, 200,200);
+    		Stage exitstage = new Stage();
     		System.exit(1);
     	});
     	
@@ -178,11 +200,10 @@ public class Dashboard{
     	StackPane centerTop = new StackPane();
     	centerTop.setPadding(new Insets(185,50,50,400));	
 		GridPane ctop1 = new GridPane();
-		//ctop1.setGridLinesVisible(true);
 		ctop1.setPadding(new Insets(70, 50,50,15));
 		ctop1.setHgap(40);
 		
-		FileInputStream imageStream10 = new FileInputStream("4.png");
+		FileInputStream imageStream10 = new FileInputStream("TopDashboard/4.png");
 		Image image10 = new Image(imageStream10);
 		ImageView imgview10 = new ImageView(image10);
 		imgview10.setFitHeight(100);
@@ -208,7 +229,7 @@ public class Dashboard{
 		
 		centerTop.getChildren().add(ctop1);
 		
-		FileInputStream imageStream13 = new FileInputStream("5.png");
+		FileInputStream imageStream13 = new FileInputStream("TopDashboard/5.png");
 		Image image13 = new Image(imageStream13);
 		ImageView imgview13 = new ImageView(image13);
 		imgview13.setFitWidth(960);
@@ -218,7 +239,7 @@ public class Dashboard{
 		
 		centTop.getChildren().add(centerTop);
 		
-		Text ctText1 = new Text("3");
+		Text ctText1 = new Text(Integer.toString(getNowShowingNo())); // get number of movie showing then change to String type
 		Text ctText2 = new Text("movie showing today");
 		ctText1.setFont(Font.font(28));
 		ctText2.setFont(Font.font(14));
@@ -226,7 +247,7 @@ public class Dashboard{
 		ctText2.setFill(Color.WHITE);
 		ctop1.add(ctText1, 1, 3);
 		ctop1.add(ctText2, 1, 4);
-		Text ctText3 = new Text("0");
+		Text ctText3 = new Text(Integer.toString(getTotalBookingMade())); // get number of booking made then change to String type
 		Text ctText4 = new Text("booking made today");
 		ctText3.setFont(Font.font(28));
 		ctText4.setFont(Font.font(14));
@@ -243,7 +264,7 @@ public class Dashboard{
 		ctop1.add(ctText5, 9, 3);
 		ctop1.add(ctText6, 9, 4);
 		
-		root.getChildren().add(centTop);
+		root.getChildren().add(centTop); 
 		
 		// 2nd heading
 		HBox headingContainer = new HBox();
@@ -256,9 +277,9 @@ public class Dashboard{
 		headingContainer.getChildren().add(heading1);
 		root.getChildren().add(headingContainer);
 		
-		// bottom content
+		// Now Showing (Bottom)
 		ScrollPane container = new ScrollPane();
-		container.setPrefHeight(200);
+		container.setPrefHeight(290);
 		container.setPrefWidth(500);
 		container.setPadding(new Insets(50,50,50,50));
 		container.setStyle("-fx-background-color : transparent; -fx-background: transparent; ");
@@ -266,7 +287,10 @@ public class Dashboard{
 		container.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		
 		StackPane nowShowing = new StackPane();
-		nowShowing.setPadding(new Insets(400,50,50,400));
+		nowShowing.setStyle("-fx-background-image: url('LeftDashboard/container.png'); -fx-background-size: 1000 400;");
+		nowShowing.setPadding(new Insets(450,50,50,395));
+		
+		Pane content = new Pane();
 		
 		FileInputStream imageStream14 = new FileInputStream("LeftDashboard/container.png");
 		Image image14 = new Image(imageStream14);
@@ -274,8 +298,8 @@ public class Dashboard{
 		imgview14.setFitWidth(1000);
 		imgview14.setFitHeight(400);
 		nowShowing.getChildren().add(imgview14);
-		
-		nowShowing.getChildren().add(container);
+		content.getChildren().add(container);
+		nowShowing.getChildren().add(content);
 		root.getChildren().add(nowShowing);
 		
 		root.getChildren().add(left);
@@ -284,7 +308,7 @@ public class Dashboard{
 	}
 	
 	public void displayNowShowing() throws Exception{
-		File file = new File("Exercise1.txt");
+		File file = new File("MovieData/movies.txt");
 		Scanner input = new Scanner(file);
 		
 		while(input.hasNext()){
@@ -300,15 +324,47 @@ public class Dashboard{
 		ArrayList<String> list = new ArrayList<String>();
 	}
 	
-	public String getNowShowingNo() throws Exception{
+	public int getNowShowingNo() throws Exception{
+		int num = 0;
+		File file = new File("MovieData/movies.txt");
 		
-		
-		return null;
+		if(file.exists()){
+    		System.out.println("File Opened! Calculating number of movies.");
+    		Scanner input = new Scanner(file);
+    		
+    		while(input.hasNextLine()){
+    			num++;
+    			input.nextLine();
+    		}// end of while ( calculate lines in text file, 1 line = 1 movie showing)
+    		
+    		input.close();// close input 
+    	}else{
+    		System.out.println("File not found!");
+    	}
+		System.out.println("Movies Available: " +num);
+		return num;// return number of movie showing
 	}
 	
-	public String getTotalBookingMade() throws Exception{
+	public int getTotalBookingMade() throws Exception{
+		String num = "";
+		int tot = 0;
+		File file = new File("MovieData/bookingmade.txt");
 		
-		
-		return null;
+		if(file.exists()){
+    		System.out.println("File Opened! Calculating number of booking made.");
+    		Scanner input = new Scanner(file);
+    		
+    		while(input.hasNextLine()){
+    			input.nextLine();
+    			num = input.nextLine();// line in text file of even number store the number of booking made 
+    			tot += Integer.parseInt(num);// Change num as string to int to enable calculation
+    		}// end of while 
+    		
+    		input.close();// close input 
+    	}else{
+    		System.out.println("File not found!");
+    	}
+		System.out.println("Movies Available: " +num);
+		return tot; // Return total number of booking made 
 	}
 }

@@ -1,7 +1,12 @@
+import java.io.File;
 import java.io.FileInputStream;
-
+import java.util.Scanner;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,24 +14,26 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Report {
 	public Scene getReport(Stage stage) throws Exception{
 		stage.setTitle("Report");
+		System.out.println("Entered report page!");
 		Pane root = new Pane();// root pane 
 		
 		//Setting Background Image
-		FileInputStream imageStream1 = new FileInputStream("1.png");
+		FileInputStream imageStream1 = new FileInputStream("PageLayout/1.png");
 		Image image = new Image(imageStream1);
 		ImageView imgview = new ImageView(image);
 		imgview.setFitHeight(960);
 		imgview.setFitWidth(1440);
-		root.getChildren().add(imgview);
+		//root.getChildren().add(imgview);
 		
 		//Create Header
 		Pane header = new Pane();
-		FileInputStream imageStream2 = new FileInputStream("2.png");
+		FileInputStream imageStream2 = new FileInputStream("PageLayout/2.png");
 		Image image2 = new Image(imageStream2);
 		ImageView imgview2 = new ImageView(image2);
 		imgview2.setLayoutY(0);
@@ -36,7 +43,7 @@ public class Report {
 		
 		// Title on header
 		Pane title = new Pane();
-		FileInputStream imageStream3 = new FileInputStream("3.png");
+		FileInputStream imageStream3 = new FileInputStream("PageLayout/3.png");
 		Image image3 = new Image(imageStream3);
 		ImageView imgview3 = new ImageView(image3);
 		imgview3.setLayoutX(542);
@@ -78,8 +85,8 @@ public class Report {
 		
     	btn1.setOnAction(e -> {
     		try {
-    			Dashboard dashboard = new Dashboard();
-				stage.setScene(dashboard.getDashboard(stage));
+    			Dashboard dashboard = new Dashboard(); // Create a dashboard object from dashboard class
+				stage.setScene(dashboard.getDashboard(stage)); // change to dashboard scene
 			} catch (Exception e1) {
 				System.out.println("Scene not found");
 			}
@@ -113,7 +120,7 @@ public class Report {
     	
     	btn3.setOnAction(e -> {
     		try {
-				stage.setScene(getReport(stage));
+				stage.setScene(getReport(stage)); // back to report scene
 			} catch (Exception e1) {
 				System.out.println("Scene not found");
 			}
@@ -143,7 +150,7 @@ public class Report {
     	
     	btn5.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
     			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			);
+    			+ "-fx-background-color: transparent;");
     	
     	btn5.setOnAction(e -> {
     		System.exit(1);
@@ -161,13 +168,76 @@ public class Report {
     	leftOutline.getChildren().add(hb4);
     	leftOutline.getChildren().add(hb5);
     	
-    	left.getChildren().add(leftOutline);
-		
-    	// Graph
+    	left.getChildren().add(leftOutline);   	
     	
+    	HBox graph = displayGraph();
+    	graph.setPadding(new Insets(200,50,50,395));
     	
-    	root.getChildren().add(left);
+    	root.getChildren().add(graph);// Calling graph pane
+    	root.getChildren().add(left);// adding left sidebar to root pane
 		Scene scene = new Scene(root, 1440, 960);
 		return scene;
+	}
+	
+	public int getMoviesBooked() throws Exception{
+		int num = 0;
+		File file = new File("MovieData/bookingmade.txt");
+		
+		if(file.exists()){
+    		System.out.println("File Opened! Calculating number of movies");
+    		Scanner input = new Scanner(file);
+    		
+    		while(input.hasNextLine()){
+    			num++;
+    			input.nextLine();
+    		}
+    		input.close();
+    	}else{
+    		System.out.println("File not found, No graph to be shown");
+    	}
+		return num/2;
+	}
+	
+	public HBox displayGraph() throws Exception{
+		HBox graph = new HBox();
+    	
+    	CategoryAxis xAxis = new CategoryAxis();
+    	NumberAxis yAxis = new NumberAxis();
+    	
+    	xAxis.tickLabelFontProperty().set(Font.font(20));
+    	yAxis.tickLabelFontProperty().set(Font.font(20));
+    	
+    	BarChart<String,Number> bc = 
+                new BarChart<String,Number>(xAxis,yAxis);
+
+    	bc.setTitle("Booking summary");
+    	xAxis.setLabel("Date");
+    	yAxis.setLabel("Number of Booking");
+    	bc.setPrefHeight(600);
+    	bc.setPrefWidth(1000);
+    	
+    	XYChart.Series series1 = new XYChart.Series<>();
+    	
+    	File file = new File("MovieData/bookingmade.txt");
+    	
+    	if(file.exists()){
+    		System.out.println("File Opened!");
+    		Scanner input = new Scanner(file);
+    		
+    		while(input.hasNextLine()){
+    			String movieTitle = input.nextLine();
+    			String bookingmade = input.nextLine();
+    			series1.setName(movieTitle);
+    			series1.getData().add(new XYChart.Data(movieTitle,
+    					Integer.parseInt(bookingmade)));
+    		}
+    		input.close();
+    	}else{
+    		System.out.println("File not found, No graph to be shown");
+    	}
+    	
+    	bc.getData().add(series1);
+    	graph.getChildren().add(bc);
+		return graph;
 	}
 }
