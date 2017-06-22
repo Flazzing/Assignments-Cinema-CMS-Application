@@ -3,11 +3,14 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -84,9 +87,7 @@ public class Dashboard{
     	Button btn1 = new Button("DashBoard");
     	btn1.setGraphic(imageView5);
     	 
-    	btn1.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
+    	changeButtonProperty(btn1);
 		
     	btn1.setOnAction(e -> {
     		try {
@@ -105,9 +106,7 @@ public class Dashboard{
     	Button btn2 = new Button("Movies");
     	btn2.setGraphic(imageView6);
     	
-    	btn2.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
+    	changeButtonProperty(btn2);
         	
     	HBox hb3 = new HBox();
     	FileInputStream imageStream7 = new FileInputStream("LeftDashboard/4.png"); 
@@ -118,9 +117,7 @@ public class Dashboard{
     	Button btn3 = new Button("Report");
     	btn3.setGraphic(imageView7);
     	
-    	btn3.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
+    	changeButtonProperty(btn3);
     	
     	btn3.setOnAction(e -> {
     		Report report = new Report(); // Create report object from report class
@@ -140,9 +137,7 @@ public class Dashboard{
     	Button btn4 = new Button("Users");
     	btn4.setGraphic(imageView8);
     	
-    	btn4.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
+    	changeButtonProperty(btn4);
     	
     	HBox hb5 = new HBox();
     	FileInputStream imageStream9 = new FileInputStream("LeftDashboard/8.png"); 
@@ -153,32 +148,17 @@ public class Dashboard{
     	Button btn5 = new Button("Logout");
     	btn5.setGraphic(imageView9);
     	
-    	btn5.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
+    	changeButtonProperty(btn5);
     	
     	btn5.setOnAction(e -> {
-    		Pane exitPane = new Pane();
-    		Text msg = new Text("Are you sure?");
-    		exitPane.getChildren().add(msg);
-    		Button btnA = new Button("Yes");
-    		Button btnB = new Button("No");
-    		
-    		btnA.setOnAction(e1 -> {
-    			System.out.println("Good work, enjoy your day! :)");
-    			System.exit(1);
-    		});
-    		
-    		btnB.setOnAction(e1 -> {
-    			System.exit(2);
-    		});
-    		
-    		exitPane.getChildren().add(btnA);
-    		exitPane.getChildren().add(btnB);
-    		
-    		Scene exitscene = new Scene(exitPane, 200,200);
-    		Stage exitstage = new Stage();
-    		System.exit(1);
+    		int dialogButton = JOptionPane.NO_OPTION;
+    		dialogButton = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning", dialogButton);
+    		if(dialogButton == JOptionPane.YES_OPTION){
+    			System.out.println("You have logged out!");
+    			System.exit(0);
+    		}
+    		if(dialogButton == JOptionPane.NO_OPTION){
+    		}
     	});
     	
     	hb1.getChildren().add(btn1);
@@ -279,28 +259,29 @@ public class Dashboard{
 		
 		// Now Showing (Bottom)
 		ScrollPane container = new ScrollPane();
-		container.setPrefHeight(290);
-		container.setPrefWidth(500);
+		container.setPrefHeight(330);
+		container.setPrefWidth(905);
 		container.setPadding(new Insets(50,50,50,50));
 		container.setStyle("-fx-background-color : transparent; -fx-background: transparent; ");
 		container.setHbarPolicy(ScrollBarPolicy.NEVER);
 		container.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		
 		StackPane nowShowing = new StackPane();
-		nowShowing.setStyle("-fx-background-image: url('LeftDashboard/container.png'); -fx-background-size: 1000 400;");
 		nowShowing.setPadding(new Insets(450,50,50,395));
 		
-		Pane content = new Pane();
+		StackPane content = new StackPane();
+		content.setPadding(new Insets(506,50,50,450));
 		
 		FileInputStream imageStream14 = new FileInputStream("LeftDashboard/container.png");
 		Image image14 = new Image(imageStream14);
 		ImageView imgview14 = new ImageView(image14);
 		imgview14.setFitWidth(1000);
-		imgview14.setFitHeight(400);
+		imgview14.setFitHeight(440);
 		nowShowing.getChildren().add(imgview14);
-		content.getChildren().add(container);
-		nowShowing.getChildren().add(content);
+		
+		content.getChildren().add(container);// Content containing the scrollpane
 		root.getChildren().add(nowShowing);
+		root.getChildren().add(content);
 		
 		root.getChildren().add(left);
 		Scene scene = new Scene(root, 1440, 960);
@@ -364,7 +345,29 @@ public class Dashboard{
     	}else{
     		System.out.println("File not found!");
     	}
-		System.out.println("Movies Available: " +num);
+		System.out.println("Booking made: " +tot);
 		return tot; // Return total number of booking made 
+	}
+	
+	public void changeButtonProperty(Button btn) throws Exception{
+    	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+    			+ "-fx-background-color: transparent;");
+		
+		DropShadow shadow = new DropShadow();
+		shadow.setColor(Color.LIGHTBLUE);
+		btn.setOnMouseEntered(e -> {
+    		btn.setEffect(shadow);
+    		btn.setStyle("-fx-background-color: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+    			+ "-fx-background-color: transparent;");
+    	});
+    		
+    	btn.setOnMouseExited(e -> {
+    		btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px; -fx-padding: 3 20 3 30; "
+        			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+        			+ "-fx-background-color: transparent;");
+    		btn.setEffect(null);
+    	});
 	}
 }

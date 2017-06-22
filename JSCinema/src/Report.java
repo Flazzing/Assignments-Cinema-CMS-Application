@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Scanner;
+
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -8,12 +10,15 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -29,7 +34,7 @@ public class Report {
 		ImageView imgview = new ImageView(image);
 		imgview.setFitHeight(960);
 		imgview.setFitWidth(1440);
-		//root.getChildren().add(imgview);
+		root.getChildren().add(imgview);
 		
 		//Create Header
 		Pane header = new Pane();
@@ -79,10 +84,8 @@ public class Report {
     	Button btn1 = new Button("DashBoard");
     	btn1.setGraphic(imageView5);
     	 
-    	btn1.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
-		
+    	changeButtonProperty(btn1);
+    	
     	btn1.setOnAction(e -> {
     		try {
     			Dashboard dashboard = new Dashboard(); // Create a dashboard object from dashboard class
@@ -101,9 +104,7 @@ public class Report {
     	Button btn2 = new Button("Movies");
     	btn2.setGraphic(imageView6);
     	
-    	btn2.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
+    	changeButtonProperty(btn2);
         	
     	HBox hb3 = new HBox();
     	FileInputStream imageStream7 = new FileInputStream("LeftDashboard/4.png"); 
@@ -114,9 +115,7 @@ public class Report {
     	Button btn3 = new Button("Report");
     	btn3.setGraphic(imageView7);
     	
-    	btn3.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
+    	changeButtonProperty(btn3);
     	
     	btn3.setOnAction(e -> {
     		try {
@@ -135,9 +134,7 @@ public class Report {
     	Button btn4 = new Button("Users");
     	btn4.setGraphic(imageView8);
     	
-    	btn4.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
+    	changeButtonProperty(btn4);
     	
     	HBox hb5 = new HBox();
     	FileInputStream imageStream9 = new FileInputStream("LeftDashboard/8.png"); 
@@ -148,9 +145,7 @@ public class Report {
     	Button btn5 = new Button("Logout");
     	btn5.setGraphic(imageView9);
     	
-    	btn5.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
+    	changeButtonProperty(btn5);
     	
     	btn5.setOnAction(e -> {
     		System.exit(1);
@@ -236,8 +231,32 @@ public class Report {
     		System.out.println("File not found, No graph to be shown");
     	}
     	
+    	bc.setStyle("-fx-font-size: 20px; -fx-text-fill: #ffffff");
+    	
     	bc.getData().add(series1);
     	graph.getChildren().add(bc);
 		return graph;
+	}
+	
+	public void changeButtonProperty(Button btn) throws Exception{
+    	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+    			+ "-fx-background-color: transparent;");
+		
+		DropShadow shadow = new DropShadow();
+		shadow.setColor(Color.LIGHTBLUE);
+		btn.setOnMouseEntered(e -> {
+    		btn.setEffect(shadow);
+    		btn.setStyle("-fx-background-color:white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+    			+ "-fx-background-color: transparent;");
+    	});
+    		
+    	btn.setOnMouseExited(e -> {
+    		btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px; -fx-padding: 3 20 3 30; "
+        			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+        			+ "-fx-background-color: transparent;");
+    		btn.setEffect(null);
+    	});
 	}
 }
