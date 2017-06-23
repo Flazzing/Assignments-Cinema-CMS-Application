@@ -97,7 +97,6 @@ public class LoginPage {
 		buttonGlow.setColor(Color.rgb(0, 176, 240));
 		buttonGlow.setWidth(70);
 		buttonGlow.setHeight(70);
-		loginButton.setEffect(buttonGlow);
 		
 		Label loginError = new Label("Incorrect username/password. Try again.");
 		loginError.setFont(Font.font(25));
@@ -113,6 +112,16 @@ public class LoginPage {
 		
 		HBox loginErrorHBox = new HBox(loginError);
 		loginErrorHBox.setAlignment(Pos.CENTER);
+		
+		loginError.setVisible(false);
+		
+		loginButton.setOnMouseEntered(e -> {
+			loginButton.setEffect(buttonGlow);
+		});
+		
+		loginButton.setOnMouseExited(e -> {
+			loginButton.setEffect(null);
+		});
 		
 		loginButton.setOnAction(e -> {
 			System.out.println("Login Button Pushed");
