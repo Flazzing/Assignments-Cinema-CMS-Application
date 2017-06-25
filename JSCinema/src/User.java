@@ -90,16 +90,11 @@ public class User implements Serializable {
 	/*
 	 * setUserName has the following requirements:
 	 * 1. '~' cannot be used
-	 * 2. Two names in user.dat cannot be the same
+	 * 2. Two names in user.dat cannot be the same (This is checked in the admin panel)
 	 */
 	public void setUsername(String username) throws IllegalArgumentException {
 		if(username.contains("~")){
 			throw new IllegalArgumentException("Delimiter '~' cannot be used in username.");
-		}
-		for(User user : getUsersFromUserFile()){
-			if(user.getUsername().equals(username)){
-				throw new IllegalArgumentException("The same username was given.");
-			}
 		}
 		
 		this.username = username;
@@ -143,19 +138,24 @@ public class User implements Serializable {
 	 */
 	public static String generateUniqueID(boolean makeAdmin){
 		ArrayList<String> uniqueIDsThatHaveBeenUsed = new ArrayList<String>();
-		for(User user : getUsersFromUserFile()){
-			uniqueIDsThatHaveBeenUsed.add(user.getUniqueID());
+		for(User user : AdminPage.getListOfUsers()){
+			String temp = user.getUniqueID();
+			if(temp.startsWith(makeAdmin ? "Admin" : "User")){
+				uniqueIDsThatHaveBeenUsed.add(temp);
+			}
 		}
 		
 		int lastUsedUniqueID = 1;
 		for(String string : uniqueIDsThatHaveBeenUsed){
-			if(string.startsWith(makeAdmin ? "Admin" : "User")){
-				try{
-					lastUsedUniqueID = Integer.parseInt(string.substring(makeAdmin ? 5 : 4));
-				}catch(NumberFormatException nfe){
-					System.err.println("Error interpreting substring while generating uniqueID.");
-					System.err.println("Please fix the file and try again.");
-				}
+			int temp = 0;
+			try{
+				temp = Integer.parseInt(string.substring(makeAdmin ? 5 : 4));
+			}catch(NumberFormatException nfe){
+				System.err.println("Error interpreting substring while generating uniqueID.");
+				System.err.println("Please fix the file and try again.");
+			}
+			if(temp > lastUsedUniqueID){
+				lastUsedUniqueID = temp;
 			}
 		}
 		String newUniqueID = (makeAdmin ? "Admin" : "User") + (lastUsedUniqueID < 1000 ? "0" : "") 

@@ -20,7 +20,7 @@ public class Testing extends Application{
     	CategoryAxis xAxis = new CategoryAxis();
     	NumberAxis yAxis = new NumberAxis();
     	
-    	bc.setTitle("Booking summary");
+    	g.setTitle("Booking summary");
     	xAxis.setLabel("Date");
     	yAxis.setLabel("Number of Booking");
     	

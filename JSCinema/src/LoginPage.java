@@ -24,7 +24,8 @@ import javafx.scene.text.FontWeight;
 public class LoginPage {
 	
 	public static Scene generateLoginScreen() throws FileNotFoundException{
-		StackPane result = new StackPane();
+		Pane result = new Pane();
+		
 		
 		ImageView imgview = CommonElements.getBackgroundImage();
 		imgview.setFitWidth(1440);
@@ -33,7 +34,7 @@ public class LoginPage {
 		
 		//Create Header
 		Pane header = new Pane();
-		FileInputStream imageStream2 = new FileInputStream("2.png");
+		FileInputStream imageStream2 = new FileInputStream("PageLayout/2.png");
 		Image image2 = new Image(imageStream2);
 		ImageView imgview2 = new ImageView(image2);
 		imgview2.setLayoutY(0);
@@ -43,7 +44,7 @@ public class LoginPage {
 		
 		// Title on header
 		Pane title = new Pane();
-		FileInputStream imageStream3 = new FileInputStream("3.png");
+		FileInputStream imageStream3 = new FileInputStream("PageLayout/3.png");
 		Image image3 = new Image(imageStream3);
 		ImageView imgview3 = new ImageView(image3);
 		imgview3.setLayoutX(542);
@@ -125,18 +126,21 @@ public class LoginPage {
 		
 		loginButton.setOnAction(e -> {
 			System.out.println("Login Button Pushed");
-			ArrayList<User> users = new ArrayList<User>();
-			try {
-				 users.addAll(User.getUsersFromUserFile());
-			} catch (SecurityException | ClassNotFoundException | IOException e1) {
-				System.err.println("Something happened when logging in. Printing stack trace.");
-				e1.printStackTrace();
-			}
+			ArrayList<User> users = AdminPage.getListOfUsers();
 			boolean foundUser = false; //false by default
 			for(User user : users){
-				if(user.verifyUser(loginIdentifiers[0].getText(), loginIdentifiers[1].getText()) == true){
+				if(user.verifyUser(loginInputs[0].getText(), loginInputs[1].getText()) == true){
 					foundUser = true;
 					AdminPage.setUserLoggedIn(user);
+					try {
+						if(AdminPage.getDashboardScene() == null){
+							AdminPage.setDashboardScene(new Dashboard().getDashboard(AdminPage.getMainStage()));
+						}
+						AdminPage.getMainStage().setScene(AdminPage.getDashboardScene());
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					System.out.println(AdminPage.getUserLoggedIn());
 					break;
 				}
 			}
@@ -144,6 +148,8 @@ public class LoginPage {
 				System.out.println("Incorrect username/password");
 				loginError.setVisible(true);
 			}
+			loginInputs[0].setText("");
+			loginInputs[1].setText("");
 		});
 		
 		loginContent.add(loginTitleHBox, 0, 0, 3, 1);
@@ -151,12 +157,12 @@ public class LoginPage {
 		loginContent.addRow(2, loginIdentifiers[0], loginInputs[0]);
 		loginContent.addRow(3, loginIdentifiers[1], loginInputs[1]);
 		loginContent.add(loginButtonHBox, 0, 4, 3, 1);
-		
-		loginContent.setAlignment(Pos.CENTER);
+		loginContent.setLayoutX((1440 / 2) - 250);
+		loginContent.setLayoutY((960 / 2) - 250);
 		
 		result.getChildren().add(loginContent);
 		
-		return new Scene(result);
+		return new Scene(result, 1440, 960);
 	}
 	
 }

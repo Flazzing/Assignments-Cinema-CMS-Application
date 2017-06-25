@@ -20,7 +20,7 @@ public class CommonElements {
 	public static ImageView getBackgroundImage(){
 		Image image = null;
 		try {
-			FileInputStream imageStream1 = new FileInputStream("1.png");
+			FileInputStream imageStream1 = new FileInputStream("PageLayout/1.png");
 			image = new Image(imageStream1);
 		} catch (NullPointerException npe) {
 			System.err.println("Image could not be opened from 1.png. Closing application.");

@@ -151,11 +151,14 @@ public class Dashboard{
     	changeButtonProperty(btn5);
     	
     	btn5.setOnAction(e -> {
-    		int dialogButton = JOptionPane.NO_OPTION;
+    		int dialogButton = JOptionPane.YES_OPTION;
     		dialogButton = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning", dialogButton);
     		if(dialogButton == JOptionPane.YES_OPTION){
     			System.out.println("You have logged out!");
-    			System.exit(0);
+    			
+    			//Changed this to redirect to login screen
+    			AdminPage.getMainStage().setScene(AdminPage.getLoginScene());
+    			AdminPage.setUserLoggedIn(null);
     		}
     		if(dialogButton == JOptionPane.NO_OPTION){
     		}
