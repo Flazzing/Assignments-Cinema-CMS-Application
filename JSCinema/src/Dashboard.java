@@ -13,7 +13,6 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -295,17 +294,22 @@ public class Dashboard{
 		File file = new File("MovieData/movies.txt");
 		Scanner input = new Scanner(file);
 		
+		ArrayList<String> list = new ArrayList<String>();
+		
 		while(input.hasNext()){
 			String word = input.nextLine();
 			
 			String[] splitter = word.split(",");
 			
-			for(String list: splitter){
+			for(String string: splitter){
 				
 			}
 		}
 		
-		ArrayList<String> list = new ArrayList<String>();
+		
+		
+		
+		input.close();
 	}
 	
 	public int getNowShowingNo() throws Exception{

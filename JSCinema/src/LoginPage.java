@@ -1,6 +1,5 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.geometry.Insets;
@@ -16,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -133,10 +131,7 @@ public class LoginPage {
 					foundUser = true;
 					AdminPage.setUserLoggedIn(user);
 					try {
-						if(AdminPage.getDashboardScene() == null){
-							AdminPage.setDashboardScene(new Dashboard().getDashboard(AdminPage.getMainStage()));
-						}
-						AdminPage.getMainStage().setScene(AdminPage.getDashboardScene());
+						AdminPage.getMainStage().setScene(new Dashboard().getDashboard(AdminPage.getMainStage()));
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}

@@ -11,7 +11,6 @@ public class AdminPage extends Application {
 	private static ArrayList<User> listOfUsers = User.getUsersFromUserFile();
 	private static User userLoggedIn;
 	private static Scene loginScene;
-	private static Scene dashboardScene;
 	
 	public static Stage getMainStage() {
 		return mainStage;
@@ -44,15 +43,7 @@ public class AdminPage extends Application {
 	public static void setLoginScene(Scene loginScene) {
 		AdminPage.loginScene = loginScene;
 	}
-
-	public static Scene getDashboardScene() {
-		return dashboardScene;
-	}
-
-	public static void setDashboardScene(Scene dashboardScene) {
-		AdminPage.dashboardScene = dashboardScene;
-	}
-
+	
 	public void start(Stage primaryStage) throws Exception{
 		setLoginScene(LoginPage.generateLoginScreen());
 		
