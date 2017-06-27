@@ -1,0 +1,4 @@
+[003],Attack on titan,10.00-12.00,13.00-14,0.00-0.00,0.00-0.00,0.00-0.00,0.00-0.00,1,2,null,null,null,null,directory.PNG
+[1],null,0.00-0.00,0.00-0.00,0.00-0.00,0.00-0.00,0.00-0.00,0.00-0.00,null,null,null,null,null,null,Movie Image Directory
+[2],null,0.00-0.00,0.00-0.00,0.00-0.00,0.00-0.00,0.00-0.00,0.00-0.00,null,null,null,null,null,null,Movie Image Directory
+[1],null,0.00-0.00,0.00-0.00,0.00-0.00,0.00-0.00,0.00-0.00,0.00-0.00,null,null,null,null,null,null,Movie Image Directory
