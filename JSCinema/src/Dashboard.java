@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -150,16 +151,11 @@ public class Dashboard{
     	changeButtonProperty(btn5);
     	
     	btn5.setOnAction(e -> {
-    		int dialogButton = JOptionPane.YES_OPTION;
+    		int dialogButton = JOptionPane.NO_OPTION;
     		dialogButton = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning", dialogButton);
     		if(dialogButton == JOptionPane.YES_OPTION){
     			System.out.println("You have logged out!");
-    			
-    			//Changed this to redirect to login screen
-    			AdminPage.getMainStage().setScene(AdminPage.getLoginScene());
-    			AdminPage.setUserLoggedIn(null);
-    		}
-    		if(dialogButton == JOptionPane.NO_OPTION){
+    			System.exit(0);
     		}
     	});
     	
@@ -237,7 +233,7 @@ public class Dashboard{
 		ctText4.setFill(Color.WHITE);
 		ctop1.add(ctText3, 5, 3);
 		ctop1.add(ctText4, 5, 4);
-		Text ctText5 = new Text("5");
+		Text ctText5 = new Text("6");
 		Text ctText6 = new Text("halls");
 		ctText5.setFont(Font.font(28));
 		ctText6.setFont(Font.font(14));
@@ -268,11 +264,11 @@ public class Dashboard{
 		container.setHbarPolicy(ScrollBarPolicy.NEVER);
 		container.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		
-		StackPane nowShowing = new StackPane();
-		nowShowing.setPadding(new Insets(450,50,50,395));
-		
 		StackPane content = new StackPane();
 		content.setPadding(new Insets(506,50,50,450));
+		
+		StackPane nowShowing = new StackPane();
+		nowShowing.setPadding(new Insets(450,50,50,395));
 		
 		FileInputStream imageStream14 = new FileInputStream("LeftDashboard/container.png");
 		Image image14 = new Image(imageStream14);
@@ -281,6 +277,8 @@ public class Dashboard{
 		imgview14.setFitHeight(440);
 		nowShowing.getChildren().add(imgview14);
 		
+		
+		//container.setContent(displayNowShowing());
 		content.getChildren().add(container);// Content containing the scrollpane
 		root.getChildren().add(nowShowing);
 		root.getChildren().add(content);
@@ -290,26 +288,38 @@ public class Dashboard{
 		return scene;
 	}
 	
-	public void displayNowShowing() throws Exception{
-		File file = new File("MovieData/movies.txt");
+	public VBox displayNowShowing() throws Exception{
+		System.out.println("Getting Movies Information...");
+		
+		VBox moviesInfo = new VBox(0);
+		moviesInfo.setStyle("-fx-background: transparent; -fx-background-color: transparent");
+		java.io.File file = new java.io.File("MovieData/movies.txt");
 		Scanner input = new Scanner(file);
 		
-		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> info = new ArrayList<String>();
 		
 		while(input.hasNext()){
-			String word = input.nextLine();
+			String line = input.nextLine();
+			String[] section = line.split(",");
 			
-			String[] splitter = word.split(",");
-			
-			for(String string: splitter){
-				
+			for(String movies: section){
+				System.out.println(movies);
+				info.add(movies);
 			}
+			System.out.println();
 		}
 		
+		final HBox[] movieBox = null;
 		
+		for(int i = 0; i < getNowShowingNo(); i++){
+			 movieBox[i] = new HBox();
+			 
+			 
+			 moviesInfo.getChildren().add(movieBox[i]);
+		}
 		
-		
-		input.close();
+		System.out.println(info);
+		return moviesInfo;
 	}
 	
 	public int getNowShowingNo() throws Exception{
@@ -336,7 +346,7 @@ public class Dashboard{
 	public int getTotalBookingMade() throws Exception{
 		String num = "";
 		int tot = 0;
-		File file = new File("MovieData/bookingmade.txt");
+		File file = new File("MovieData/TotalBookingMade.txt");
 		
 		if(file.exists()){
     		System.out.println("File Opened! Calculating number of booking made.");
@@ -360,7 +370,9 @@ public class Dashboard{
     	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
     			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
     			+ "-fx-background-color: transparent;");
-		
+    	
+    	
+    	// Mouse Hover Effect
 		DropShadow shadow = new DropShadow();
 		shadow.setColor(Color.LIGHTBLUE);
 		btn.setOnMouseEntered(e -> {

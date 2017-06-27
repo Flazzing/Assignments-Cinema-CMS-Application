@@ -1,8 +1,17 @@
 import java.io.File;
 import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
-import javafx.event.EventHandler;
+import javax.swing.JOptionPane;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -13,7 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -148,7 +156,12 @@ public class Report {
     	changeButtonProperty(btn5);
     	
     	btn5.setOnAction(e -> {
-    		System.exit(1);
+    		int dialogButton = JOptionPane.NO_OPTION;
+    		dialogButton = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning", dialogButton);
+    		if(dialogButton == JOptionPane.YES_OPTION){
+    			System.out.println("You have logged out!");
+    			System.exit(0);
+    		}
     	});
     	
     	hb1.getChildren().add(btn1);
@@ -165,7 +178,7 @@ public class Report {
     	
     	left.getChildren().add(leftOutline);   	
     	
-    	HBox graph = displayGraph();
+    	HBox graph = displayBarGraph(); 
     	graph.setPadding(new Insets(200,50,50,395));
     	
     	root.getChildren().add(graph);// Calling graph pane
@@ -173,71 +186,85 @@ public class Report {
 		Scene scene = new Scene(root, 1440, 960);
 		return scene;
 	}
-	
-	public int getMoviesBooked() throws Exception{
-		int num = 0;
+	// Store the 
+	public Map<String, List<Integer>> getMoviesBooked() throws Exception{
+		Map<String,List<Integer>> movieBooked = new HashMap<String,List<Integer>>();
 		File file = new File("MovieData/bookingmade.txt");
 		
+		String movieName = "";
+		
 		if(file.exists()){
-    		System.out.println("File Opened! Calculating number of movies");
+    		System.out.println("File Opened! Calculating number of movies booked");
     		Scanner input = new Scanner(file);
-    		
+
     		while(input.hasNextLine()){
-    			num++;
-    			input.nextLine();
+    			String line = input.nextLine();
+    			String[] section = line.split(";");
+    			movieName = section[0];
+    			List<Integer> numberBooked = new ArrayList<Integer>();
+    			
+    			for(int i = 1; i < section.length; i++){
+    				numberBooked.add(Integer.parseInt(section[i]));
+    			}
+    			movieBooked.put(movieName, numberBooked);
     		}
-    		input.close();
+    	input.close();
     	}else{
     		System.out.println("File not found, No graph to be shown");
     	}
-		return num/2;
+		System.out.println(movieBooked);
+		return movieBooked;
 	}
 	
-	public HBox displayGraph() throws Exception{
+	public HBox displayBarGraph() throws Exception{
 		HBox graph = new HBox();
     	
     	CategoryAxis xAxis = new CategoryAxis();
     	NumberAxis yAxis = new NumberAxis();
     	
+    	xAxis.setLabel("Date");
+    	yAxis.setLabel("Number of Booking");
     	xAxis.tickLabelFontProperty().set(Font.font(20));
+    	xAxis.setTickLabelFill(Color.CYAN);
     	yAxis.tickLabelFontProperty().set(Font.font(20));
+    	yAxis.setTickLabelFill(Color.CYAN);
     	
     	BarChart<String,Number> bc = 
                 new BarChart<String,Number>(xAxis,yAxis);
 
     	bc.setTitle("Booking summary");
-    	xAxis.setLabel("Date");
-    	yAxis.setLabel("Number of Booking");
     	bc.setPrefHeight(600);
     	bc.setPrefWidth(1000);
+    	bc.setStyle("-fx-font-size: 20px; -fx-text-fill: BLUE;"
+    			+ "-fx-background-color : transparent; -fx-background: transparent; ");
     	
-    	XYChart.Series series1 = new XYChart.Series<>();
+    	String date="06/27/2017";
+    	String incDate;
+    	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    	Calendar c = Calendar.getInstance();
+    	c.setTime(sdf.parse(date));
+    	int maxDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
     	
-    	File file = new File("MovieData/bookingmade.txt");
-    	
-    	if(file.exists()){
-    		System.out.println("File Opened!");
-    		Scanner input = new Scanner(file);
-    		
-    		while(input.hasNextLine()){
-    			String movieTitle = input.nextLine();
-    			String bookingmade = input.nextLine();
-    			series1.setName(movieTitle);
-    			series1.getData().add(new XYChart.Data(movieTitle,
-    					Integer.parseInt(bookingmade)));
-    		}
-    		input.close();
-    	}else{
-    		System.out.println("File not found, No graph to be shown");
-    	}
-    	
-    	bc.setStyle("-fx-font-size: 20px; -fx-text-fill: #ffffff");
-    	
-    	bc.getData().add(series1);
+		Map<String,List<Integer>> data = getMoviesBooked();
+		for(String key : data.keySet()){
+			c.add(Calendar.DATE, 1);
+			incDate = sdf.format(c.getTime());
+			XYChart.Series series = new XYChart.Series<>();
+			series.setName(key);
+			for(Integer i : data.get(key)){
+				System.out.println("Key : " +key + " value: " + i);
+				
+				series.getData().add(new XYChart.Data(incDate, i));
+			}
+
+			bc.getData().add(series);
+		}
+
     	graph.getChildren().add(bc);
 		return graph;
 	}
 	
+	// This method changes the style of buttons of menu bar on the left
 	public void changeButtonProperty(Button btn) throws Exception{
     	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
     			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
