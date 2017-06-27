@@ -1,4 +1,3 @@
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -10,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -19,11 +17,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+/**
+ * This class is used to generate the login page.
+ */
+
+/**
+ * @author Kwan Juen Wen (Steve)
+ */
 public class LoginPage {
 	
 	public static Scene generateLoginScreen() throws FileNotFoundException{
 		Pane result = new Pane();
-		
 		
 		ImageView imgview = CommonElements.getBackgroundImage();
 		imgview.setFitWidth(1440);
@@ -32,9 +36,7 @@ public class LoginPage {
 		
 		//Create Header
 		Pane header = new Pane();
-		FileInputStream imageStream2 = new FileInputStream("PageLayout/2.png");
-		Image image2 = new Image(imageStream2);
-		ImageView imgview2 = new ImageView(image2);
+		ImageView imgview2 = CommonElements.getHeaderImage();
 		imgview2.setLayoutY(0);
 		header.getChildren().add(imgview2);
 		header.setLayoutY(0);
@@ -42,9 +44,7 @@ public class LoginPage {
 		
 		// Title on header
 		Pane title = new Pane();
-		FileInputStream imageStream3 = new FileInputStream("PageLayout/3.png");
-		Image image3 = new Image(imageStream3);
-		ImageView imgview3 = new ImageView(image3);
+		ImageView imgview3 = CommonElements.getTitleImage();
 		imgview3.setLayoutX(542);
 		imgview3.setLayoutY(26);
 		title.getChildren().add(imgview3);
@@ -76,9 +76,7 @@ public class LoginPage {
 			loginIdentifiers[i].setFont(Font.font("", FontWeight.BOLD, 25));
 			loginIdentifiers[i].setTextFill(Color.WHITE);
 			loginInputs[i].setFont(Font.font(25));
-			loginInputs[i].setStyle("-fx-text-fill: white; -fx-padding: 3 3 3 3; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: #00B0F0; -fx-border-width: 5px; "
-    			+ "-fx-background-color: transparent;");
+			CommonElements.setStandardTextFieldStyle(loginInputs[i]);
 		}
 		
 		Button loginButton = new Button("Login");
@@ -86,9 +84,14 @@ public class LoginPage {
     			+ "-fx-border-color: #00B0F0; -fx-border-width: 5px; "
     			+ "-fx-background-color: transparent;");
 		
-		HBox loginButtonHBox = new HBox(loginButton);
-		loginButtonHBox.setPrefHeight(100);
-		loginButtonHBox.setAlignment(Pos.BOTTOM_CENTER);		
+		Button exitButton = new Button("Exit Program");
+		exitButton.setStyle("-fx-text-fill: white; -fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-border-color: #00B0F0; -fx-border-width: 5px; "
+    			+ "-fx-background-color: transparent;");
+		
+		HBox buttonOptionsHBox = new HBox(20, loginButton, exitButton);
+		buttonOptionsHBox.setPrefHeight(100);
+		buttonOptionsHBox.setAlignment(Pos.BOTTOM_CENTER);		
 		
 		DropShadow buttonGlow = new DropShadow();
 		buttonGlow.setOffsetX(0.0);
@@ -114,6 +117,9 @@ public class LoginPage {
 		
 		loginError.setVisible(false);
 		
+		/*
+		 * Button action events and triggers start here. 
+		 */
 		loginButton.setOnMouseEntered(e -> {
 			loginButton.setEffect(buttonGlow);
 		});
@@ -131,7 +137,12 @@ public class LoginPage {
 					foundUser = true;
 					AdminPage.setUserLoggedIn(user);
 					try {
-						AdminPage.getMainStage().setScene(new Dashboard().getDashboard(AdminPage.getMainStage()));
+						if(user.isAdmin() == true){
+							AdminPage.getMainStage().setScene(new Dashboard().getDashboard(AdminPage.getMainStage()));
+						}
+						else{
+							
+						}
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -147,11 +158,27 @@ public class LoginPage {
 			loginInputs[1].setText("");
 		});
 		
+		exitButton.setOnMouseEntered(e -> {
+			exitButton.setEffect(buttonGlow);
+		});
+		
+		exitButton.setOnMouseExited(e -> {
+			exitButton.setEffect(null);
+		});
+		
+		exitButton.setOnAction(e -> {
+			System.exit(0);
+		});
+		
+		/*
+		 * Button action events and triggers end here. 
+		 */
+		
 		loginContent.add(loginTitleHBox, 0, 0, 3, 1);
 		loginContent.add(loginErrorHBox, 0, 1, 3, 1);
 		loginContent.addRow(2, loginIdentifiers[0], loginInputs[0]);
 		loginContent.addRow(3, loginIdentifiers[1], loginInputs[1]);
-		loginContent.add(loginButtonHBox, 0, 4, 3, 1);
+		loginContent.add(buttonOptionsHBox, 0, 4, 3, 1);
 		loginContent.setLayoutX((1440 / 2) - 250);
 		loginContent.setLayoutY((960 / 2) - 250);
 		

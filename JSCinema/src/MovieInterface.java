@@ -50,6 +50,22 @@ import javafx.util.Callback;
 
 public class MovieInterface extends Application{
 
+	/*
+	 * These two properties allow us to read images without much problems
+	 * Before this: 
+	 * 		Hard coded urls (Just.... no. pls. -Steve)
+	 * 
+	 * Now: These properties contain the root directory (The thing containing JSCinema, MovieAssignment, etc.)
+	 * 		Just add the directory being used to the end of where the thing is
+	 * 		Usage: rootDirectory + "directory/where/thing/is"
+	 * 
+	 * by: -Steve
+	 */
+	
+	private String currentMainDirectory = System.getProperty("user.dir");
+	private String rootDirectory = currentMainDirectory.substring(0, currentMainDirectory.length() - 8);
+	
+	
 	public static void main(String[]args){
 		launch(args);
 	}
@@ -59,7 +75,7 @@ public class MovieInterface extends Application{
 		// TODO Auto-generated method stub
 		Stage MovieStage = new Stage();
 		BorderPane MovieBorderPane = new BorderPane();
-		setBorderPaneBackground(MovieBorderPane, "file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/Background.jpg");
+		setBorderPaneBackground(MovieBorderPane, "file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/Background.jpg");
 		setTopMovieBorderPane(MovieBorderPane);
 		setLeftMovieBorderPane(MovieBorderPane);
 		setRightMovieBorderPane(MovieBorderPane);
@@ -101,7 +117,7 @@ public class MovieInterface extends Application{
 	      VBox TopMovieVBox =  new VBox();
 			
 	      Pane MovieTittlePane = new Pane();
-	      ImageView MovieTittleImageView = new ImageView(new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/Logo.png"));
+	      ImageView MovieTittleImageView = new ImageView(new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/Logo.png"));
 	      MovieTittleImageView.setX(750);
 	      MovieTittleImageView.setY(30);
 	      MovieTittlePane.getChildren().add(MovieTittleImageView);
@@ -109,11 +125,11 @@ public class MovieInterface extends Application{
 
 	        
 	      Pane MovieIconImageViewPane = new Pane();
-	      Image MovieIconImage = new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/MovieIcon.png");
+	      Image MovieIconImage = new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/MovieIcon.png");
 	      ImageView MovieIconImageView = new ImageView(MovieIconImage);
 	        
 	        
-	      String MovieTittleBlackBoxStringDirectory = "file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/MovieTittleBlackBox.jpg";
+	      String MovieTittleBlackBoxStringDirectory = "file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/MovieTittleBlackBox.jpg";
 	      Image MovieTittleBlackBoxImage = new Image(MovieTittleBlackBoxStringDirectory,1980,398, false, false);
 	      BackgroundImage MovieTittleBlackBoxBackgroundImage = new BackgroundImage(MovieTittleBlackBoxImage,
 	            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -160,7 +176,7 @@ public class MovieInterface extends Application{
 	      VBox TopMovieVBox =  new VBox();
 			
 	      Pane MovieTittlePane = new Pane();
-	      ImageView MovieTittleImageView = new ImageView(new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/Logo.png"));
+	      ImageView MovieTittleImageView = new ImageView(new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/Logo.png"));
 	      MovieTittleImageView.setX(750);
 	      MovieTittleImageView.setY(30);
 	      MovieTittlePane.getChildren().add(MovieTittleImageView);
@@ -168,11 +184,11 @@ public class MovieInterface extends Application{
 
 	        
 	      Pane MovieIconImageViewPane = new Pane();
-	      Image MovieIconImage = new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/MovieIcon.png");
+	      Image MovieIconImage = new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/MovieIcon.png");
 	      ImageView MovieIconImageView = new ImageView(MovieIconImage);
 	        
 	        
-	      String MovieTittleBlackBoxStringDirectory = "file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/MovieTittleBlackBox.jpg";
+	      String MovieTittleBlackBoxStringDirectory = "file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/MovieTittleBlackBox.jpg";
 	      Image MovieTittleBlackBoxImage = new Image(MovieTittleBlackBoxStringDirectory,1980,398, false, false);
 	      BackgroundImage MovieTittleBlackBoxBackgroundImage = new BackgroundImage(MovieTittleBlackBoxImage,
 	            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -211,7 +227,7 @@ public class MovieInterface extends Application{
 	      VBox TopMovieVBox =  new VBox();
 			
 	      Pane MovieTittlePane = new Pane();
-	      ImageView MovieTittleImageView = new ImageView(new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/Logo.png"));
+	      ImageView MovieTittleImageView = new ImageView(new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/Logo.png"));
 	      MovieTittleImageView.setX(750);
 	      MovieTittleImageView.setY(30);
 	      MovieTittlePane.getChildren().add(MovieTittleImageView);
@@ -219,11 +235,11 @@ public class MovieInterface extends Application{
 
 	        
 	      Pane MovieIconImageViewPane = new Pane();
-	      Image MovieIconImage = new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/MovieIcon.png");
+	      Image MovieIconImage = new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/MovieIcon.png");
 	      ImageView MovieIconImageView = new ImageView(MovieIconImage);
 	        
 	        
-	      String MovieTittleBlackBoxStringDirectory = "file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/MovieTittleBlackBox.jpg";
+	      String MovieTittleBlackBoxStringDirectory = "file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/MovieTittleBlackBox.jpg";
 	      Image MovieTittleBlackBoxImage = new Image(MovieTittleBlackBoxStringDirectory,1980,398, false, false);
 	      BackgroundImage MovieTittleBlackBoxBackgroundImage = new BackgroundImage(MovieTittleBlackBoxImage,
 	            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -262,7 +278,7 @@ public class MovieInterface extends Application{
 	      VBox TopMovieVBox =  new VBox();
 			
 	      Pane MovieTittlePane = new Pane();
-	      ImageView MovieTittleImageView = new ImageView(new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/Logo.png"));
+	      ImageView MovieTittleImageView = new ImageView(new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/Logo.png"));
 	      MovieTittleImageView.setX(750);
 	      MovieTittleImageView.setY(30);
 	      MovieTittlePane.getChildren().add(MovieTittleImageView);
@@ -270,11 +286,11 @@ public class MovieInterface extends Application{
 
 	        
 	      Pane MovieIconImageViewPane = new Pane();
-	      Image MovieIconImage = new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/MovieIcon.png");
+	      Image MovieIconImage = new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/MovieIcon.png");
 	      ImageView MovieIconImageView = new ImageView(MovieIconImage);
 	        
 	        
-	      String MovieTittleBlackBoxStringDirectory = "file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/MovieTittleBlackBox.jpg";
+	      String MovieTittleBlackBoxStringDirectory = "file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/MovieTittleBlackBox.jpg";
 	      Image MovieTittleBlackBoxImage = new Image(MovieTittleBlackBoxStringDirectory,1980,398, false, false);
 	      BackgroundImage MovieTittleBlackBoxBackgroundImage = new BackgroundImage(MovieTittleBlackBoxImage,
 	            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -386,7 +402,7 @@ public class MovieInterface extends Application{
 		Pane MovieTypeButtonPane = new Pane();
 	      
 
-		String BlueBoxImageDirectory = "file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/BlueBox.png";
+		String BlueBoxImageDirectory = "file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/BlueBox.png";
 		Image BlueBoxImage = new Image(BlueBoxImageDirectory,1528,864, false, false);
 		BackgroundImage BlueBoxBackgroundImage = new BackgroundImage(BlueBoxImage,
 				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -419,7 +435,7 @@ public class MovieInterface extends Application{
 	        
 	     
 	
-			MovieTableView(MovieTypeButtonPane, "C:/Users/Cheng Qing/workspace/MovieAssignment/src/MovieDataSource/Movie.txt");
+			MovieTableView(MovieTypeButtonPane, rootDirectory + "MovieAssignment/src/MovieDataSource/Movie.txt");
 		
 		   Button AddMovieButton = new Button("Add Movie");
 	        Button EditMovieButton = new Button("Edit Movie");
@@ -441,7 +457,7 @@ public class MovieInterface extends Application{
 	        	
 	        
 	        BorderPane AddMovieBorderPane = new BorderPane();	
-	    	Image AddMovieImage = new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/Background.jpg",2000,1500, false,false);
+	    	Image AddMovieImage = new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/Background.jpg",2000,1500, false,false);
 	        BackgroundImage AddMovieBackgroundImage= new BackgroundImage(AddMovieImage,
 	                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 	        Background AddMovieBackground = new Background(AddMovieBackgroundImage);
@@ -536,7 +552,7 @@ public class MovieInterface extends Application{
 			BorderPane DeleteMovieBorderPane = new BorderPane();
 			setTopDeleteMovieBorderPane(DeleteMovieBorderPane);
 		
-			Image DeleteMovieImage = new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/Background.jpg",2000,1500, false,false);
+			Image DeleteMovieImage = new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/Background.jpg",2000,1500, false,false);
 			BackgroundImage DeleteMovieBackgroundImage= new BackgroundImage(DeleteMovieImage,
 					BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 			Background DeleteMovieBackground = new Background(DeleteMovieBackgroundImage);
@@ -595,7 +611,7 @@ public class MovieInterface extends Application{
 	        	BorderPane EditMovieBorderPane = new BorderPane();
 	        	setTopEditMovieBorderPane(EditMovieBorderPane);
 	        	
-	        	Image EditMovieImage = new Image("file:///C:/Users/Cheng%20Qing/workspace/MovieAssignment/src/MovieInterfaceResource/Background.jpg",2000,1500, false,false);
+	        	Image EditMovieImage = new Image("file:///" + rootDirectory + "MovieAssignment/src/MovieInterfaceResource/Background.jpg",2000,1500, false,false);
 	        	BackgroundImage EditMovieBackgroundImage= new BackgroundImage(EditMovieImage,
 	        			BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 	        	Background EditMovieBackground = new Background(EditMovieBackgroundImage);
@@ -858,7 +874,7 @@ public class MovieInterface extends Application{
 		}
 		
 		List<Movie> MovieCollection = new ArrayList<Movie>();
-		for(int i=0; i<lists.size(); i++){
+		for(int i=0; i < lists.size(); i++){
 			for(int b=0; b<lists.get(i).size()/17; b++){
 				String[] MovieStartTime = new String[6];
 				MovieStartTime[0] = lists.get(i).get(b+2);

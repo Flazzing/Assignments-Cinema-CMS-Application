@@ -5,6 +5,10 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * @author Steve
+ *
+ */
 public class AdminPage extends Application {
 
 	private static Stage mainStage;
@@ -48,11 +52,11 @@ public class AdminPage extends Application {
 		setLoginScene(LoginPage.generateLoginScreen());
 		
 		setMainStage(primaryStage);
-		//startAdminPage(getMainStage());
 		getMainStage().setScene(getLoginScene());
 		getMainStage().show();
 	}
 	
+	/* Not needed right now
 	public void startAdminPage(Stage primaryStage) throws Exception{
 		Dashboard dashboard = new Dashboard();
 		
@@ -60,6 +64,7 @@ public class AdminPage extends Application {
 		primaryStage.setTitle("Dashboard"); //Set the stage title 
 		primaryStage.setScene(scene); //Place the scene in the stage
 	}
+	*/
 	
 	public static void main(String[] args){
 		Application.launch(args);

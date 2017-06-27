@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
  */
 
 /**
- * @author Kwan Juen Wen
+ * @author Kwan Juen Wen (Steve)
  */
 public class User implements Serializable {
 
