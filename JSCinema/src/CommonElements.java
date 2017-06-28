@@ -1,10 +1,14 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 /**
  * This class houses the different elements that are commonly used on all of the application's scenes
@@ -76,6 +80,54 @@ public class CommonElements {
 	 */
 	public static ImageView getTitleImage(){
 		return getElementView("PageLayout/3.png");
+	}
+	
+	/*
+	 * This function calculate number movies that is airing
+	 */
+	public static int getNowShowingNo() throws Exception{
+		int num = 0;
+		File file = new File("MovieData/movies.txt");
+		
+		if(file.exists()){
+    		System.out.println("File Opened! Calculating number of movies.");
+    		Scanner input = new Scanner(file);
+    		
+    		while(input.hasNextLine()){
+    			num++;
+    			input.nextLine();
+    		}// end of while ( calculate lines in text file, 1 line = 1 movie showing)
+    		
+    		input.close();// close input 
+    	}else{
+    		System.out.println("File not found!");
+    	}
+		System.out.println("Movies Available: " +num);
+		return num;// return number of movie showing
+	}
+	
+	public static void changeButtonProperty(Button btn) throws Exception{
+    	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+    			+ "-fx-background-color: transparent;");
+    	
+    	
+    	// Mouse Hover Effect
+		DropShadow shadow = new DropShadow();
+		shadow.setColor(Color.LIGHTBLUE);
+		btn.setOnMouseEntered(e -> {
+    		btn.setEffect(shadow);
+    		btn.setStyle("-fx-background-color: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+    			+ "-fx-background-color: transparent;");
+    	});
+    		
+    	btn.setOnMouseExited(e -> {
+    		btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px; -fx-padding: 3 20 3 30; "
+        			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+        			+ "-fx-background-color: transparent;");
+    		btn.setEffect(null);
+    	});
 	}
 	
 }
