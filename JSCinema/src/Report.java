@@ -250,11 +250,11 @@ public class Report {
 			c.add(Calendar.DATE, 1);
 			incDate = sdf.format(c.getTime());
 			XYChart.Series series = new XYChart.Series<>();
-			series.setName(key);
+			series.setName(incDate);
 			for(Integer i : data.get(key)){
 				System.out.println("Key : " +key + " value: " + i);
 				
-				series.getData().add(new XYChart.Data(incDate, i));
+				series.getData().add(new XYChart.Data(key, i));
 			}
 
 			bc.getData().add(series);
