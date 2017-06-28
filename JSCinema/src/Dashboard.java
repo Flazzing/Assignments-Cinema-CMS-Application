@@ -215,7 +215,6 @@ public class Dashboard{
 				 */
 				if(i == 0){
 					if(isFastSellingMovie(lbl.toString())){
-						System.out.println(lbl.toString());
 						Label lbl2 = new Label("Fast Selling!");
 						lbl.setStyle("-fx-text-fill : Cyan");
 						lbl2.setStyle("-fx-text-fill : Cyan");
@@ -275,17 +274,19 @@ public class Dashboard{
 		for(String key : data.keySet()){
 			int j = 0;
 			for(Integer i : data.get(key)){
-				System.out.println(i);
 				value[j] = i;
 				j++;
 			}
 			diff = value[0] - value[1];
+			System.out.println(key +"'s booking difference is: " +Math.abs(diff));
 			/*
 			 * Check if the movie name is the same as the key
-			 * Check if the difference of Yesterday booking and Today booking is 30 and above
+			 * Check if the difference of Yesterday booking and Today booking is +30 and above
 			 * If yes then the movie is in fast selling
+			 * If no then continue until all data is compared 
+			 * If no key is matched return false means nothing is in fast selling
 			 */
-			if(movieName.contains(key) && Math.abs(diff) >= 30){
+			if(movieName.contains(key) && diff >= 30){
 				System.out.println("Fast Selling movie are: " +key);
 				return true;
 			}
