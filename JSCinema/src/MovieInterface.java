@@ -489,7 +489,6 @@ public class MovieInterface extends Application{
 	        	
 	        Button AddMovieConfirmButton = new Button("Confirm");
 	        AddMovieConfirmButton.setPrefSize(100, 50);
-	        FileChooser fileChooser = new FileChooser();
 	        AddMovieGridPane.add(AddMovieConfirmButton, 8, 8);
 	        Button MovieImageDirectoryButton = new Button("Movie Image Directory");
 	        MovieImageDirectoryButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -824,6 +823,7 @@ public class MovieInterface extends Application{
 				MovieIDTemp.add(MovieDataTemp[i]);
 			}
 		}
+		readMovieFile.close();
 		return MovieIDTemp;
 	}
 	

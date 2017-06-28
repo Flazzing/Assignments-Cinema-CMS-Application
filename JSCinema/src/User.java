@@ -154,7 +154,15 @@ public class User implements Serializable {
 				System.err.println("Error interpreting substring while generating uniqueID.");
 				System.err.println("Please fix the file and try again.");
 			}
+			
 			if(temp > lastUsedUniqueID){
+				/*
+				 * If temp and lastUsedUniqueID have a gap between them (like 0003,0005), that number is returned instead.
+				 */
+				if(temp - lastUsedUniqueID > 1){
+					lastUsedUniqueID++; //Increment to the next number (It's unused)
+					break; //Exit this loop
+				}
 				lastUsedUniqueID = temp;
 			}
 		}

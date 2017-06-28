@@ -1,20 +1,14 @@
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -219,6 +213,7 @@ public class Dashboard{
 			 moviesInfo.getChildren().add(movieBox[j]);
 			j++;
 		}
+		input.close();
 		return moviesInfo;
 	}
 	
