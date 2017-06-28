@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import javafx.geometry.Insets;
@@ -200,8 +203,20 @@ public class Dashboard{
 			for(int i = 0; i < 6 ; i++){
 				Label lbl = new Label(section[i]);
 				lbl.setFont(Font.font(20));
-				if(i == 0){;
+				/*
+				 * First section of the line is always Movie Name
+				 * Checking if the movie is in fast selling
+				 * If the movie is in fast selling, Prompt fast selling and change text color
+				 */
+				if(i == 0){
+					if(isFastSellingMovie(lbl.toString())){
+						Label lbl2 = new Label("Fast Selling!");
+						lbl.setStyle("-fx-text-fill : Cyan");
+						lbl2.setStyle("-fx-text-fill : Cyan");
+						gpane[j].add(lbl2, 3,0);
+					}
 					gpane[j].add(lbl, 0, 0);
+					
 					GridPane.setColumnSpan(lbl, 2);
 				}
 				else{
@@ -242,6 +257,38 @@ public class Dashboard{
 		System.out.println("Booking made: " +tot);
 		return tot; // Return total number of booking made 
 	}
-	
 
+	/*
+	 * This method checks which movie is in fast Selling
+	 */
+	public static boolean isFastSellingMovie(String movieName) throws Exception{
+		Report report = new Report();
+		Map<String,List<Integer>> data = report.getMoviesBooked(); // Get the map of data
+		int diff = 0;
+		int[] value = new int[2];
+		
+		for(String key : data.keySet()){
+			int j = 0;
+			for(Integer i : data.get(key)){
+				value[j] = i;
+				j++;
+			}
+			diff = value[0] - value[1];
+			System.out.println(key +"'s booking difference is: " +Math.abs(diff));
+			/*
+			 * Check if the movie name is the same as the key
+			 * Check if the difference of Yesterday booking and Today booking is +30 and above
+			 * If yes then the movie is in fast selling
+			 * If no then continue until all data is compared 
+			 * If no key is matched return false means nothing is in fast selling
+			 */
+			if(movieName.contains(key) && diff >= 30){
+				System.out.println("Fast Selling movie are: " +key);
+				return true;
+			}
+			else
+				continue;
+		}
+		return false;
+	}
 }
