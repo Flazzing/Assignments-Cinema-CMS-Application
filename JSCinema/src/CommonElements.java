@@ -106,6 +106,9 @@ public class CommonElements {
 		return num;// return number of movie showing
 	}
 	
+	/*
+	 * This function changes the style of buttons 
+	 */
 	public static void changeButtonProperty(Button btn) throws Exception{
     	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
     			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
