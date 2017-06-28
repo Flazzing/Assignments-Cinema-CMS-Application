@@ -8,21 +8,19 @@ import javax.swing.JOptionPane;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -35,14 +33,18 @@ public class Dashboard{
 		Pane root = new Pane();// root pane 
 		
 		//Setting Background Image
-		ImageView imgview = CommonElements.getBackgroundImage();
+		FileInputStream imageStream1 = new FileInputStream("PageLayout/1.png");
+		Image image = new Image(imageStream1);
+		ImageView imgview = new ImageView(image);
 		imgview.setFitHeight(960);
 		imgview.setFitWidth(1440);
 		root.getChildren().add(imgview);
 		
 		//Create Header
 		Pane header = new Pane();
-		ImageView imgview2 = CommonElements.getHeaderImage();
+		FileInputStream imageStream2 = new FileInputStream("PageLayout/2.png");
+		Image image2 = new Image(imageStream2);
+		ImageView imgview2 = new ImageView(image2);
 		imgview2.setLayoutY(0);
 		header.getChildren().add(imgview2);
 		header.setLayoutY(0);
@@ -50,7 +52,9 @@ public class Dashboard{
 		
 		// Title on header
 		Pane title = new Pane();
-		ImageView imgview3 = CommonElements.getTitleImage();
+		FileInputStream imageStream3 = new FileInputStream("PageLayout/3.png");
+		Image image3 = new Image(imageStream3);
+		ImageView imgview3 = new ImageView(image3);
 		imgview3.setLayoutX(542);
 		imgview3.setLayoutY(26);
 		title.getChildren().add(imgview3);
@@ -61,7 +65,11 @@ public class Dashboard{
 		StackPane leftContainer = new StackPane();
 		leftContainer.setPadding(new Insets(180,50,50,40));	
 		
-		ImageView imgview4 = CommonElements.getElementView("LeftDashboard/sidebar.png");
+		String img1_url = "LeftDashboard/sidebar.png";
+		
+	    FileInputStream imageStream4 = new FileInputStream(img1_url);
+		Image image4 = new Image(imageStream4);
+		ImageView imgview4 = new ImageView(image4);
 		imgview4.setFitHeight(650);
 		imgview4.setFitWidth(350);
 	    
@@ -72,7 +80,9 @@ public class Dashboard{
 	    leftOutline.setPadding(new Insets(240,50,50,85));
 	    
 	    HBox hb1 = new HBox();
-	    ImageView imageView5 = CommonElements.getElementView("LeftDashboard/1.png");
+	    FileInputStream imageStream5 = new FileInputStream("LeftDashboard/1.png"); 
+		Image image5 = new Image(imageStream5);
+    	ImageView imageView5 = new ImageView(image5);
     	imageView5.setFitHeight(62);
     	imageView5.setFitWidth(62);
     	Button btn1 = new Button("DashBoard");
@@ -89,7 +99,9 @@ public class Dashboard{
     	});
     	
     	HBox hb2 = new HBox();
-    	ImageView imageView6 = CommonElements.getElementView("LeftDashboard/3.png");
+    	FileInputStream imageStream6 = new FileInputStream("LeftDashboard/3.png"); 
+		Image image6 = new Image(imageStream6);
+    	ImageView imageView6 = new ImageView(image6);
     	imageView6.setFitHeight(62);
     	imageView6.setFitWidth(62);
     	Button btn2 = new Button("Movies");
@@ -98,7 +110,9 @@ public class Dashboard{
     	changeButtonProperty(btn2);
         	
     	HBox hb3 = new HBox();
-    	ImageView imageView7 = CommonElements.getElementView("LeftDashboard/4.png");
+    	FileInputStream imageStream7 = new FileInputStream("LeftDashboard/4.png"); 
+		Image image7 = new Image(imageStream7);
+    	ImageView imageView7 = new ImageView(image7);
     	imageView7.setFitHeight(62);
     	imageView7.setFitWidth(62);
     	Button btn3 = new Button("Report");
@@ -116,7 +130,9 @@ public class Dashboard{
     	});
     	
     	HBox hb4 = new HBox();
-    	ImageView imageView8 = CommonElements.getElementView("LeftDashboard/6.png");
+    	FileInputStream imageStream8 = new FileInputStream("LeftDashboard/6.png"); 
+		Image image8 = new Image(imageStream8);
+    	ImageView imageView8 = new ImageView(image8);
     	imageView8.setFitHeight(62);
     	imageView8.setFitWidth(62);
     	Button btn4 = new Button("Users");
@@ -125,7 +141,9 @@ public class Dashboard{
     	changeButtonProperty(btn4);
     	
     	HBox hb5 = new HBox();
-    	ImageView imageView9 = CommonElements.getElementView("LeftDashboard/8.png");;
+    	FileInputStream imageStream9 = new FileInputStream("LeftDashboard/8.png"); 
+		Image image9 = new Image(imageStream9);
+    	ImageView imageView9 = new ImageView(image9);
     	imageView9.setFitHeight(62);
     	imageView9.setFitWidth(62);
     	Button btn5 = new Button("Logout");
@@ -136,15 +154,9 @@ public class Dashboard{
     	btn5.setOnAction(e -> {
     		int dialogButton = JOptionPane.NO_OPTION;
     		dialogButton = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning", dialogButton);
-    		/*
-    		 * If the user wants to log out, we should not immediately quit the program.
-    		 * Just redirect the program back to login and set the userLoggedIn to null (empty)
-    		 *	-Steve
-    		 */
     		if(dialogButton == JOptionPane.YES_OPTION){
     			System.out.println("You have logged out!");
-    			AdminPage.setUserLoggedIn(null);
-    			AdminPage.getMainStage().setScene(AdminPage.getLoginScene());
+    			System.exit(0);
     		}
     	});
     	
@@ -170,19 +182,25 @@ public class Dashboard{
 		ctop1.setPadding(new Insets(70, 50,50,15));
 		ctop1.setHgap(40);
 		
-		ImageView imgview10 = CommonElements.getElementView("TopDashboard/4.png");
+		FileInputStream imageStream10 = new FileInputStream("TopDashboard/4.png");
+		Image image10 = new Image(imageStream10);
+		ImageView imgview10 = new ImageView(image10);
 		imgview10.setFitHeight(100);
 		imgview10.setFitWidth(100);
 		GridPane.setRowSpan(imgview10, 5);
 		ctop1.add(imgview10, 0, 0);
 		
-		ImageView imgview11 = CommonElements.getElementView("LeftDashboard/4.png");
+		FileInputStream imageStream11 = new FileInputStream("LeftDashboard/4.png");
+		Image image11 = new Image(imageStream11);
+		ImageView imgview11 = new ImageView(image11);
 		imgview11.setFitHeight(80);
 		imgview11.setFitWidth(80);
 		GridPane.setRowSpan(imgview11, 5);
 		ctop1.add(imgview11, 4, 0);
 		
-		ImageView imgview12 = CommonElements.getElementView("LeftDashboard/5.png");
+		FileInputStream imageStream12 = new FileInputStream("LeftDashboard/5.png");
+		Image image12 = new Image(imageStream12);
+		ImageView imgview12 = new ImageView(image12);
 		imgview12.setFitHeight(90);
 		imgview12.setFitWidth(90);
 		GridPane.setRowSpan(imgview12, 5);
@@ -190,7 +208,9 @@ public class Dashboard{
 		
 		centerTop.getChildren().add(ctop1);
 		
-		ImageView imgview13 = CommonElements.getElementView("TopDashboard/5.png");
+		FileInputStream imageStream13 = new FileInputStream("TopDashboard/5.png");
+		Image image13 = new Image(imageStream13);
+		ImageView imgview13 = new ImageView(image13);
 		imgview13.setFitWidth(960);
 		imgview13.setFitHeight(180);
 		
@@ -242,7 +262,7 @@ public class Dashboard{
 		container.setPrefWidth(905);
 		container.setPadding(new Insets(50,50,50,50));
 		container.setStyle("-fx-background-color : transparent; -fx-background: transparent; ");
-		container.setHbarPolicy(ScrollBarPolicy.NEVER);
+		container.setHbarPolicy(ScrollBarPolicy.ALWAYS);
 		container.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		
 		StackPane content = new StackPane();
@@ -259,7 +279,7 @@ public class Dashboard{
 		nowShowing.getChildren().add(imgview14);
 		
 		
-		//container.setContent(displayNowShowing());
+		container.setContent(displayNowShowing());
 		content.getChildren().add(container);// Content containing the scrollpane
 		root.getChildren().add(nowShowing);
 		root.getChildren().add(content);
@@ -272,34 +292,37 @@ public class Dashboard{
 	public VBox displayNowShowing() throws Exception{
 		System.out.println("Getting Movies Information...");
 		
-		VBox moviesInfo = new VBox(0);
+		VBox moviesInfo = new VBox(30);
 		moviesInfo.setStyle("-fx-background: transparent; -fx-background-color: transparent");
+		HBox[] movieBox = new HBox[3];
+		GridPane[] gpane = new GridPane[3];
+		int j = 0;
 		java.io.File file = new java.io.File("MovieData/movies.txt");
 		Scanner input = new Scanner(file);
-		
-		ArrayList<String> info = new ArrayList<String>();
 		
 		while(input.hasNext()){
 			String line = input.nextLine();
 			String[] section = line.split(",");
-			
-			for(String movies: section){
-				System.out.println(movies);
-				info.add(movies);
+			movieBox[j] = new HBox();
+			movieBox[j].setStyle("-fx-background: transparent; -fx-background-color: #336699");
+			gpane[j] = new GridPane();
+			gpane[j].setVgap(15);
+			gpane[j].setHgap(30);
+			for(int i = 0; i < 6 ; i++){
+				Label lbl = new Label(section[i]);
+				lbl.setFont(Font.font(20));
+				if(i == 0){;
+					gpane[j].add(lbl, 0, 0);
+				}
+				else{
+					gpane[j].add(lbl, i-1, 1);
+				}
+					
 			}
-			System.out.println();
+			 movieBox[j].getChildren().add(gpane[j]);
+			 moviesInfo.getChildren().add(movieBox[j]);
+			j++;
 		}
-		
-		final HBox[] movieBox = null;
-		
-		for(int i = 0; i < getNowShowingNo(); i++){
-			 movieBox[i] = new HBox();
-			 
-			 
-			 moviesInfo.getChildren().add(movieBox[i]);
-		}
-		
-		System.out.println(info);
 		return moviesInfo;
 	}
 	
@@ -348,21 +371,25 @@ public class Dashboard{
 	}
 	
 	public void changeButtonProperty(Button btn) throws Exception{
-		CommonElements.setStandardButtonStyle(btn);
-
+    	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+    			+ "-fx-background-color: transparent;");
+    	
+    	
     	// Mouse Hover Effect
 		DropShadow shadow = new DropShadow();
 		shadow.setColor(Color.LIGHTBLUE);
 		btn.setOnMouseEntered(e -> {
     		btn.setEffect(shadow);
-    		btn.setTextFill(Color.BLACK);
-    		btn.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY , Insets.EMPTY)));
-    		
+    		btn.setStyle("-fx-background-color: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+    			+ "-fx-background-color: transparent;");
     	});
     		
     	btn.setOnMouseExited(e -> {
-    		btn.setTextFill(Color.WHITE);
-    		btn.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY , Insets.EMPTY)));
+    		btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px; -fx-padding: 3 20 3 30; "
+        			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+        			+ "-fx-background-color: transparent;");
     		btn.setEffect(null);
     	});
 	}
