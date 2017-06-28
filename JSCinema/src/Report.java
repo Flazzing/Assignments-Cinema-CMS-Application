@@ -45,28 +45,22 @@ public class Report {
 		Pane root = new Pane();// root pane 
 		
 		//Setting Background Image
-		FileInputStream imageStream1 = new FileInputStream("PageLayout/1.png");
-		Image image = new Image(imageStream1);
-		ImageView imgview = new ImageView(image);
-		imgview.setFitHeight(960);
+		ImageView imgview = CommonElements.getBackgroundImage();
 		imgview.setFitWidth(1440);
+		imgview.setFitHeight(960);
 		root.getChildren().add(imgview);
-		
+				
 		//Create Header
 		Pane header = new Pane();
-		FileInputStream imageStream2 = new FileInputStream("PageLayout/2.png");
-		Image image2 = new Image(imageStream2);
-		ImageView imgview2 = new ImageView(image2);
+		ImageView imgview2 = CommonElements.getHeaderImage();
 		imgview2.setLayoutY(0);
 		header.getChildren().add(imgview2);
 		header.setLayoutY(0);
 		root.getChildren().add(header);
-		
+				
 		// Title on header
 		Pane title = new Pane();
-		FileInputStream imageStream3 = new FileInputStream("PageLayout/3.png");
-		Image image3 = new Image(imageStream3);
-		ImageView imgview3 = new ImageView(image3);
+		ImageView imgview3 = CommonElements.getTitleImage();
 		imgview3.setLayoutX(542);
 		imgview3.setLayoutY(26);
 		title.getChildren().add(imgview3);
@@ -76,11 +70,12 @@ public class Report {
     	graph.setPadding(new Insets(200,50,50,395));
     	
     	root.getChildren().add(graph);// Calling graph pane
-    	root.getChildren().add(CommonElements.getMenuBar(stage));// adding left sidebar to root pane
+    	root.getChildren().add(CommonElements.getMenuBar(stage));// calling menubar to root pane
 		Scene scene = new Scene(root, 1440, 960);
 		return scene;
 	}
-	// Store the 
+	
+	// Store the data of booking made into a Map and return the map
 	public Map<String, List<Integer>> getMoviesBooked() throws Exception{
 		Map<String,List<Integer>> movieBooked = new HashMap<String,List<Integer>>();
 		File file = new File("MovieData/bookingmade.txt");
@@ -92,9 +87,9 @@ public class Report {
     		Scanner input = new Scanner(file);
 
     		while(input.hasNextLine()){
-    			String line = input.nextLine();
-    			String[] section = line.split(";");
-    			movieName = section[0];
+    			String line = input.nextLine();	// Store a line from txt file
+    			String[] section = line.split(";");	// Split each line with regex ";" to each section store in an element of array
+    			movieName = section[0];	// Movie name is the first section for each line
     			List<Integer> numberBooked = new ArrayList<Integer>();
     			
     			for(int i = 1; i < section.length; i++){
@@ -132,10 +127,14 @@ public class Report {
     	bc.setStyle("-fx-font-size: 20px; -fx-text-fill: BLUE;"
     			+ "-fx-background-color : transparent; -fx-background: transparent; ");
     	
-    	Map<String,List<Integer>> data = getMoviesBooked();
+    	Map<String,List<Integer>> data = getMoviesBooked(); // Get the map of data
     	
-    	ArrayList<XYChart.Series> seriesList = new ArrayList<>();
+    	ArrayList<XYChart.Series> seriesList = new ArrayList<>();	// Create an arraylist for series
     	
+    	/*
+    	 * Create 2 series and add to the arraylist
+    	 * 2 series - 1 for Yesterday's data, 1 for Today's data
+    	 */
     	for(int i = 0;i < 2; i++){
     		XYChart.Series series = new XYChart.Series<>();
     		seriesList.add(series);
@@ -165,26 +164,4 @@ public class Report {
 		return graph;
 	}
 	
-	// This method changes the style of buttons of menu bar on the left
-	public void changeButtonProperty(Button btn) throws Exception{
-    	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
-		
-		DropShadow shadow = new DropShadow();
-		shadow.setColor(Color.LIGHTBLUE);
-		btn.setOnMouseEntered(e -> {
-    		btn.setEffect(shadow);
-    		btn.setStyle("-fx-background-color:white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
-    	});
-    		
-    	btn.setOnMouseExited(e -> {
-    		btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px; -fx-padding: 3 20 3 30; "
-        			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-        			+ "-fx-background-color: transparent;");
-    		btn.setEffect(null);
-    	});
-	}
 }

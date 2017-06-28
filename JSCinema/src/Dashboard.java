@@ -41,18 +41,14 @@ public class Dashboard{
 		Pane root = new Pane();// root pane 
 		
 		//Setting Background Image
-		FileInputStream imageStream1 = new FileInputStream("PageLayout/1.png");
-		Image image = new Image(imageStream1);
-		ImageView imgview = new ImageView(image);
-		imgview.setFitHeight(960);
+		ImageView imgview = CommonElements.getBackgroundImage();
 		imgview.setFitWidth(1440);
+		imgview.setFitHeight(960);
 		root.getChildren().add(imgview);
 		
 		//Create Header
 		Pane header = new Pane();
-		FileInputStream imageStream2 = new FileInputStream("PageLayout/2.png");
-		Image image2 = new Image(imageStream2);
-		ImageView imgview2 = new ImageView(image2);
+		ImageView imgview2 = CommonElements.getHeaderImage();
 		imgview2.setLayoutY(0);
 		header.getChildren().add(imgview2);
 		header.setLayoutY(0);
@@ -60,9 +56,7 @@ public class Dashboard{
 		
 		// Title on header
 		Pane title = new Pane();
-		FileInputStream imageStream3 = new FileInputStream("PageLayout/3.png");
-		Image image3 = new Image(imageStream3);
-		ImageView imgview3 = new ImageView(image3);
+		ImageView imgview3 = CommonElements.getTitleImage();
 		imgview3.setLayoutX(542);
 		imgview3.setLayoutY(26);
 		title.getChildren().add(imgview3);
@@ -173,7 +167,7 @@ public class Dashboard{
 		nowShowing.getChildren().add(imgview14);
 		
 		
-		container.setContent(displayNowShowing());
+		container.setContent(displayNowShowing()); // Calling the VBox to show content in nowshowing
 		content.getChildren().add(container);// Content containing the scrollpane
 		root.getChildren().add(nowShowing);
 		root.getChildren().add(content);
@@ -182,14 +176,20 @@ public class Dashboard{
 		Scene scene = new Scene(root, 1440, 960);
 		return scene;
 	}
-	
+	/*
+	 * This method create the content of nowshowing in dashboard
+	 */
 	public VBox displayNowShowing() throws Exception{
 		System.out.println("Getting Movies Information...");
 		
 		VBox moviesInfo = new VBox(30);
 		moviesInfo.setStyle("-fx-background: transparent; -fx-background-color: transparent");
-		HBox[] movieBox = new HBox[3];
-		GridPane[] gpane = new GridPane[3];
+		/*
+		 * Declaring size of hbox and Gridpane according to the number of movie airing
+		 */
+		HBox[] movieBox = new HBox[CommonElements.getNowShowingNo()];
+		GridPane[] gpane = new GridPane[CommonElements.getNowShowingNo()];
+		
 		int j = 0;
 		java.io.File file = new java.io.File("MovieData/movies.txt");
 		Scanner input = new Scanner(file);
@@ -222,6 +222,9 @@ public class Dashboard{
 		return moviesInfo;
 	}
 	
+	/*
+	 * This method Calculate the total booking made 
+	 */
 	public int getTotalBookingMade() throws Exception{
 		String num = "";
 		int tot = 0;
