@@ -316,11 +316,13 @@ public class Dashboard{
 			gpane[j] = new GridPane();
 			gpane[j].setVgap(15);
 			gpane[j].setHgap(30);
+
 			for(int i = 0; i < 6 ; i++){
 				Label lbl = new Label(section[i]);
 				lbl.setFont(Font.font(20));
 				if(i == 0){;
 					gpane[j].add(lbl, 0, 0);
+					GridPane.setColumnSpan(lbl, 2);
 				}
 				else{
 					gpane[j].add(lbl, i-1, 1);
