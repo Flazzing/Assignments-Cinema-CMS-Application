@@ -25,6 +25,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * This class is used to generate the Dashboard.
+ */
+
+/**
+ * @author Ong Jun Quan
+ */
+
 public class Dashboard{
 	
 	public Scene getDashboard(Stage stage) throws Exception{
@@ -88,7 +96,7 @@ public class Dashboard{
     	Button btn1 = new Button("DashBoard");
     	btn1.setGraphic(imageView5);
     	 
-    	changeButtonProperty(btn1);
+    	CommonElements.changeButtonProperty(btn1);
 		
     	btn1.setOnAction(e -> {
     		try {
@@ -107,7 +115,7 @@ public class Dashboard{
     	Button btn2 = new Button("Movies");
     	btn2.setGraphic(imageView6);
     	
-    	changeButtonProperty(btn2);
+    	CommonElements.changeButtonProperty(btn2);
         	
     	HBox hb3 = new HBox();
     	FileInputStream imageStream7 = new FileInputStream("LeftDashboard/4.png"); 
@@ -118,7 +126,7 @@ public class Dashboard{
     	Button btn3 = new Button("Report");
     	btn3.setGraphic(imageView7);
     	
-    	changeButtonProperty(btn3);
+    	CommonElements.changeButtonProperty(btn3);
     	
     	btn3.setOnAction(e -> {
     		Report report = new Report(); // Create report object from report class
@@ -138,7 +146,7 @@ public class Dashboard{
     	Button btn4 = new Button("Users");
     	btn4.setGraphic(imageView8);
     	
-    	changeButtonProperty(btn4);
+    	CommonElements.changeButtonProperty(btn4);
     	
     	HBox hb5 = new HBox();
     	FileInputStream imageStream9 = new FileInputStream("LeftDashboard/8.png"); 
@@ -149,7 +157,7 @@ public class Dashboard{
     	Button btn5 = new Button("Logout");
     	btn5.setGraphic(imageView9);
     	
-    	changeButtonProperty(btn5);
+    	CommonElements.changeButtonProperty(btn5);
     	
     	btn5.setOnAction(e -> {
     		int dialogButton = JOptionPane.NO_OPTION;
@@ -218,7 +226,7 @@ public class Dashboard{
 		
 		centTop.getChildren().add(centerTop);
 		
-		Text ctText1 = new Text(Integer.toString(getNowShowingNo())); // get number of movie showing then change to String type
+		Text ctText1 = new Text(Integer.toString(CommonElements.getNowShowingNo())); // get number of movie showing then change to String type
 		Text ctText2 = new Text("movie showing today");
 		ctText1.setFont(Font.font(28));
 		ctText2.setFont(Font.font(14));
@@ -326,27 +334,6 @@ public class Dashboard{
 		return moviesInfo;
 	}
 	
-	public int getNowShowingNo() throws Exception{
-		int num = 0;
-		File file = new File("MovieData/movies.txt");
-		
-		if(file.exists()){
-    		System.out.println("File Opened! Calculating number of movies.");
-    		Scanner input = new Scanner(file);
-    		
-    		while(input.hasNextLine()){
-    			num++;
-    			input.nextLine();
-    		}// end of while ( calculate lines in text file, 1 line = 1 movie showing)
-    		
-    		input.close();// close input 
-    	}else{
-    		System.out.println("File not found!");
-    	}
-		System.out.println("Movies Available: " +num);
-		return num;// return number of movie showing
-	}
-	
 	public int getTotalBookingMade() throws Exception{
 		String num = "";
 		int tot = 0;
@@ -370,27 +357,5 @@ public class Dashboard{
 		return tot; // Return total number of booking made 
 	}
 	
-	public void changeButtonProperty(Button btn) throws Exception{
-    	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
-    	
-    	
-    	// Mouse Hover Effect
-		DropShadow shadow = new DropShadow();
-		shadow.setColor(Color.LIGHTBLUE);
-		btn.setOnMouseEntered(e -> {
-    		btn.setEffect(shadow);
-    		btn.setStyle("-fx-background-color: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
-    	});
-    		
-    	btn.setOnMouseExited(e -> {
-    		btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px; -fx-padding: 3 20 3 30; "
-        			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-        			+ "-fx-background-color: transparent;");
-    		btn.setEffect(null);
-    	});
-	}
+
 }

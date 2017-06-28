@@ -30,6 +30,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * This class is used to generate the Report page.
+ */
+
+/**
+ * @author Ong Jun Quan
+ */
+
 public class Report {
 	public Scene getReport(Stage stage) throws Exception{
 		stage.setTitle("Report");
@@ -238,26 +246,42 @@ public class Report {
     	bc.setStyle("-fx-font-size: 20px; -fx-text-fill: BLUE;"
     			+ "-fx-background-color : transparent; -fx-background: transparent; ");
     	
-    	String date="06/27/2017";
+    	/*String date="06/27/2017";
     	String incDate;
     	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     	Calendar c = Calendar.getInstance();
     	c.setTime(sdf.parse(date));
     	int maxDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+    	c.add(Calendar.DATE, 1);
+		incDate = sdf.format(c.getTime());*/
+    	Map<String,List<Integer>> data = getMoviesBooked();
     	
-		Map<String,List<Integer>> data = getMoviesBooked();
+    	ArrayList<XYChart.Series> seriesList = new ArrayList<>();
+    	
+    	for(int i = 0;i < 2; i++){
+    		XYChart.Series series = new XYChart.Series<>();
+    		seriesList.add(series);
+    	}
+		
 		for(String key : data.keySet()){
-			c.add(Calendar.DATE, 1);
-			incDate = sdf.format(c.getTime());
-			XYChart.Series series = new XYChart.Series<>();
-			series.setName(incDate);
+			System.out.println("Hi");
+			int valueCounter = 0;
+			
 			for(Integer i : data.get(key)){
 				System.out.println("Key : " +key + " value: " + i);
 				
-				series.getData().add(new XYChart.Data(key, i));
+				if(valueCounter == 0){
+					seriesList.get(valueCounter).setName("Yesterday");
+					seriesList.get(valueCounter).getData().add(new XYChart.Data(key, i));
+				}
+					
+				if(valueCounter == 1){
+					seriesList.get(valueCounter).setName("Today");
+					seriesList.get(valueCounter).getData().add(new XYChart.Data(key, i));
+				}
+				bc.getData().add(seriesList.get(valueCounter));
+				valueCounter++;
 			}
-
-			bc.getData().add(series);
 		}
 
     	graph.getChildren().add(bc);

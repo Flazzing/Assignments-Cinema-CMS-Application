@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 import javafx.application.Application;
@@ -6,9 +5,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * @author Steve
- *
+ * This class is used to start the Admin's side of the program.
  */
+
+/**
+ * @author Ong Jun Quan, Kwan Juen Wen (Steve)
+ */
+
 public class AdminPage extends Application {
 
 	private static Stage mainStage;
@@ -55,16 +58,6 @@ public class AdminPage extends Application {
 		getMainStage().setScene(getLoginScene());
 		getMainStage().show();
 	}
-	
-	/* Not needed right now
-	public void startAdminPage(Stage primaryStage) throws Exception{
-		Dashboard dashboard = new Dashboard();
-		
-		Scene scene = dashboard.getDashboard(primaryStage);
-		primaryStage.setTitle("Dashboard"); //Set the stage title 
-		primaryStage.setScene(scene); //Place the scene in the stage
-	}
-	*/
 	
 	public static void main(String[] args){
 		Application.launch(args);
