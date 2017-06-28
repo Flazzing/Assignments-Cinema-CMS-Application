@@ -420,7 +420,7 @@ public class MovieInterface extends Application{
 		AiringMovieInterfaceButton.setPrefWidth(300);
 	      
 		AiringMovieInterfaceButton.setOnAction(e->{
-			MovieTableView(MovieTypeButtonPane, "MovieDataSource/Movie.txt");		
+			MovieTableView(MovieTypeButtonPane, "MovieDataSource/Movie.txt");	
 		});
 		
 		Button ComingSoonMovieInterfaceButton = new Button("Coming Soon");
@@ -429,7 +429,7 @@ public class MovieInterface extends Application{
 		ComingSoonMovieInterfaceButton.setPrefWidth(300);	
 
 		ComingSoonMovieInterfaceButton.setOnAction(e->{
-			MovieTableView(MovieTypeButtonPane, "MovieDataSource/ComingSoonMovie.txt");			
+			ComingSoonMovieTableView(MovieTypeButtonPane, "MovieDataSource/ComingSoonMovie.txt");
 		});
 		
 
@@ -447,7 +447,6 @@ public class MovieInterface extends Application{
 	        AddMovieButton.setStyle("-fx-border-color: transparent; -fx-border-width: 0; -fx-background-radius: 0; -fx-background-color: transparent; -fx-font-size: 30; /* 30 */ -fx-text-fill: #ffffff;");    
 	        EditMovieButton.setStyle("-fx-border-color: transparent; -fx-border-width: 0; -fx-background-radius: 0; -fx-background-color: transparent; -fx-font-size: 30; /* 30 */ -fx-text-fill: #ffffff;");    
 	        DeleteMovieButton.setStyle("-fx-border-color: transparent; -fx-border-width: 0; -fx-background-radius: 0; -fx-background-color: transparent; -fx-font-size: 30; /* 30 */ -fx-text-fill: #ffffff;");    
-	        
 	        
 	        HBox MovieFunctionHBox = new HBox();
 	        MovieFunctionHBox.setSpacing(300);
@@ -506,9 +505,19 @@ public class MovieInterface extends Application{
 	            			}
 	            }});
 
+	    	ComboBox <String>MovieFileComboBox = new ComboBox<String>();
+			MovieFileComboBox.getItems().add("MovieDataSource/Movie.txt");
+			MovieFileComboBox.getItems().add("MovieDataSource/ComingSoonMovie.txt");
+
+			MovieFileComboBox.setPromptText("Please select the type of movie to delete");
+			
+	        Label Movie = new Label("Type of Text Movie");
+	       	Movie.setStyle(" -fx-font-size: 20; -fx-text-fill: #ffffff;");
+	   	 	AddMovieGridPane.add(MovieFileComboBox, 7, 8);
+	        AddMovieGridPane.add(Movie, 6, 8);
 	        AddMovieConfirmButton.setOnAction(d->{
 	        	try {
-	        		AddMovie("MovieDataSource/Movie.txt", AddMovieTextField[0].getText(), AddMovieTextField[1].getText(), AddMovieTextField[2].getText(), AddMovieTextField[3].getText(), AddMovieTextField[4].getText(), AddMovieTextField[5].getText(), AddMovieTextField[6].getText(), AddMovieTextField[7].getText(), AddMovieTextField[8].getText(), AddMovieTextField[9].getText(), AddMovieTextField[10].getText(), AddMovieTextField[11].getText(), AddMovieTextField[12].getText(),AddMovieTextField[13].getText(), MovieImageDirectoryButton.getText());
+	        		AddMovie(MovieFileComboBox.getValue(), AddMovieTextField[0].getText(), AddMovieTextField[1].getText(), AddMovieTextField[2].getText(), AddMovieTextField[3].getText(), AddMovieTextField[4].getText(), AddMovieTextField[5].getText(), AddMovieTextField[6].getText(), AddMovieTextField[7].getText(), AddMovieTextField[8].getText(), AddMovieTextField[9].getText(), AddMovieTextField[10].getText(), AddMovieTextField[11].getText(), AddMovieTextField[12].getText(),AddMovieTextField[13].getText(), MovieImageDirectoryButton.getText());
 	        	}catch(IOException g){
 	        		g.printStackTrace();
 	        	}
@@ -909,7 +918,7 @@ public class MovieInterface extends Application{
 				}
 			}
 		}
-
+	
 		TableView <Movie>MovieTableView = new TableView<Movie>();
 		MovieTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		MovieTableView.setEditable(true);
@@ -933,6 +942,7 @@ public class MovieInterface extends Application{
 		 for(int i=0;i<MovieCollection.size(); i++){			 
 		 data.add(MovieCollection.get(i));
 		}	    
+		 
 		 MovieTableView.setItems(data);		 
 		MovieTableView.setLayoutX(400);
 		MovieTableView.setLayoutY(250);
@@ -941,6 +951,60 @@ public class MovieInterface extends Application{
 		MovieTypePane.getChildren().add(MovieTableView);
 	}
 	
+	public void ComingSoonMovieTableView(Pane MovieTypePane, String Directory){
+	
+		File ComingSoonMovieDataFile = new File(Directory);
+		Scanner read = null;
+		try {
+			read = new Scanner(ComingSoonMovieDataFile);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String Dataline = null;
+		String[] ComingSoonData = null;
+		ArrayList <String>RawMovieData = new ArrayList<String>();
+		
+		
+		while (read.hasNextLine()){
+			Dataline = read.nextLine();
+			ComingSoonData = Dataline.split(",");
+			for (int i=0; i<ComingSoonData.length;i++){
+				RawMovieData.add(ComingSoonData[i]);				
+			}
+		}
+		
+		
+		
+		TableView <ComingSoonMovie>MovieTableView = new TableView<ComingSoonMovie>();
+		MovieTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		MovieTableView.setEditable(true);
+		TableColumn<ComingSoonMovie, String> MovieName = new TableColumn<ComingSoonMovie, String>("Movie Name");
+		TableColumn<ComingSoonMovie, String> MovieReleaseDay = new TableColumn<ComingSoonMovie, String>("Release Day");
+		TableColumn<ComingSoonMovie, String> MovieReleaseMonth = new TableColumn<ComingSoonMovie, String>("Release Month");
+		
+		MovieTableView.getColumns().addAll(MovieName, MovieReleaseDay, MovieReleaseMonth);
 
+		MovieName.setCellValueFactory(new PropertyValueFactory<>("MovieName"));
+		MovieReleaseDay.setCellValueFactory(new PropertyValueFactory<>("ReleaseDay"));
+		MovieReleaseMonth.setCellValueFactory(new PropertyValueFactory<>("ReleaseMonth"));
+		 
+		 ObservableList<ComingSoonMovie> data = FXCollections.observableArrayList();
+		 
+		 System.out.println(RawMovieData.size());
+		 for(int i=0;i<(RawMovieData.size()-1)/3; i++){
+			data.add(new ComingSoonMovie(RawMovieData.get(i), RawMovieData.get(i+1), RawMovieData.get(i+2)));
+			
+		 }
+		
+		MovieTableView.setItems(data);		 
+		MovieTableView.setLayoutX(400);
+		MovieTableView.setLayoutY(250);
+		MovieTableView.setPrefHeight(400);
+		MovieTableView.setPrefWidth(800);
+		MovieTypePane.getChildren().add(MovieTableView);
+	}
+	
 	
 }
