@@ -67,25 +67,19 @@ public class Dashboard{
 		ctop1.setPadding(new Insets(70, 50,50,15));
 		ctop1.setHgap(40);
 		
-		FileInputStream imageStream10 = new FileInputStream("TopDashboard/4.png");
-		Image image10 = new Image(imageStream10);
-		ImageView imgview10 = new ImageView(image10);
+		ImageView imgview10 = CommonElements.getElementView("TopDashboard/4.png");
 		imgview10.setFitHeight(100);
 		imgview10.setFitWidth(100);
 		GridPane.setRowSpan(imgview10, 5);
 		ctop1.add(imgview10, 0, 0);
 		
-		FileInputStream imageStream11 = new FileInputStream("LeftDashboard/4.png");
-		Image image11 = new Image(imageStream11);
-		ImageView imgview11 = new ImageView(image11);
+		ImageView imgview11 = CommonElements.getElementView("LeftDashboard/4.png");
 		imgview11.setFitHeight(80);
 		imgview11.setFitWidth(80);
 		GridPane.setRowSpan(imgview11, 5);
 		ctop1.add(imgview11, 4, 0);
 		
-		FileInputStream imageStream12 = new FileInputStream("LeftDashboard/5.png");
-		Image image12 = new Image(imageStream12);
-		ImageView imgview12 = new ImageView(image12);
+		ImageView imgview12 = CommonElements.getElementView("LeftDashboard/5.png");
 		imgview12.setFitHeight(90);
 		imgview12.setFitWidth(90);
 		GridPane.setRowSpan(imgview12, 5);
@@ -93,9 +87,7 @@ public class Dashboard{
 		
 		centerTop.getChildren().add(ctop1);
 		
-		FileInputStream imageStream13 = new FileInputStream("TopDashboard/5.png");
-		Image image13 = new Image(imageStream13);
-		ImageView imgview13 = new ImageView(image13);
+		ImageView imgview13 = CommonElements.getElementView("TopDashboard/5.png");
 		imgview13.setFitWidth(960);
 		imgview13.setFitHeight(180);
 		
