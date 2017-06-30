@@ -7,6 +7,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -40,6 +43,10 @@ import javafx.stage.Stage;
 		
 		int no_Movies =0;
 		String [] movieNames = new String [10];
+		String MovieName = "";
+		String time ="";
+		String hall ="";
+		String Directory = "";
 		
 		
 		public Scene getUserScene(Stage stage) throws Exception{
@@ -106,7 +113,7 @@ import javafx.stage.Stage;
 				while(input.hasNext()){
 				String line = input.nextLine();
 				String[] splitter = line.split(",");
-				FileInputStream movieStream = new FileInputStream(splitter[12]);
+				FileInputStream movieStream = new FileInputStream(splitter[14]);
 				movieNames[count] = splitter[1];
 				Image movieImage = new Image(movieStream);
 				movieImgView[count] = new ImageView(movieImage);
@@ -211,12 +218,18 @@ import javafx.stage.Stage;
 			RadioButton time5 = new RadioButton("Not Applicable");
 				time5.setFont(Font.font("Times New Roman", 20));
 				time5.setTextFill(Color.AQUA);
+				
+			RadioButton time6 = new RadioButton("Not Applicable");
+				time6.setFont(Font.font("Times New Roman", 20));
+				time6.setTextFill(Color.AQUA);
 			
 				time1.setToggleGroup(group);
 				time2.setToggleGroup(group);
 				time3.setToggleGroup(group);
 				time4.setToggleGroup(group);
 				time5.setToggleGroup(group);
+				time6.setToggleGroup(group);
+				
 				
 				
 				Label ShowingTimeAvailable = new Label("Showing Time Available");
@@ -232,8 +245,9 @@ import javafx.stage.Stage;
 				showingTime.add(time1, 1, 1);
 				showingTime.add(time2, 2, 1);
 				showingTime.add(time3, 3, 1);
-				showingTime.add(time4, 4, 1);
-				showingTime.add(time5, 5, 1);
+				showingTime.add(time4, 1, 2);
+				showingTime.add(time5, 2, 2);
+				showingTime.add(time6, 3, 2);
 			
 			//Proceed button Pane - movie seating pane
 			HBox BtnPane = new HBox(20);
@@ -254,11 +268,13 @@ import javafx.stage.Stage;
 		            
 		            public void handle(ActionEvent event) {
 		            	
+		            	MovieName = movieNames[0];
 		            	time1.setText("Not Applicable");
 		            	time2.setText("Not Applicable");
 		            	time3.setText("Not Applicable");
 		            	time4.setText("Not Applicable");
 		            	time5.setText("Not Applicable");
+		            	time6.setText("Not Applicable");
 		            	
 		            	Movie_Name.setText(movieNames[0]);
 		            	try{
@@ -275,6 +291,8 @@ import javafx.stage.Stage;
 		                    	time3.setText(splitter[4]);
 		                    	time4.setText(splitter[5]);
 		                    	time5.setText(splitter[6]);
+		                    	time6.setText(splitter[7]);
+		                    	Directory = splitter[14];
 		            			
 		            		}
 		            		
@@ -296,11 +314,13 @@ import javafx.stage.Stage;
 		            
 		            public void handle(ActionEvent event) {
 		            	
+		            	MovieName = movieNames[1];
 		            	time1.setText("Not Applicable");
 		            	time2.setText("Not Applicable");
 		            	time3.setText("Not Applicable");
 		            	time4.setText("Not Applicable");
 		            	time5.setText("Not Applicable");
+		            	time6.setText("Not Applicable");
 		            	
 		            	Movie_Name.setText(movieNames[1]);
 		            	try{
@@ -317,6 +337,8 @@ import javafx.stage.Stage;
 		                    	time3.setText(splitter[4]);
 		                    	time4.setText(splitter[5]);
 		                    	time5.setText(splitter[6]);
+		                    	time6.setText(splitter[7]);
+		                    	
 		            			
 		            		}
 		            		
@@ -338,11 +360,13 @@ import javafx.stage.Stage;
 		            
 		            public void handle(ActionEvent event) {
 		            	
+		            	MovieName = movieNames[2];
 		            	time1.setText("Not Applicable");
 		            	time2.setText("Not Applicable");
 		            	time3.setText("Not Applicable");
 		            	time4.setText("Not Applicable");
 		            	time5.setText("Not Applicable");
+		            	time6.setText("Not Applicable");
 		            	
 		            	Movie_Name.setText(movieNames[2]);
 		            	try{
@@ -359,6 +383,7 @@ import javafx.stage.Stage;
 		                    	time3.setText(splitter[4]);
 		                    	time4.setText(splitter[5]);
 		                    	time5.setText(splitter[6]);
+		                    	time6.setText(splitter[7]);
 		            			
 		            		}
 		            		
@@ -380,11 +405,13 @@ import javafx.stage.Stage;
 		            
 		            public void handle(ActionEvent event) {
 		            	
+		            	MovieName = movieNames[3];
 		            	time1.setText("Not Applicable");
 		            	time2.setText("Not Applicable");
 		            	time3.setText("Not Applicable");
 		            	time4.setText("Not Applicable");
 		            	time5.setText("Not Applicable");
+		            	time6.setText("Not Applicable");
 		            	
 		            	Movie_Name.setText(movieNames[3]);
 		            	try{
@@ -401,6 +428,7 @@ import javafx.stage.Stage;
 		                    	time3.setText(splitter[4]);
 		                    	time4.setText(splitter[5]);
 		                    	time5.setText(splitter[6]);
+		                    	time6.setText(splitter[7]);
 		            			
 		            		}
 		            		
@@ -422,11 +450,13 @@ import javafx.stage.Stage;
 		            
 		            public void handle(ActionEvent event) {
 		            	
+		            	MovieName = movieNames[4];
 		            	time1.setText("Not Applicable");
 		            	time2.setText("Not Applicable");
 		            	time3.setText("Not Applicable");
 		            	time4.setText("Not Applicable");
 		            	time5.setText("Not Applicable");
+		            	time6.setText("Not Applicable");
 		            	
 		            	Movie_Name.setText(movieNames[4]);
 		            	try{
@@ -443,6 +473,7 @@ import javafx.stage.Stage;
 		                    	time3.setText(splitter[4]);
 		                    	time4.setText(splitter[5]);
 		                    	time5.setText(splitter[6]);
+		                    	time6.setText(splitter[7]);
 		            			
 		            		}
 		            		
@@ -464,11 +495,13 @@ import javafx.stage.Stage;
 		            
 		            public void handle(ActionEvent event) {
 		            	
+		            	MovieName = movieNames[5];
 		            	time1.setText("Not Applicable");
 		            	time2.setText("Not Applicable");
 		            	time3.setText("Not Applicable");
 		            	time4.setText("Not Applicable");
 		            	time5.setText("Not Applicable");
+		            	time6.setText("Not Applicable");
 		            	
 		            	Movie_Name.setText(movieNames[5]);
 		            	try{
@@ -485,6 +518,7 @@ import javafx.stage.Stage;
 		                    	time3.setText(splitter[4]);
 		                    	time4.setText(splitter[5]);
 		                    	time5.setText(splitter[6]);
+		                    	time6.setText(splitter[7]);
 		            			
 		            		}
 		            		
@@ -506,11 +540,13 @@ import javafx.stage.Stage;
 		            
 		            public void handle(ActionEvent event) {
 		            	
+		            	MovieName = movieNames[6];
 		            	time1.setText("Not Applicable");
 		            	time2.setText("Not Applicable");
 		            	time3.setText("Not Applicable");
 		            	time4.setText("Not Applicable");
 		            	time5.setText("Not Applicable");
+		            	time6.setText("Not Applicable");
 		            	
 		            	Movie_Name.setText(movieNames[6]);
 		            	try{
@@ -527,6 +563,7 @@ import javafx.stage.Stage;
 		                    	time3.setText(splitter[4]);
 		                    	time4.setText(splitter[5]);
 		                    	time5.setText(splitter[6]);
+		                    	time6.setText(splitter[7]);
 		                    	
 		            		}
 		            		
@@ -548,11 +585,13 @@ import javafx.stage.Stage;
 		            
 		            public void handle(ActionEvent event) {
 		            	
+		            	MovieName = movieNames[7];
 		            	time1.setText("Not Applicable");
 		            	time2.setText("Not Applicable");
 		            	time3.setText("Not Applicable");
 		            	time4.setText("Not Applicable");
 		            	time5.setText("Not Applicable");
+		            	time6.setText("Not Applicable");
 		            	
 		            	Movie_Name.setText(movieNames[7]);
 		            	try{
@@ -569,6 +608,7 @@ import javafx.stage.Stage;
 		                    	time3.setText(splitter[4]);
 		                    	time4.setText(splitter[5]);
 		                    	time5.setText(splitter[6]);
+		                    	time6.setText(splitter[7]);
 		            			
 		            		}
 		            		
@@ -590,11 +630,13 @@ import javafx.stage.Stage;
 		            
 		            public void handle(ActionEvent event) {
 		            	
+		            	MovieName = movieNames[8];
 		            	time1.setText("Not Applicable");
 		            	time2.setText("Not Applicable");
 		            	time3.setText("Not Applicable");
 		            	time4.setText("Not Applicable");
 		            	time5.setText("Not Applicable");
+		            	time6.setText("Not Applicable");
 		            	
 		            	Movie_Name.setText(movieNames[8]);
 		            	try{
@@ -611,6 +653,7 @@ import javafx.stage.Stage;
 		                    	time3.setText(splitter[4]);
 		                    	time4.setText(splitter[5]);
 		                    	time5.setText(splitter[6]);
+		                    	time6.setText(splitter[7]);
 		            			
 		            		}
 		            		
@@ -632,11 +675,13 @@ import javafx.stage.Stage;
 		            
 		            public void handle(ActionEvent event) {
 		            	
+		            	MovieName = movieNames[9];
 		            	time1.setText("Not Applicable");
 		            	time2.setText("Not Applicable");
 		            	time3.setText("Not Applicable");
 		            	time4.setText("Not Applicable");
 		            	time5.setText("Not Applicable");
+		            	time6.setText("Not Applicable");
 		            	
 		            	Movie_Name.setText(movieNames[9]);
 		            	try{
@@ -653,6 +698,7 @@ import javafx.stage.Stage;
 		                    	time3.setText(splitter[4]);
 		                    	time4.setText(splitter[5]);
 		                    	time5.setText(splitter[6]);
+		                    	time6.setText(splitter[7]);
 		            			
 		            		}
 		            		
@@ -697,6 +743,177 @@ import javafx.stage.Stage;
 			      }
 			    });
 			
+			time1.setOnAction(e ->{
+				
+				if(time1.isSelected())
+				{
+					
+				try{
+	            	java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+	            	Scanner inputtime1 = new Scanner(filetime1);
+	            	while(inputtime1.hasNext()){
+	            		String line = inputtime1.nextLine();
+	            		String[] splitter = line.split(",");
+	            		
+	            		if(splitter[1].matches(MovieName)){
+	            			
+	            			time = time1.getText();
+	            			hall = splitter[8];
+	            			
+	            		}
+	            		
+	            		}
+	            	
+	            	}
+	            	catch (FileNotFoundException ex){
+	            		System.out.println("File Cannot Be Found");
+	            	}
+				}
+			});
+			
+			time2.setOnAction(e ->{
+				
+				try{
+	            	java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+	            	Scanner inputtime1 = new Scanner(filetime1);
+	            	while(inputtime1.hasNext()){
+	            		String line = inputtime1.nextLine();
+	            		String[] splitter = line.split(",");
+	            		
+	            		if(splitter[1].matches(MovieName)){
+	            			
+	            			time = time2.getText();
+	            			hall = splitter[9];
+	            			
+	            		}
+	            		
+	            		}
+	            	
+	            	}
+	            	catch (FileNotFoundException ex){
+	            		System.out.println("File Cannot Be Found");
+	            	}
+			});
+			
+			time3.setOnAction(e ->{
+				
+				try{
+	            	java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+	            	Scanner inputtime1 = new Scanner(filetime1);
+	            	while(inputtime1.hasNext()){
+	            		String line = inputtime1.nextLine();
+	            		String[] splitter = line.split(",");
+	            		
+	            		if(splitter[1].matches(MovieName)){
+	            			
+	            			time = time3.getText();
+	            			hall = splitter[10];
+	            			
+	            		}
+	            		
+	            		}
+	            	
+	            	}
+	            	catch (FileNotFoundException ex){
+	            		System.out.println("File Cannot Be Found");
+	            	}
+			});
+
+			time4.setOnAction(e ->{
+	
+				try{
+					java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+					Scanner inputtime1 = new Scanner(filetime1);
+					while(inputtime1.hasNext()){
+						String line = inputtime1.nextLine();
+						String[] splitter = line.split(",");
+    		
+						if(splitter[1].matches(MovieName)){
+    			
+							time = time4.getText();
+							hall = splitter[11];
+    			
+						}
+    		
+					}
+    	
+				}
+				catch (FileNotFoundException ex){
+					System.out.println("File Cannot Be Found");
+				}
+			});
+
+			time5.setOnAction(e ->{
+	
+				try{
+					java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+					Scanner inputtime1 = new Scanner(filetime1);
+					while(inputtime1.hasNext()){
+						String line = inputtime1.nextLine();
+						String[] splitter = line.split(",");
+    		
+						if(splitter[1].matches(MovieName)){
+    			
+							time = time5.getText();
+							hall = splitter[12];
+    			
+						}
+    		
+					}
+    	
+				}
+				catch (FileNotFoundException ex){
+					System.out.println("File Cannot Be Found");
+				}
+			});
+
+			time6.setOnAction(e ->{
+				
+				try{
+			    	java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+			    	Scanner inputtime1 = new Scanner(filetime1);
+			    	while(inputtime1.hasNext()){
+			    		String line = inputtime1.nextLine();
+			    		String[] splitter = line.split(",");
+			    		
+			    		if(splitter[1].matches(MovieName)){
+			    			
+			    			time = time6.getText();
+			    			hall = splitter[13];
+			    			
+			    		}
+			    		
+			    		}
+			    	
+			    	}
+			    	catch (FileNotFoundException ex){
+			    		System.out.println("File Cannot Be Found");
+			    	}
+			});
+			
+			Proceed.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+
+	            
+	            public void handle(ActionEvent event) {
+	            	
+	            	if(time.matches("-") ||time.matches("0.00-0.00")){
+	            		int dialogButton = JOptionPane.CLOSED_OPTION;
+	            		dialogButton = JOptionPane.showConfirmDialog(null, "Please select an available time slot?", "Time slot not found", dialogButton);
+	            		if(dialogButton == JOptionPane.OK_OPTION){
+	            			
+	            		}
+	            	}else{
+	            		
+	            		//------------TO CHING SCENE-------------
+	            		
+	            		//Ching ching = new Ching(MovieName,time,hall,Directory);
+	            		//stage.setScene(ching.ChingMethod(stage));
+	            		
+	            		//------------EDIT TO HERE---------------
+	            	}
+	            } 
+	            });
+			
 			//adding all the pane in to RootPane for UserScene 
 			rootPane.getChildren().addAll(backgroundPane,Footer,banner,border,BtnPane,showingTime,hbox1,MenuBar);
 			Scene scene = new Scene(rootPane, 1440 , 960 );
@@ -706,6 +923,4 @@ import javafx.stage.Stage;
 		}
 		
 }
-	
-
 	
