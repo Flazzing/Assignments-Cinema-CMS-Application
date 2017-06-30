@@ -110,7 +110,7 @@ public class ComingSoonScene {
 				VBox NowShowingMov = new VBox(20);
 			
 					NowShowingMov.setPadding(new Insets(350,0,0,100));
-					java.io.File file = new java.io.File("UserPage/movies.txt");
+					java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 					Scanner input = new Scanner(file);
 					Scanner MovName = new Scanner(file);
 					Label movieNames [] = new Label [10];
@@ -133,7 +133,7 @@ public class ComingSoonScene {
 			
 		
 				CommingSoonMov.setPadding(new Insets(350,0,0,360));
-				FileInputStream file2 = new FileInputStream("UserPage/comingSoon.txt");
+				FileInputStream file2 = new FileInputStream("MovieDataSource/ComingSoonMovie.txt");
 				Scanner CmgName = new Scanner(file2);
 				Label comingSoonNames [] = new Label [10];
 				int count4 =0;
@@ -154,7 +154,7 @@ public class ComingSoonScene {
 				HBox MoviesCommingSoon = new HBox();
 				
 					//MoviesCommingSoon.setPadding(new Insets(350,0,0,360));
-					java.io.File file3 = new java.io.File("UserPage/comingSoon.txt");
+					java.io.File file3 = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 					Scanner MovNames = new Scanner(file3);
 					Button MovImages [] = new Button[10];
 					int count5 = 0;
@@ -230,7 +230,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
@@ -261,7 +261,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
@@ -292,7 +292,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
@@ -323,7 +323,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
@@ -354,7 +354,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
@@ -385,7 +385,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
@@ -416,7 +416,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
@@ -447,7 +447,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
@@ -478,7 +478,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
@@ -509,7 +509,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
@@ -540,7 +540,7 @@ public class ComingSoonScene {
 			            public void handle(ActionEvent event) {
 			            	
 			            	try{
-			            	java.io.File file = new java.io.File("UserPage/comingSoon.txt");
+			            	java.io.File file = new java.io.File("MovieDataSource/ComingSoonMovie.txt");
 			            	Scanner input = new Scanner(file);
 			            	while(input.hasNext()){
 			            		String line = input.nextLine();
