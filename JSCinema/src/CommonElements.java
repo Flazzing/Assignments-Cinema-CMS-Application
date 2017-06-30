@@ -6,6 +6,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
@@ -187,6 +188,15 @@ public class CommonElements {
     	btn2.setGraphic(imageView6);
     	
     	changeButtonProperty(btn2);
+    	
+    	btn2.setOnAction(e -> {
+    		try {
+    			MovieInterface movieInterface = new MovieInterface();// Create a report object from report class
+				stage.setScene(movieInterface.generateLoginScreen(stage)); // back to report scene
+			} catch (Exception e1) {
+				System.out.println("Scene not found");
+			}
+    	});
         	
     	HBox hb3 = new HBox();
     	ImageView imageView7 =getElementView("LeftDashboard/4.png");

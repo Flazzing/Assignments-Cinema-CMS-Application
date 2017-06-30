@@ -48,18 +48,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class MovieInterface extends Application{
+public class MovieInterface{
 
-	public static void main(String[]args){
-		launch(args);
-	}
-	
-	
-	public Scene generateLoginScreen() throws FileNotFoundException{
-		Stage MovieStage = new Stage();
+	public Scene generateLoginScreen(Stage MovieStage) throws FileNotFoundException{
 		BorderPane MovieBorderPane = new BorderPane();
 		setBorderPaneBackground(MovieBorderPane, "MovieInterfaceResource/Background.jpg");
-		setTopMovieBorderPane(MovieBorderPane);
+		setTopMovieBorderPane(MovieBorderPane, MovieStage);
 		setLeftMovieBorderPane(MovieBorderPane);
 		setRightMovieBorderPane(MovieBorderPane);
 		setCenterBorderPane(MovieBorderPane, MovieStage);		
@@ -69,29 +63,7 @@ public class MovieInterface extends Application{
 	    MovieScrollPane.setContent(MovieBorderPane);
 		
 		Scene MovieScene = new Scene(MovieScrollPane);
-		MovieStage.setScene(MovieScene);
-		MovieStage.show();
 		return MovieScene;
-		
-	}
-	@Override
-	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
-		Stage MovieStage = new Stage();
-		BorderPane MovieBorderPane = new BorderPane();
-		setBorderPaneBackground(MovieBorderPane, "MovieInterfaceResource/Background.jpg");
-		setTopMovieBorderPane(MovieBorderPane);
-		setLeftMovieBorderPane(MovieBorderPane);
-		setRightMovieBorderPane(MovieBorderPane);
-		setCenterBorderPane(MovieBorderPane, MovieStage);		
-		
-		ScrollPane MovieScrollPane = new ScrollPane();
-	    MovieScrollPane.setFitToWidth(true);
-	    MovieScrollPane.setContent(MovieBorderPane);
-		
-		Scene MovieScene = new Scene(MovieScrollPane);
-		MovieStage.setScene(MovieScene);
-		MovieStage.show();
 	}
 	
 // The method below only set Pane background
@@ -115,7 +87,7 @@ public class MovieInterface extends Application{
 	}
 
 	//The method below set the first row of the interface
-	public void setTopMovieBorderPane(BorderPane MovieBorderPane){
+	public void setTopMovieBorderPane(BorderPane MovieBorderPane, Stage stage){
 		  Pane TopMoviePane = new Pane();
 	      HBox TopMovieHBox = new HBox();		
 	      VBox TopMovieVBox =  new VBox();
@@ -168,6 +140,15 @@ public class MovieInterface extends Application{
 	      MovieBackButton.setPrefWidth(200);
 	      MovieBackButton.setLayoutX(1700);
 	      MovieBackButton.setLayoutY(120); 
+	      
+	      MovieBackButton.setOnAction(e -> {
+	    	  try {
+	    			Dashboard dashboard = new Dashboard(); // Create a dashboard object from dashboard class
+					stage.setScene(dashboard.getDashboard(stage)); // change to dashboard scene
+				} catch (Exception e1) {
+					System.out.println("Scene not found");
+				}
+	      });
 	        
 	      TopMoviePane.getChildren().add(MovieBackButton);
 	                
