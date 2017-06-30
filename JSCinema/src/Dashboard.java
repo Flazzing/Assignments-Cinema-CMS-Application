@@ -180,7 +180,7 @@ public class Dashboard{
 		GridPane[] gpane = new GridPane[CommonElements.getNowShowingNo()];
 		
 		int j = 0;
-		java.io.File file = new java.io.File("MovieData/movies.txt");
+		java.io.File file = new java.io.File("MovieDataSource/movies.txt");
 		Scanner input = new Scanner(file);
 		
 		while(input.hasNext()){
@@ -192,15 +192,15 @@ public class Dashboard{
 			gpane[j].setVgap(15);
 			gpane[j].setHgap(30);
 
-			for(int i = 0; i < 6 ; i++){
+			for(int i = 1; i < 7 ; i++){
 				Label lbl = new Label(section[i]);
 				lbl.setFont(Font.font(20));
 				/*
-				 * First section of the line is always Movie Name
+				 * Second section of the line is always Movie Name
 				 * Checking if the movie is in fast selling
 				 * If the movie is in fast selling, Prompt fast selling and change text color
 				 */
-				if(i == 0){
+				if(i == 1){
 					if(isFastSellingMovie(lbl.toString())){
 						Label lbl2 = new Label("Fast Selling!");
 						lbl.setStyle("-fx-text-fill : Cyan");
@@ -230,7 +230,7 @@ public class Dashboard{
 		int tot = 0;
 		String movieName = "";
 		
-		File file = new File("MovieData/bookingmade.txt");
+		File file = new File("MovieDataSource/bookingmade.txt");
 		
 		if(file.exists()){
     		System.out.println("File Opened! Calculating number of movies booked");

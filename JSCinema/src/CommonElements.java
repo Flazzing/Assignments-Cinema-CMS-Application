@@ -96,7 +96,7 @@ public class CommonElements {
 	 */
 	public static int getNowShowingNo() throws Exception{
 		int num = 0;
-		File file = new File("MovieData/movies.txt");
+		File file = new File("MovieDataSource/movies.txt");
 		
 		if(file.exists()){
     		System.out.println("File Opened! Calculating number of movies.");

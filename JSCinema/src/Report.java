@@ -66,7 +66,7 @@ public class Report {
 	// Store the data of booking made into a Map and return the map
 	public Map<String, List<Integer>> getMoviesBooked() throws Exception{
 		Map<String,List<Integer>> movieBooked = new HashMap<String,List<Integer>>();
-		File file = new File("MovieData/bookingmade.txt");
+		File file = new File("MovieDataSource/bookingmade.txt");
 		
 		String movieName = "";
 		
