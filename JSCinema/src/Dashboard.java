@@ -1,9 +1,9 @@
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -220,7 +220,6 @@ public class Dashboard{
 			 moviesInfo.getChildren().add(movieBox[j]);
 			j++;
 		}
-		input.close();
 		return moviesInfo;
 	}
 	
@@ -265,7 +264,7 @@ public class Dashboard{
 				value[j] = i;
 				j++;
 			}
-			diff = value[0] - value[1];
+			diff = value[1] - value[0];
 			System.out.println(key +"'s booking difference is: " +Math.abs(diff));
 			/*
 			 * Check if the movie name is the same as the key
