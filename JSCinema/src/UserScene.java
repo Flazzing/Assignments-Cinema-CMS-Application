@@ -106,7 +106,7 @@ import javafx.stage.Stage;
 			
 				MoviesImage.setStyle("-fx-background: transparent");
 				MoviesImage.setStyle("-fx-background-color: transparent");
-				java.io.File file = new java.io.File("UserPage/movies.txt");
+				java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 				Scanner input = new Scanner(file);
 				ImageView [] movieImgView = new ImageView[10];
 				int count =0;
@@ -278,7 +278,7 @@ import javafx.stage.Stage;
 		            	
 		            	Movie_Name.setText(movieNames[0]);
 		            	try{
-		            	java.io.File file = new java.io.File("UserPage/movies.txt");
+		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
 		            	while(input.hasNext()){
 		            		String line = input.nextLine();
@@ -324,7 +324,7 @@ import javafx.stage.Stage;
 		            	
 		            	Movie_Name.setText(movieNames[1]);
 		            	try{
-		            	java.io.File file = new java.io.File("UserPage/movies.txt");
+		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
 		            	while(input.hasNext()){
 		            		String line = input.nextLine();
@@ -370,7 +370,7 @@ import javafx.stage.Stage;
 		            	
 		            	Movie_Name.setText(movieNames[2]);
 		            	try{
-		            	java.io.File file = new java.io.File("UserPage/movies.txt");
+		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
 		            	while(input.hasNext()){
 		            		String line = input.nextLine();
@@ -415,7 +415,7 @@ import javafx.stage.Stage;
 		            	
 		            	Movie_Name.setText(movieNames[3]);
 		            	try{
-		            	java.io.File file = new java.io.File("UserPage/movies.txt");
+		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
 		            	while(input.hasNext()){
 		            		String line = input.nextLine();
@@ -460,7 +460,7 @@ import javafx.stage.Stage;
 		            	
 		            	Movie_Name.setText(movieNames[4]);
 		            	try{
-		            	java.io.File file = new java.io.File("UserPage/movies.txt");
+		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
 		            	while(input.hasNext()){
 		            		String line = input.nextLine();
@@ -505,7 +505,7 @@ import javafx.stage.Stage;
 		            	
 		            	Movie_Name.setText(movieNames[5]);
 		            	try{
-		            	java.io.File file = new java.io.File("UserPage/movies.txt");
+		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
 		            	while(input.hasNext()){
 		            		String line = input.nextLine();
@@ -550,7 +550,7 @@ import javafx.stage.Stage;
 		            	
 		            	Movie_Name.setText(movieNames[6]);
 		            	try{
-		            	java.io.File file = new java.io.File("UserPage/movies.txt");
+		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
 		            	while(input.hasNext()){
 		            		String line = input.nextLine();
@@ -595,7 +595,7 @@ import javafx.stage.Stage;
 		            	
 		            	Movie_Name.setText(movieNames[7]);
 		            	try{
-		            	java.io.File file = new java.io.File("UserPage/movies.txt");
+		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
 		            	while(input.hasNext()){
 		            		String line = input.nextLine();
@@ -640,7 +640,7 @@ import javafx.stage.Stage;
 		            	
 		            	Movie_Name.setText(movieNames[8]);
 		            	try{
-		            	java.io.File file = new java.io.File("UserPage/movies.txt");
+		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
 		            	while(input.hasNext()){
 		            		String line = input.nextLine();
@@ -685,7 +685,7 @@ import javafx.stage.Stage;
 		            	
 		            	Movie_Name.setText(movieNames[9]);
 		            	try{
-		            	java.io.File file = new java.io.File("UserPage/movies.txt");
+		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
 		            	while(input.hasNext()){
 		            		String line = input.nextLine();
@@ -749,7 +749,7 @@ import javafx.stage.Stage;
 				{
 					
 				try{
-	            	java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+	            	java.io.File filetime1 = new java.io.File("MovieDataSource/Movie.txt");
 	            	Scanner inputtime1 = new Scanner(filetime1);
 	            	while(inputtime1.hasNext()){
 	            		String line = inputtime1.nextLine();
@@ -774,7 +774,7 @@ import javafx.stage.Stage;
 			time2.setOnAction(e ->{
 				
 				try{
-	            	java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+	            	java.io.File filetime1 = new java.io.File("MovieDataSource/Movie.txt");
 	            	Scanner inputtime1 = new Scanner(filetime1);
 	            	while(inputtime1.hasNext()){
 	            		String line = inputtime1.nextLine();
@@ -798,7 +798,7 @@ import javafx.stage.Stage;
 			time3.setOnAction(e ->{
 				
 				try{
-	            	java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+	            	java.io.File filetime1 = new java.io.File("MovieDataSource/Movie.txt");
 	            	Scanner inputtime1 = new Scanner(filetime1);
 	            	while(inputtime1.hasNext()){
 	            		String line = inputtime1.nextLine();
@@ -822,7 +822,7 @@ import javafx.stage.Stage;
 			time4.setOnAction(e ->{
 	
 				try{
-					java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+					java.io.File filetime1 = new java.io.File("MovieDataSource/Movie.txt");
 					Scanner inputtime1 = new Scanner(filetime1);
 					while(inputtime1.hasNext()){
 						String line = inputtime1.nextLine();
@@ -846,7 +846,7 @@ import javafx.stage.Stage;
 			time5.setOnAction(e ->{
 	
 				try{
-					java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+					java.io.File filetime1 = new java.io.File("MovieDataSource/Movie.txt");
 					Scanner inputtime1 = new Scanner(filetime1);
 					while(inputtime1.hasNext()){
 						String line = inputtime1.nextLine();
@@ -870,7 +870,7 @@ import javafx.stage.Stage;
 			time6.setOnAction(e ->{
 				
 				try{
-			    	java.io.File filetime1 = new java.io.File("UserPage/movies.txt");
+			    	java.io.File filetime1 = new java.io.File("MovieDataSource/Movie.txt");
 			    	Scanner inputtime1 = new Scanner(filetime1);
 			    	while(inputtime1.hasNext()){
 			    		String line = inputtime1.nextLine();
