@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,41 +115,41 @@ public class Report {
     	bc.setStyle("-fx-font-size: 20px; -fx-text-fill: BLUE;"
     			+ "-fx-background-color : transparent; -fx-background: transparent; ");
     	
-    	Map<String,List<Integer>> data = getMoviesBooked(); // Get the map of data
+		Map<String,List<Integer>> data = getMoviesBooked(); // Get the map of data
+    	Collection<List<Integer>> value = data.values();
     	
-    	ArrayList<XYChart.Series> seriesList = new ArrayList<>();	// Create an arraylist for series
-    	
-    	/*
-    	 * Create 2 series and add to the arraylist
-    	 * 2 series - 1 for Yesterday's data, 1 for Today's data
-    	 */
-    	for(int i = 0;i < 2; i++){
-    		XYChart.Series series = new XYChart.Series<>();
-    		seriesList.add(series);
-    	}
-		
-		for(String key : data.keySet()){
-			System.out.println("Hi");
-			int valueCounter = 0;
-			
+    	// 3 Key set, loop 3 times
+    	for(String key : data.keySet()){
+			int valueCounter = 0;	// set counter to default
+			//Each key have 2 values, yesterday and today's booking
 			for(Integer i : data.get(key)){
-				System.out.println("Key : " +key + " value: " + i);
-				
+				//	First value is yyesterday's booking
 				if(valueCounter == 0){
-					seriesList.get(valueCounter).setName("Yesterday");
-					seriesList.get(valueCounter).getData().add(new XYChart.Data(key, i));
+					System.out.println("Key is: " +key + " Data is: " +i);
+					XYChart.Series series = getSeries(bc, key, i);
+					series.setName("Yesterday");
 				}
-					
+				// Second value is tomorrow's booking
 				if(valueCounter == 1){
-					seriesList.get(valueCounter).setName("Today");
-					seriesList.get(valueCounter).getData().add(new XYChart.Data(key, i));
+					System.out.println("Key is: " +key + " Data is: " +i);
+					XYChart.Series series = getSeries(bc, key, i);
+					series.setName("Today");
 				}
-				bc.getData().add(seriesList.get(valueCounter));
+				
 				valueCounter++;
 			}
 		}
     	graph.getChildren().add(bc);
 		return graph;
+	}
+	
+	private XYChart.Series getSeries(BarChart<String, Number> bc, String key, Integer i) {
+    	XYChart.Series series = new XYChart.Series();
+    	
+    	series.getData().add(new XYChart.Data(key, i));
+    	bc.getData().add(series);
+    	
+		return series;
 	}
 	
 }
