@@ -227,23 +227,27 @@ public class Dashboard{
 	 * This method Calculate the total booking made 
 	 */
 	public int getTotalBookingMade() throws Exception{
-		String num = "";
 		int tot = 0;
-		File file = new File("MovieData/TotalBookingMade.txt");
+		String movieName = "";
+		
+		File file = new File("MovieData/bookingmade.txt");
 		
 		if(file.exists()){
-    		System.out.println("File Opened! Calculating number of booking made.");
+    		System.out.println("File Opened! Calculating number of movies booked");
     		Scanner input = new Scanner(file);
-    		
+
     		while(input.hasNextLine()){
-    			input.nextLine();
-    			num = input.nextLine();// line in text file of even number store the number of booking made 
-    			tot += Integer.parseInt(num);// Change num as string to int to enable calculation
-    		}// end of while 
-    		
-    		input.close();// close input 
+    			String line = input.nextLine();	// Store a line from txt file
+    			String[] section = line.split(";");	// Split each line with regex ";" to each section store in an element of array
+    			movieName = section[0];	// Movie name is the first section for each line
+    			
+    			for(int i = 1; i < section.length; i++){
+    				tot += Integer.parseInt(section[i]);
+    			}
+    		}
+    	input.close();
     	}else{
-    		System.out.println("File not found!");
+    		System.out.println("File not found, No graph to be shown");
     	}
 		System.out.println("Booking made: " +tot);
 		return tot; // Return total number of booking made 
