@@ -51,7 +51,7 @@ import javafx.util.Callback;
 
 public class MovieInterface{
 
-	public Scene generateLoginScreen(Stage MovieStage) throws FileNotFoundException{
+	public Scene generateMovieScreen(Stage MovieStage) throws FileNotFoundException{
 		BorderPane MovieBorderPane = new BorderPane();
 		setBackground(MovieBorderPane);	
 		setTopMovieBorderPane(MovieBorderPane, MovieStage);
@@ -191,7 +191,7 @@ public class MovieInterface{
 		Button DeleteMovie = new Button("Delete Movie");
 		
 		AddMovie.setOnAction(e->{			
-			Add add = new Add();
+			AddMovieInterface add = new AddMovieInterface();
 			stage.setScene(add.GenerateAddPage(stage));
 		});
 		MovieTypeButtonPane.getChildren().add(AddMovie);
@@ -199,7 +199,7 @@ public class MovieInterface{
 		AddMovie.setLayoutY(600);
 
 		EditMovie.setOnAction(e->{
-			Edit edit = new Edit();
+			EditMovieInterface edit = new EditMovieInterface();
 			stage.setScene(edit.GenerateEditPage(stage));
 		});
 		
@@ -208,7 +208,7 @@ public class MovieInterface{
 		EditMovie.setLayoutY(600);
 		
 		DeleteMovie.setOnAction(e->{
-			Delete delete = new Delete();
+			DeleteMovieInterface delete = new DeleteMovieInterface();
 			stage.setScene(delete.GenerateDeletePage(stage));
 		});
 		
