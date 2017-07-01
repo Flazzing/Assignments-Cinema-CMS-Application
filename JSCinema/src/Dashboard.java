@@ -180,7 +180,7 @@ public class Dashboard{
 		GridPane[] gpane = new GridPane[CommonElements.getNowShowingNo()];
 		
 		int j = 0;
-		java.io.File file = new java.io.File("MovieDataSource/movies.txt");
+		java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		Scanner input = new Scanner(file);
 		
 		while(input.hasNext()){
@@ -192,7 +192,7 @@ public class Dashboard{
 			gpane[j].setVgap(15);
 			gpane[j].setHgap(30);
 
-			for(int i = 1; i < 7 ; i++){
+			for(int i = 1; i < 8; i++){
 				Label lbl = new Label(section[i]);
 				lbl.setFont(Font.font(20));
 				/*

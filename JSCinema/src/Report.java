@@ -1,6 +1,5 @@
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,7 +115,6 @@ public class Report {
     			+ "-fx-background-color : transparent; -fx-background: transparent; ");
     	
 		Map<String,List<Integer>> data = getMoviesBooked(); // Get the map of data
-    	Collection<List<Integer>> value = data.values();
     	
     	// 3 Key set, loop 3 times
     	for(String key : data.keySet()){
