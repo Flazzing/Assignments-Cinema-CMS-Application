@@ -9,3 +9,26 @@
 	-fx-background-radius: 0; -fx-background-color: transparent; 
 	-fx-font-size: 30; /* 30 */ -fx-text-fill: #ffffff;
 }
+
+
+.table-view .column-header-background{
+    -fx-background-color: #262626;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: #0ed9e0;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: #0ed9e0;
+    -fx-alignment: center;
+}
+
+
+
+.table-row-cell:selected {
+    -fx-background-color: #005797;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
