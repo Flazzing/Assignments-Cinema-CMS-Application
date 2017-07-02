@@ -100,7 +100,7 @@ public class Add extends Application{
 	      MovieBackButton.setOnAction(e -> {
 	    	  try {
 	    		  MovieInterface movieinterface = new MovieInterface();
-	    		  stage.setScene(movieinterface.generateLoginScreen(stage));
+	    		  stage.setScene(movieinterface.generateMovieScreen(stage));
 				} catch (Exception e1) {
 					System.out.println("Scene not found");
 				}
@@ -223,7 +223,7 @@ public class Add extends Application{
         	}
         	MovieInterface movieInterface = new MovieInterface();
         	try {
-				stage.setScene(movieInterface.generateLoginScreen(stage));
+				stage.setScene(movieInterface.generateMovieScreen(stage));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -342,7 +342,7 @@ public class Add extends Application{
 			}
 			MovieInterface movieinterface = new MovieInterface();
 			try {
-				stage.setScene(movieinterface.generateLoginScreen(stage));
+				stage.setScene(movieinterface.generateMovieScreen(stage));
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

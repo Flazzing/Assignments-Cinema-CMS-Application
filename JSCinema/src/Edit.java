@@ -100,7 +100,7 @@ public class Edit extends Application{
 	      
 	      MovieBackButton.setOnAction(e -> {
 	    	  try {	    		 
-	    		stage.setScene(new MovieInterface().generateLoginScreen(stage));
+	    		stage.setScene(new MovieInterface().generateMovieScreen(stage));
 				} catch (Exception e1) {
 					System.out.println("Scene not found");
 				}
@@ -489,7 +489,7 @@ public class Edit extends Application{
     	EditMovieGridPane.add(StatusLabel, 5, 10);
     	EditMovieExitButton.setOnAction(p->{
     		try {
-				EditMovieStage.setScene(new MovieInterface().generateLoginScreen(EditMovieStage));
+				EditMovieStage.setScene(new MovieInterface().generateMovieScreen(EditMovieStage));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -505,7 +505,7 @@ public class Edit extends Application{
 				e1.printStackTrace();
 			}
     		try {
-				EditMovieStage.setScene(new MovieInterface().generateLoginScreen(EditMovieStage));
+				EditMovieStage.setScene(new MovieInterface().generateMovieScreen(EditMovieStage));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -548,7 +548,7 @@ public class Edit extends Application{
 			try {
 				DeleteComingSoonMovie("MovieDataSource/ComingSoonMovie.txt", ComingSoonMovieData[0].getText());
 				AddComingSoonMovie("MovieDataSource/ComingSoonMovie.txt", ComingSoonMovieData[0].getText(), ComingSoonMovieData[1].getText(), ComingSoonMovieData[2].getText(),ComingSoonMovieData[3].getText(),ComingSoonMovieData[4].getText());
-				stage.setScene(new MovieInterface().generateLoginScreen(stage));
+				stage.setScene(new MovieInterface().generateMovieScreen(stage));
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

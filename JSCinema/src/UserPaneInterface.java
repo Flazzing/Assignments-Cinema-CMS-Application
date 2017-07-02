@@ -3,13 +3,17 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -30,14 +34,43 @@ import javafx.scene.text.FontWeight;
 public class UserPaneInterface {
 	
 	/*
-	 * This function serves as a wrapper for the 
+	 * This function creates the interface to add, remove, and modify users
 	 */
+	public static Scene getUserAddRemoveModifyScene() throws Exception{
+		Pane root = new Pane();// root pane 
+		
+		//Setting Background Image
+		ImageView imgview = CommonElements.getBackgroundImage();
+		imgview.setFitWidth(1440);
+		imgview.setFitHeight(960);
+		root.getChildren().add(imgview);
+				
+		//Create Header
+		Pane header = new Pane();
+		ImageView imgview2 = CommonElements.getHeaderImage();
+		imgview2.setLayoutY(0);
+		header.getChildren().add(imgview2);
+		header.setLayoutY(0);
+		root.getChildren().add(header);
+				
+		// Title on header
+		Pane title = new Pane();
+		ImageView imgview3 = CommonElements.getTitleImage();
+		imgview3.setLayoutX(542);
+		imgview3.setLayoutY(26);
+		title.getChildren().add(imgview3);
+		root.getChildren().add(title);
+		
+		root.getChildren().add(CommonElements.getMenuBar(AdminPage.getMainStage()));
+		
+		GridPane content = getMainContent();
+		content.setPadding(new Insets(506,50,50,450));
+		root.getChildren().add(content);
+		
+		return new Scene(root);
+	}
 	
-	
-	/*
-	 * This function creates the interface to add users
-	 */
-	public static GridPane getAddUserInterface(){
+	public static GridPane getMainContent(){
 		GridPane result = new GridPane();
 		
 		Label title = new Label("Add User");

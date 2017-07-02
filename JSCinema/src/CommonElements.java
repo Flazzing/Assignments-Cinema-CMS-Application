@@ -192,7 +192,7 @@ public class CommonElements {
     	btn2.setOnAction(e -> {
     		try {
     			MovieInterface movieInterface = new MovieInterface();// Create a report object from report class
-				stage.setScene(movieInterface.generateLoginScreen(stage)); // back to report scene
+				stage.setScene(movieInterface.generateMovieScreen(stage)); // back to report scene
 			} catch (Exception e1) {
 				System.out.println("Scene not found");
 			}
@@ -227,9 +227,8 @@ public class CommonElements {
     	
     	btn4.setOnAction(e -> {
     		try {
-    			
-    		//TODO: Change this to change content in dashboard
-				stage.setScene(new Scene(UserPaneInterface.getAddUserInterface()));
+    			stage.setTitle("User Interface");
+				stage.setScene(UserPaneInterface.getUserAddRemoveModifyScene());
 			} catch (Exception e1) {
 				System.out.println("Scene not found");
 			}

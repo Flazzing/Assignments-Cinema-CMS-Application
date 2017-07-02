@@ -144,6 +144,7 @@ public class LoginPage {
 							
 						}
 					} catch (Exception e1) {
+						System.err.println("Somehting went horribly wrong. Printing out stack trace.");
 						e1.printStackTrace();
 					}
 					System.out.println(AdminPage.getUserLoggedIn());

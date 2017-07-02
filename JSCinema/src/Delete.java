@@ -99,7 +99,7 @@ public class Delete extends Application{
 	      
 	      MovieBackButton.setOnAction(e -> {
 	    	  try {
-	    		stage.setScene(new MovieInterface().generateLoginScreen(stage));
+	    		stage.setScene(new MovieInterface().generateMovieScreen(stage));
 	    		
 				} catch (Exception e1) {
 					System.out.println("Scene not found");
@@ -208,6 +208,7 @@ public class Delete extends Application{
 				}
 			}
 		}
+		read.close();
 		pw.close();
 
 	}
@@ -235,7 +236,7 @@ public class Delete extends Application{
 				try{
 					DeleteComingSoonMovie("MovieDataSource/ComingSoonMovie.txt", DeleteMovieName.getText());
 					Deletestatus.setText("Delete Success");
-					DeleteMovieStage.setScene(new MovieInterface().generateLoginScreen(DeleteMovieStage));
+					DeleteMovieStage.setScene(new MovieInterface().generateMovieScreen(DeleteMovieStage));
 				}
 				catch(IOException e2){
 					e2.printStackTrace();
@@ -271,7 +272,7 @@ public class Delete extends Application{
 				try{
 					DeleteMovie("MovieDataSource/Movie.txt", DeleteMovieID.getText());
 					Deletestatus.setText("Delete Success");
-					DeleteMovieStage.setScene(new MovieInterface().generateLoginScreen(DeleteMovieStage));
+					DeleteMovieStage.setScene(new MovieInterface().generateMovieScreen(DeleteMovieStage));
 				}
 				catch(IOException e2){
 					e2.printStackTrace();
