@@ -3,5 +3,8 @@
 	-fx-font-size: 11pt;
 }
 
+.button:disabled, {
+  -fx-opacity: 1.0 ;
+}
 
 	
