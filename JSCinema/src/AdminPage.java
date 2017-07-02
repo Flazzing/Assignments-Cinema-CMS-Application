@@ -52,6 +52,9 @@ public class AdminPage extends Application {
 	}
 	
 	public void start(Stage primaryStage) throws Exception{
+		for(User user: getListOfUsers()){
+			System.out.println(user.getUniqueID() + " " + user.getUsername() + " " + user.getPassword());
+		}
 		setLoginScene(LoginPage.generateLoginScreen());
 		
 		setMainStage(primaryStage);

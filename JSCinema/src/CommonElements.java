@@ -125,13 +125,18 @@ public class CommonElements {
     	
     	
     	// Mouse Hover Effect
-		DropShadow shadow = new DropShadow();
-		shadow.setColor(Color.LIGHTBLUE);
+		DropShadow buttonGlow = new DropShadow();
+		buttonGlow.setOffsetX(0.0);
+		buttonGlow.setOffsetY(0.0);
+		buttonGlow.setColor(Color.rgb(0, 176, 240));
+		buttonGlow.setWidth(70);
+		buttonGlow.setHeight(70);
+		
 		btn.setOnMouseEntered(e -> {
-    		btn.setEffect(shadow);
     		btn.setStyle("-fx-background-color: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
     			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
     			+ "-fx-background-color: transparent;");
+    		btn.setEffect(buttonGlow);
     	});
     		
     	btn.setOnMouseExited(e -> {
@@ -227,10 +232,11 @@ public class CommonElements {
     	
     	btn4.setOnAction(e -> {
     		try {
+    			// Create the scene needed to add/remove/modify users
     			stage.setTitle("User Interface");
-				stage.setScene(UserPaneInterface.getUserAddRemoveModifyScene());
+				stage.setScene(UserPaneInterface.getUserAddRemoveModifyScene(stage));
 			} catch (Exception e1) {
-				System.out.println("Scene not found");
+				System.out.println("User add/remove/modify scene not found");
 			}
     	});
     	

@@ -80,12 +80,12 @@ public class LoginPage {
 		}
 		
 		Button loginButton = new Button("Login");
-		loginButton.setStyle("-fx-text-fill: white; -fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+		loginButton.setStyle("-fx-text-fill: white; -fx-font-size: 35px;  -fx-padding: 3 20 3 20; "
     			+ "-fx-border-color: #00B0F0; -fx-border-width: 5px; "
     			+ "-fx-background-color: transparent;");
 		
 		Button exitButton = new Button("Exit Program");
-		exitButton.setStyle("-fx-text-fill: white; -fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+		exitButton.setStyle("-fx-text-fill: white; -fx-font-size: 35px;  -fx-padding: 3 20 3 20; "
     			+ "-fx-border-color: #00B0F0; -fx-border-width: 5px; "
     			+ "-fx-background-color: transparent;");
 		
