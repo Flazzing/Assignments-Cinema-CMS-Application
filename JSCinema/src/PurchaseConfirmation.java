@@ -4,7 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -33,7 +36,7 @@ import javafx.stage.Stage;
 
 public class PurchaseConfirmation extends Application {
 	
-	public Scene generatePurchaseConfirmation(Stage stage, String MovieName ,String MovieDirectory , String ShowTime , String BookedHall ,String BookedSeats, int TotalAdult , int TotalChildren, double TotalPrice)throws FileNotFoundException{
+	public Scene generatePurchaseConfirmation(Stage stage, String MovieName ,String MovieDirectory , String ShowTime , String BookedHall ,String BookedSeats, String TotalAdult , String TotalChildren, double TotalPrice)throws FileNotFoundException{
 		
 		BorderPane pane2 = new BorderPane();
 		
@@ -142,25 +145,28 @@ public class PurchaseConfirmation extends Application {
 				Text6.setTranslateX(60);
 				Text6.setTranslateY(600);
 				
-				Text Text7 = new Text("Seats      :" + BookedSeats);
+				Text Text7 = new Text("Seats      :   " + BookedSeats);
 				Text7.setFont(Font.font(25));
 				Text7.setFill(Color.CYAN);
 				Text7.setTranslateX(60);
 				Text7.setTranslateY(650);
 				
-				Text Text8= new Text("Total Price      :" + TotalPrice);
+				Text Text8= new Text("Total Price      :   	" + TotalPrice);
 				Text8.setFont(Font.font(25));
 				Text8.setFill(Color.CYAN);
 				Text8.setTranslateX(60);
 				Text8.setTranslateY(700);
 				
-				Text Text9= new Text("Movie Name      :" + MovieName);
+				Text Text9= new Text("Movie Name      :   " + MovieName);
 				Text9.setFont(Font.font(25));
 				Text9.setFill(Color.CYAN);
 				Text9.setTranslateX(920);
 				Text9.setTranslateY(370);
 				
-				Text Text10= new Text("Date      :");
+				DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				Date date = new Date();
+				
+				Text Text10= new Text("Date      :" + sdf.format(date));
 				Text10.setFont(Font.font(25));
 				Text10.setFill(Color.CYAN);
 				Text10.setTranslateX(920);
@@ -189,16 +195,15 @@ public class PurchaseConfirmation extends Application {
 			
 			button1.setOnAction(e -> 
 			{
-				File file = new File("myfile.txt");
+				File file = new File("MovieDataSource/myfile.txt");
 				if(file.exists())
 				{
 					System.out.println("File already exists");
-					System.exit(0);
 				}
 				try(
 				PrintWriter output = new PrintWriter(file);
 				){
-				output.println(MovieName +","+MovieDirectory +","+ ShowTime +","+ BookedHall +","+BookedSeats+ ","+Integer.toString(TotalAdult) + ","+Integer.toString(TotalChildren)+","+ Double.toString(TotalPrice));
+				output.println(MovieName + ","+ ShowTime +","+ BookedHall +","+BookedSeats+ ","+TotalAdult + ","+TotalChildren+","+ Double.toString(TotalPrice));
 				try {
 					updateBookingMade(MovieName, 3);
 				} catch (Exception e1) {
@@ -219,6 +224,13 @@ public class PurchaseConfirmation extends Application {
 				label1.setTextFill(Color.CYAN);
 				label1.setTranslateX(1100);
 				label1.setTranslateY(850);
+				UserScene x = new UserScene();
+				try {
+					stage.setScene(x.getUserScene(stage));
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 					);
@@ -306,21 +318,21 @@ public class PurchaseConfirmation extends Application {
 			//background pane
 			Pane backgroundPane = new Pane();
 				
-				FileInputStream imageStream = new FileInputStream("MovieInterfaceResource/Background.png");
+				FileInputStream imageStream = new FileInputStream("picture/Background.png");
 				backgroundPane.setPadding(new Insets(0,0,0,0));
 				Image image = new Image(imageStream);
 				backgroundPane.getChildren().add(new ImageView(image));
 				
 				Pane Footer = new Pane();
 				
-				FileInputStream imageStream2 = new FileInputStream("MovieInterfaceResource/Logo.png");
+				FileInputStream imageStream2 = new FileInputStream("picture/Logo.png");
 				Footer.setPadding(new Insets(30,0,0,530));
 				Image image2 = new Image(imageStream2);
 				Footer.getChildren().add(new ImageView(image2));
 				Footer.setTranslateX(500);
 				Footer.setTranslateY(40);
 				
-				FileInputStream imageStream12 = new FileInputStream("MovieInterfaceResource/Container.png");
+				FileInputStream imageStream12 = new FileInputStream("picture/Container.png");
 				Image image12 = new Image(imageStream12);
 				ImageView imgview12 = new ImageView(image12);
 				imgview12.setFitWidth(400);
@@ -328,7 +340,7 @@ public class PurchaseConfirmation extends Application {
 				imgview12.setTranslateX(50);
 				imgview12.setTranslateY(200);
 					
-				FileInputStream imageStream13 = new FileInputStream("MovieInterfaceResource/Container.png");
+				FileInputStream imageStream13 = new FileInputStream("picture/Container.png");
 				Image image13 = new Image(imageStream13);
 				ImageView imgview13 = new ImageView(image13);
 				imgview13.setFitWidth(400);
@@ -336,7 +348,7 @@ public class PurchaseConfirmation extends Application {
 				imgview13.setTranslateX(500);
 				imgview13.setTranslateY(200);
 				
-				FileInputStream imageStream14 = new FileInputStream("MovieInterfaceResource/Container.png");
+				FileInputStream imageStream14 = new FileInputStream("picture/Container.png");
 				Image image14 = new Image(imageStream14);
 				ImageView imgview14 = new ImageView(image14);
 				imgview14.setFitWidth(400);
@@ -344,7 +356,7 @@ public class PurchaseConfirmation extends Application {
 				imgview14.setTranslateX(50);
 				imgview14.setTranslateY(300);
 				
-				FileInputStream imageStream15 = new FileInputStream("MovieInterfaceResource/Container.png");
+				FileInputStream imageStream15 = new FileInputStream("picture/Container.png");
 				Image image15 = new Image(imageStream15);
 				ImageView imgview15 = new ImageView(image15);
 				imgview15.setFitWidth(400);
@@ -353,7 +365,7 @@ public class PurchaseConfirmation extends Application {
 				imgview15.setTranslateY(300);
 				
 				
-				FileInputStream picture = new FileInputStream("MovieInterfaceResource/AOT.png");
+				FileInputStream picture = new FileInputStream("picture/AOT.png");
 				Image moviepic = new Image(picture);
 				ImageView moviepicture = new ImageView(moviepic);
 				moviepicture.setFitWidth(400);
@@ -418,7 +430,7 @@ public class PurchaseConfirmation extends Application {
 				Text9.setTranslateX(920);
 				Text9.setTranslateY(370);
 				
-				Text Text10= new Text("Date      :");
+				Text Text10= new Text("Date      :"  );
 				Text10.setFont(Font.font(25));
 				Text10.setFill(Color.CYAN);
 				Text10.setTranslateX(920);
@@ -470,6 +482,8 @@ public class PurchaseConfirmation extends Application {
 				label1.setTextFill(Color.CYAN);
 				label1.setTranslateX(1100);
 				label1.setTranslateY(850);
+			
+				
 				
 			}
 					);

@@ -223,7 +223,6 @@ public class Seat extends Application{
 					SeatButton[c][i].setText(Integer.toString(c) + Integer.toString(i));
 					SeatButton[c][i].setPrefWidth(50);
 					SeatButton[c][i].setPrefHeight(50);
-					SeatButton[c][i].setDisable(true);
 					SeatButton[c][i].setStyle("-fx-border-color: transparent;-fx-background-color: transparent;");    				
 					SeatButton[c][i].setGraphic(new ImageView(new Image("MovieInterfaceResource/Seat_Available.png")));	
 					seatGridPane.add(SeatButton[c][i],c,i);
@@ -319,9 +318,9 @@ public class Seat extends Application{
 		
 		Button b2 = new Button("Refresh");
 		vbox1.getChildren().add(b2);
-		
-		
 		TextField[] seatPosition = new TextField[18];
+		
+		
 		
 		int totalAdult = (Integer.parseInt(adult.getText().replace("Adult: ", "")));
 		int totalChild = (Integer.parseInt(children.getText().replace("Children: ", "")));
@@ -418,13 +417,17 @@ public class Seat extends Application{
 		b1.setOnAction(e->{
 			PurchaseConfirmation purchaseConfirmation = new PurchaseConfirmation();
 			char[] seat = new char[32];
-			int totalpeople = totalAdult+totalChild;
+			int totalpeople = Integer.parseInt(adult.getText().replace("Adult: ", "")) + Integer.parseInt(children.getText().replace("Children: ", ""));
 			for(int i=0; i>totalpeople; i++){
+				System.out.println("ss");
 				seat[i] = seatPosition[i].getText().charAt(0);
 			}
-			double total2 =  10 * (Integer.parseInt(children.getText().replace("Children: ", "")));
-			total2 += 15*(Integer.parseInt(adult.getText().replace("Adult: ", "")));
 			
+			
+			
+			double total24 =  10 * (Integer.parseInt(children.getText().replace("Children: ", "")));
+			total24 += 15*(Integer.parseInt(adult.getText().replace("Adult: ", "")));
+			System.out.println(new String(seat)+ ","+total24+ ","+Integer.toString(totalAdult)+ ","+ Double.toString(totalChild));
 			/**
 			 * set the scene to abother scebe
 			 * 
@@ -432,10 +435,8 @@ public class Seat extends Application{
 		     */
 			
 		try {
-			
-			
-			
-			stage.setScene(purchaseConfirmation.generatePurchaseConfirmation(stage, MovieName, Directory, time, hall, new String(seat), totalAdult, totalChild, total2));
+						
+			stage.setScene(purchaseConfirmation.generatePurchaseConfirmation(stage, MovieName, Directory, time, hall, new String(seat), adult.getText().replace("Adult: ", ""), children.getText().replace("Children: ", ""), total24));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -479,16 +480,15 @@ public class Seat extends Application{
 	     */
 		int total2 =1;
 		GridPane gp = new GridPane();
-		for(int b=0; b<8; b++){
-			for(int i=0; i<4;i++){
+		for(int i=0; i<4;i++){
+			for(int b=0; b<8; b++){
 				gp.add(new Label(Integer.toString(total2)), b, i);
 				total2++;
 			}			
 		}
-		
 		gp.setLayoutX(230);
 		gp.setLayoutY(320);
-		gp.setHgap(76);
+		gp.setHgap(70);
 		gp.setVgap(43);
 		root.getChildren().add(gp);	
 
