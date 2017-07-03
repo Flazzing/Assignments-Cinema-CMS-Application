@@ -138,6 +138,8 @@ public class DeleteMovieInterface extends Application{
 	    		stage.setScene(new MovieInterface().generateMovieScreen(stage));
 	    		
 				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 					System.out.println("Scene not found");
 				}
 	      });
@@ -244,9 +246,13 @@ public class DeleteMovieInterface extends Application{
 			lists = split(MovieData, 21);
 		}
 		catch(FileNotFoundException e){
+			JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 			e.printStackTrace();
 		}
 		catch(Exception e){
+			JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 			e.printStackTrace();			
 		}
 		PrintWriter pw = new PrintWriter(new File(MovieFileDirectory));		

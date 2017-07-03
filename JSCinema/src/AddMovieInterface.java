@@ -4,6 +4,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.swing.JOptionPane;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -137,6 +139,8 @@ public class AddMovieInterface extends Application{
 	    		  stage.setScene(movieinterface.generateMovieScreen(stage));
 				} catch (Exception e1) {
 					System.out.println("Scene not found");
+					JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 				}
 	      });
 	        
@@ -287,12 +291,16 @@ public class AddMovieInterface extends Application{
         	try {
         		AddMovie(filedirectory, AddMovieTextField[0].getText(), AddMovieTextField[1].getText(), AddMovieTextField[2].getText(), AddMovieTextField[3].getText(), AddMovieTextField[4].getText(), AddMovieTextField[5].getText(), AddMovieTextField[6].getText(), AddMovieTextField[7].getText(), AddMovieTextField[8].getText(), AddMovieTextField[9].getText(), AddMovieTextField[10].getText(), AddMovieTextField[11].getText(), AddMovieTextField[12].getText(),AddMovieTextField[13].getText(), MovieImageDirectoryButton.getText());
         	}catch(IOException g){
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
         		g.printStackTrace();
         	}
         	MovieInterface movieInterface = new MovieInterface();
         	try {
 				stage.setScene(movieInterface.generateMovieScreen(stage));
 			} catch (FileNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}   		 
@@ -455,6 +463,8 @@ public class AddMovieInterface extends Application{
 			try {
 				AddComingSoonMovie("MovieDataSource/ComingSoonMovie.txt",AddComingSoonMovieData[0].getText(),AddComingSoonMovieData[1].getText(), AddComingSoonMovieData[2].getText(), MovieImageDirectoryButton.getText(), AddComingSoonMovieData[3].getText());
 			} catch (IOException e1) {
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -462,6 +472,8 @@ public class AddMovieInterface extends Application{
 			try {
 				stage.setScene(movieinterface.generateMovieScreen(stage));
 			} catch (FileNotFoundException e1) {
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			};

@@ -396,6 +396,7 @@ public class Seat extends Application{
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
 			}
 		});
 		
@@ -413,6 +414,7 @@ public class Seat extends Application{
 		vbox1.getChildren().add(hbox6);
 		
 		
+		
 		b1.setOnAction(e->{
 			PurchaseConfirmation purchaseConfirmation = new PurchaseConfirmation();
 			char[] seat = new char[32];
@@ -423,15 +425,30 @@ public class Seat extends Application{
 			double total2 =  10 * (Integer.parseInt(children.getText().replace("Children: ", "")));
 			total2 += 15*(Integer.parseInt(adult.getText().replace("Adult: ", "")));
 			
-			System.out.println(new String(seat));
+			/**
+			 * set the scene to abother scebe
+			 * 
+			 * The method below will change the stage to purchase confirmation page
+		     */
 			
 		try {
+			
+			
+			
 			stage.setScene(purchaseConfirmation.generatePurchaseConfirmation(stage, MovieName, Directory, time, hall, new String(seat), totalAdult, totalChild, total2));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 		}
 		});
+		
+		/**
+		 * The add button confirm the number of adult and children 
+		 * 
+		 * 
+	     */
 		
 		Add.setOnAction(e->{
 			if(Adult.getText().matches("[0-9]")){
@@ -455,18 +472,23 @@ public class Seat extends Application{
 		root.getChildren().add(hbox1);
 	
 		
-		
-		
+		/**
+		 * 
+		 * Generate the number within the seat box
+		 * 
+	     */
+		int total2 =1;
 		GridPane gp = new GridPane();
 		for(int b=0; b<8; b++){
 			for(int i=0; i<4;i++){
-				gp.add(new Label(Integer.toString(b+i)), b, i);
+				gp.add(new Label(Integer.toString(total2)), b, i);
+				total2++;
 			}			
 		}
 		
 		gp.setLayoutX(230);
 		gp.setLayoutY(320);
-		gp.setHgap(83);
+		gp.setHgap(76);
 		gp.setVgap(43);
 		root.getChildren().add(gp);	
 

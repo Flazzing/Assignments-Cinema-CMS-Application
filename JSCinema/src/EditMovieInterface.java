@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -134,6 +136,8 @@ public class EditMovieInterface extends Application{
 	    	  try {	    		 
 	    		stage.setScene(new MovieInterface().generateMovieScreen(stage));
 				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 					System.out.println("Scene not found");
 				}
 	      });
@@ -300,9 +304,13 @@ public class EditMovieInterface extends Application{
 			lists = split(MovieData, 21);
 		}
 		catch(FileNotFoundException e){
+			JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 			e.printStackTrace();
 		}
 		catch(Exception e){
+			JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 			e.printStackTrace();			
 		}
 		PrintWriter pw = new PrintWriter(new File(MovieFileDirectory));		
@@ -540,9 +548,13 @@ public class EditMovieInterface extends Application{
     			lists = split(MovieData, 21);
     		}
     		catch(FileNotFoundException e){
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
     			e.printStackTrace();
     		}
     		catch(Exception e){
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
     			e.printStackTrace();			
     		}	        	
     	
@@ -611,6 +623,8 @@ public class EditMovieInterface extends Application{
 				EditMovieStage.setScene(new MovieInterface().generateMovieScreen(EditMovieStage));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 				e.printStackTrace();
 			};
     	});
@@ -621,12 +635,16 @@ public class EditMovieInterface extends Application{
 				AddMovie("MovieDataSource/Movie.txt", EditMovieTextField[0].getText(),EditMovieTextField[1].getText(), EditMovieTextField[2].getText(),EditMovieTextField[3].getText(), EditMovieTextField[4].getText(),EditMovieTextField[5].getText(),EditMovieTextField[6].getText(), EditMovieTextField[7].getText(), EditMovieTextField[8].getText(), EditMovieTextField[9].getText(), EditMovieTextField[10].getText(),EditMovieTextField[11].getText(), EditMovieTextField[12].getText(), EditMovieTextField[13].getText(),EditMovieTextField[14].getText());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 				e1.printStackTrace();
 			}
     		try {
 				EditMovieStage.setScene(new MovieInterface().generateMovieScreen(EditMovieStage));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 				e.printStackTrace();
 			}
     	});
@@ -680,7 +698,11 @@ public class EditMovieInterface extends Application{
 				AddComingSoonMovie("MovieDataSource/ComingSoonMovie.txt", ComingSoonMovieData[0].getText(), ComingSoonMovieData[1].getText(), ComingSoonMovieData[2].getText(),ComingSoonMovieData[3].getText(),ComingSoonMovieData[4].getText());
 				stage.setScene(new MovieInterface().generateMovieScreen(stage));
 			} catch (IOException e1) {
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 				e1.printStackTrace();
 			}
 		});
@@ -704,9 +726,13 @@ public class EditMovieInterface extends Application{
 
     		}
     		catch(FileNotFoundException e){
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
     			e.printStackTrace();
     		}
     		catch(Exception e){
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
     			e.printStackTrace();			
     		}	        	
 

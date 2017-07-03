@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Spliterator;
 
+import javax.swing.JOptionPane;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -183,6 +185,8 @@ public class MovieInterface{
 				stage.setScene(dashboard.getDashboard(stage)); // change to dashboard scene
 			} catch (Exception e1) {
 				System.out.println("Scene not found");
+				JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 			}
 		});	        
 		TopMoviePane.getChildren().add(MovieBackButton);            
@@ -353,9 +357,13 @@ public class MovieInterface{
 			lists = split(MovieData, 21);
 		}
 		catch(FileNotFoundException e){
+			JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 			e.printStackTrace();
 		}
 		catch(Exception e){
+			JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 			e.printStackTrace();
 			
 		}
@@ -448,6 +456,8 @@ public class MovieInterface{
 		try {
 			read = new Scanner(ComingSoonMovieDataFile);
 		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "System error: Please Contact developer for help!");
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
