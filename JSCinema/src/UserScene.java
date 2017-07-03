@@ -39,7 +39,7 @@ import javafx.stage.Stage;
 
 	/** 
 	
-	@author : Jonathan Foong
+	@author : Jonathan Foongo
 	@function : Main staff scene / first scene for user site
 	@task : Interface, call ComingSoonScene and Login Scene
 	
@@ -946,6 +946,18 @@ import javafx.stage.Stage;
 	            		
 	            	}
 	            } 
+	            });
+			
+			
+	            	Back.setOnAction(e -> {
+	            		int dialogButton = JOptionPane.YES_NO_OPTION;
+	            		dialogButton = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning", dialogButton);
+	            		if(dialogButton == JOptionPane.YES_OPTION){
+	            			System.out.println("You have logged out!");
+	            			//Go back to login screen
+	            			stage.setScene(MainApplication.getLoginScene());
+	            		}
+	            	
 	            });
 			
 			//adding all the pane in to RootPane for UserScene 
