@@ -73,7 +73,7 @@ public class UserPaneInterface {
 		
 		root.getChildren().add(CommonElements.getMenuBar(stage));
 		
-		return new Scene(root);
+		return new Scene(root, 1440,960);
 	}
 	
 	public static GridPane getMainContent(){
@@ -223,11 +223,15 @@ public class UserPaneInterface {
 				}
 				//If there was no duplicate, add it into the file. Else, throw an error prompt at the user
 				if(usernameIsNotDuplicate){
-					temp.add(
-							new User(User.generateUniqueID(type.equals("Admin")), username, pword)
-							);
-					MainApplication.setListOfUsers(temp);
-					User.saveUsersToUserFile(temp);
+					int dialogButton = JOptionPane.YES_NO_OPTION;
+		    		dialogButton = JOptionPane.showConfirmDialog(null, "Are You sure?", "Warning", dialogButton);
+		    		if(dialogButton == JOptionPane.YES_OPTION){
+		    			temp.add(
+								new User(User.generateUniqueID(type.equals("Admin")), username, pword)
+								);
+						MainApplication.setListOfUsers(temp);
+						User.saveUsersToUserFile(temp);
+		    		}
 				}
 				else{
 					JOptionPane.showMessageDialog(null, 
