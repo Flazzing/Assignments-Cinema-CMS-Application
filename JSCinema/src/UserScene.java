@@ -904,6 +904,9 @@ import javafx.stage.Stage;
 	            		}
 	            	}else{
 	            		
+	            		Seat seat = new Seat();
+	            		seat.GenerateSeat(stage, MovieName, time, hall, Directory);
+	            		
 	            		//------------TO CHING SCENE-------------
 	            		
 	            		//Ching ching = new Ching(MovieName,time,hall,Directory);
