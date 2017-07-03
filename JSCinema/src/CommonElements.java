@@ -36,7 +36,7 @@ import javafx.stage.Stage;
  */
 
 /**
- * @author Steve
+ * @author Steve, JQ
  *
  */
 public class CommonElements {
