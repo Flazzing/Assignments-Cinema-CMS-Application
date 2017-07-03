@@ -1,5 +1,16 @@
 
 
+/**
+ * A movie class which uses as an object to store value
+ *
+ * It acts as an objec to fascilitate the program to store the value accordingly
+ * 
+ * 
+ *
+ *
+ */
+
+
 public class Movie {
 
 	@Override
@@ -23,6 +34,18 @@ public class Movie {
 		return super.hashCode();
 	}
 	private String MovieID;	
+	
+	 /************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method
+     * 
+     * The method below is used to return all variables value within the object itself
+     * 
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
 	@Override
 	public String toString() {
 		return "Movie [MovieID=" + MovieID + ", MovieName=" + MovieName + ", MovieStartTime=" + MovieStartTime
@@ -39,6 +62,17 @@ public class Movie {
 		MovieHall = movieHall;
 		MovieDirectory = movieDirectory;
 	}
+	
+	 /************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method
+     * 
+     * Getter and setter method generate by eclipse
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
 	public String getMovieID() {
 		return MovieID;
 	}

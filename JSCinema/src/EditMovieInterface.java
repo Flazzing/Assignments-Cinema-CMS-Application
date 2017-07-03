@@ -31,6 +31,26 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * An interface, that generate Edit interface which allows the deletion of  new movies
+ *
+ * It acts as a Edit movie interface generator.
+ *
+ *It is assume that user are not allows to change the id of the movie
+ *
+ *
+ *The editing function is completed by reading and changing the value of each variable
+ *and rewrite it after again
+ *
+ *Edit availabel too all types of movie
+ *
+ * Each respective file got their own ID
+ *Movie.txt ID : (e.g. 001,002,003)
+ * ComingSoonMove.txt ID: (e.g. power ranger, spiderman, batman) [MovieName]
+ * 
+ *  
+ */
+
 public class EditMovieInterface extends Application{
 
 	public static void main(String[]args){
@@ -43,6 +63,19 @@ public class EditMovieInterface extends Application{
 		GenerateEditPage(arg0);
 	}
 	
+	 /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup method
+     * 
+     *  The method below set the top part of the borderpane
+     *  
+     *  back button is used for the transition of the previous stage
+     *                                           
+     *                                           *
+     * @{                                                                   *
+     ***********************************************************************/
+
 	public void setTopEditMovieBorderPane(BorderPane MovieBorderPane, Stage stage ){
 		  Pane TopMoviePane = new Pane();
 	      HBox TopMovieHBox = new HBox();		
@@ -109,6 +142,18 @@ public class EditMovieInterface extends Application{
 	                
 	      MovieBorderPane.setTop(TopMoviePane);	
 	}
+	
+	
+	 /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Method
+     * 
+     * Generate the edit page by returning the requried scene
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
 	
 	public Scene GenerateEditPage(Stage EditMovieStage){
 	     	
@@ -180,6 +225,16 @@ public class EditMovieInterface extends Application{
 
 	}
 	
+	 /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Method to split object                                                 *
+     *Split the arraylist into different component *
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
+	
 	public static <T extends Object> List<List<T>> split(List<T> list, int targetSize) {
 		List<List<T>> lists = new ArrayList<List<T>>();
 	    for (int i = 0; i < list.size(); i += targetSize) {
@@ -187,6 +242,18 @@ public class EditMovieInterface extends Application{
 	    }
 	    return lists;
 	}
+	
+	
+	 /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Method
+     * The method below fascilitate the program to read the text file
+     * 
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
 	
 	public List<String> ReadFunction(String FileDirectory) throws FileNotFoundException{
 		File MovieFile = new File(FileDirectory);
@@ -212,6 +279,17 @@ public class EditMovieInterface extends Application{
 		readMovieFile.close();
 		return MovieIDTemp;
 	}
+	
+	 /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Method
+     * 
+     * The mehtod below is responsible too delete the the movies
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
 	
 	public void DeleteMovie(String MovieFileDirectory, String MovieID) throws IOException{
 		List <String> MovieData = new ArrayList<String>();
@@ -248,6 +326,18 @@ public class EditMovieInterface extends Application{
 
 	}
 	
+
+	 /************************************************************************
+    * @}                                                                   *
+    *                                                                      *
+    * \defgroup Method
+    * 
+    * The mehtod below is responsible too add coming soon movies
+    *                                                                      *
+    * @{                                                                   *
+    ***********************************************************************/
+
+	
 	public void AddComingSoonMovie( String MovieTextFileDirectory, String MovieName, String StartDay, String StartMonth, String MovieImageFileDirectory, String MovieDescription) throws IOException{
 		PrintWriter pw = new PrintWriter(new FileOutputStream( new File(MovieTextFileDirectory),  true /* append = true */));
 		if (MovieTextFileDirectory.equals("Movie Image Directory")){
@@ -276,6 +366,18 @@ public class EditMovieInterface extends Application{
 		pw.println( MovieName  + "," + StartDay + "," +  StartMonth + ","  + MovieImageFileDirectory + ","+ MovieDescription);	
 		pw.close();
 	}
+	
+
+	 /************************************************************************
+    * @}                                                                   *
+    *                                                                      *
+    * \defgroup Method
+    * 
+    * The mehtod below is responsible too delete the the coming soon movies
+    *                                                                      *
+    * @{                                                                   *
+    ***********************************************************************/
+
 	
 	public void DeleteComingSoonMovie(String MovieFileDirectory, String MovieName) throws IOException{
 		List <String> MovieData = new ArrayList<String>();
@@ -307,7 +409,17 @@ public class EditMovieInterface extends Application{
 		}
 		pw.close();
 
+		
 	}
+	 /************************************************************************
+	    * @}                                                                   *
+	    *                                                                      *
+	    * \defgroup Method
+	    * 
+	    * The mehtod below is responsible too Add movie for the Movie.txt file 
+	    *                                                                      *
+	    * @{                                                                   *
+	    ***********************************************************************/
 	
 	public static void AddMovie( String MovieTextFileDirectory, String MovieID, String MovieName, String Time1,String Time2, String Time3,String Time4, String Time5, String Time6, String Hall1, String Hall2, String Hall3, String Hall4, String Hall5, String Hall6,String MovieImageFileDirectory) throws IOException{
 		PrintWriter pw = new PrintWriter(new FileOutputStream( new File(MovieTextFileDirectory),  true /* append = true */));
@@ -366,7 +478,15 @@ public class EditMovieInterface extends Application{
 		pw.close();
 	}
 				
-	
+	 /************************************************************************
+	    * @}                                                                   *
+	    *                                                                      *
+	    * \defgroup Method
+	    * 
+	    * The mehtod below is responsible to generate the airing edit page
+	    *                                                                      *
+	    * @{                                                                   *
+	    ***********************************************************************/
 	
 	public GridPane GenerateAiringMovieEditPage(Stage EditMovieStage, Pane EditPane){	
 		Button Search = new Button("Search for Airing Movie");
@@ -513,6 +633,17 @@ public class EditMovieInterface extends Application{
     	
     	return EditMovieGridPane;
 	}
+	
+	 /************************************************************************
+	    * @}                                                                   *
+	    *                                                                      *
+	    * \defgroup Method
+	    * 
+	    * The mehtod below is responsible too generate  coming soon Movie Page
+	    *                                                                      *
+	    * @{                                                                   *
+	    ***********************************************************************/
+	
 	
 	public GridPane GenerateComingSoonMoviePage(Stage stage, Pane EditPane){
 

@@ -9,9 +9,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -40,22 +44,79 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
+/**
+ * A Seat class to generate seat interface
+ * 
+ * after confirm ur booking will make n interface transition from here to purchase confirmation interface
+ * 
+ * 
+ * @sa EditableLabelSkin, EditableLabelBehavior
+ */
 public class Seat extends Application{
 
+	 /************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                           *
+     *
+     *The method below is responsible to facilitate the reading function
+     *
+     *
+     *
+                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
+	
+	public ArrayList<String> read(String fileDirectory){
+		ArrayList <String> data = new ArrayList<String>();
+		Scanner read = null;
+		try {
+			read = new Scanner(new File(fileDirectory));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String linedata = null;
+		String[] alldata = null;
+		
+		while(read.hasNext()){
+			linedata = read.nextLine();
+			alldata = linedata.split(",");
+			for(int i=0; i<alldata.length; i++){
+				data.add(alldata[i]);
+			}
+		}		
+		return data;
+	}
 
+	 /************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                           *
+     *
+     *The method below is responsible to fgenerate the seat available and unavailable to u 
+     *
+     *
+     *
+                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
 	public Scene GenerateSeat(Stage stage, String MovieName, String time, String hall, String Directory){
+		
 		BorderPane SeatBorderPane = new BorderPane();
 		setBackground(SeatBorderPane);
 		setTopMovieBorderPane(SeatBorderPane, stage);
 		
 		
-		SeatBorderPane.setCenter(GenerateCenter(MovieName, time, hall, Directory));		
+		SeatBorderPane.setCenter(GenerateCenter(stage, MovieName, time, hall, Directory));		
 		
 		ScrollPane scrollpane = new ScrollPane();
 		scrollpane.setContent(SeatBorderPane);
 		Scene scene = new Scene(scrollpane);
 		scene.getStylesheets().add("Seat.css");
+		stage.setScene(scene);
 		return scene;
 	}
 	
@@ -63,6 +124,7 @@ public class Seat extends Application{
 	public void start(Stage arg0) throws Exception {
 		// TODO Auto-generated method stub
 
+		
 		BorderPane SeatBorderPane = new BorderPane();
 		setBackground(SeatBorderPane);
 		setTopMovieBorderPane(SeatBorderPane, arg0);
@@ -72,7 +134,7 @@ public class Seat extends Application{
 		String hall = null; 
 		String Directory = "MovieInterfaceResource/MovieIcon.png";
 		
-		SeatBorderPane.setCenter(GenerateCenter(MovieName, time, hall, Directory));		
+		SeatBorderPane.setCenter(GenerateCenter(arg0, MovieName, time, hall, Directory));		
 		
 		ScrollPane scrollpane = new ScrollPane();
 		scrollpane.setContent(SeatBorderPane);
@@ -85,56 +147,102 @@ public class Seat extends Application{
 	}
 	
 	
-		public Pane GenerateCenter(String MovieName,String time,String hall, String Directory){
+	 /************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                           *
+     *
+     *The method below is responsible generate the center of the borderpane
+     *
+     *Note: this is needed to be within a method to simplify the transition of variable
+     *
+                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
+
+		public Pane GenerateCenter(Stage stage, String MovieName,String time,String hall, String Directory){
 		
 		Ticket ticket = new Ticket();
-		
-		
+			
 		
 		Pane root = new Pane();
 		Label adult = new Label("Adult: 0");
 		Label children = new Label("Children: 0");
 		TextField Adult = new TextField();
-		GridPane seatGridPane = new GridPane();
-		final ToggleGroup[][] group = new ToggleGroup[8][4];
-		ToggleButton[][] SeatButton = new ToggleButton[8][4];
-		
 	
-		for(int i=0; i<4; i++){
-			for(int c=0; c<8; c++){
-				SeatButton[c][i] = new ToggleButton();
-				SeatButton[c][i].setText(Integer.toString(c) + Integer.toString(i));
-				SeatButton[c][i].setPrefWidth(50);
-				SeatButton[c][i].setPrefHeight(50);
-				SeatButton[c][i].setDisable(true);
-				SeatButton[c][i].setGraphic(new ImageView(new Image("MovieInterfaceResource/Seat_Available.png")));			
-				SeatButton[c][i].setStyle("-fx-border-color: transparent;-fx-background-color: transparent;");    				
-				seatGridPane.add(SeatButton[c][i],c,i);
-				
-				group[c][i] = new ToggleGroup();
-				SeatButton[c][i].setToggleGroup(group[c][i]);
-				int temp = c;
-				int temp2 = i;
-				group[c][i].selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+		Pane pane = new Pane();
 
-				    public void changed(ObservableValue<? extends Toggle> ov,
-				        Toggle toggle, Toggle new_toggle) {
-				    		if(new_toggle == null){
-								SeatButton[temp][temp2].setGraphic(new ImageView(new Image("MovieInterfaceResource/Seat_Available.png")));							            	
-				            }
-				            else{				            	
-								SeatButton[temp][temp2].setGraphic(new ImageView(new Image("MovieInterfaceResource/Seat_Choosen.png")));											
-				            }
-				         } 
-				});
-			}
-		}
+		GridPane seatGridPane = new GridPane();
+
+		Button[][] SeatButton = new Button[8][4];
+	
+		ArrayList <String>seatinfo = new ArrayList<String>();
+		seatinfo = read("MovieDataSource/Purchase.txt");
 		
+		int reserve =0;
+		int available =0;
+		
+		if(seatinfo.get(0).equals(MovieName)){
+			int p=7;
+			for(int i=0; i<4; i++){
+				for(int c=0; c<8; c++){
+					SeatButton[c][i] = new Button();
+					SeatButton[c][i].setText(Integer.toString(c) + Integer.toString(i));
+					SeatButton[c][i].setPrefWidth(50);
+					SeatButton[c][i].setPrefHeight(50);
+					SeatButton[c][i].setDisable(true);
+					SeatButton[c][i].setStyle("-fx-border-color: transparent;-fx-background-color: transparent;");    				
+					SeatButton[c][i].setGraphic(new ImageView(new Image("MovieInterfaceResource/Seat_Available.png")));	
+					for(int x=0; x<seatinfo.size()/39;x++){
+						for( ; p< 39;){
+							if(seatinfo.get(p).equals("0")){
+								SeatButton[c][i].setGraphic(new ImageView(new Image("MovieInterfaceResource/Seat_Available.png")));	
+								seatGridPane.add(SeatButton[c][i],c,i);
+								available++;
+								p++;
+								break;
+							}
+							else {
+								SeatButton[c][i].setGraphic(new ImageView(new Image("MovieInterfaceResource/Seat_Reserve.png")));										
+								p++;
+								seatGridPane.add(SeatButton[c][i],c,i);
+								reserve++;
+								break;
+							}
+						}
+						break;				
+					}
+					}
+			}
+			}
+		else{
+			for(int i=0; i<4; i++){
+				for(int c=0; c<8; c++){
+					SeatButton[c][i] = new Button();
+					SeatButton[c][i].setText(Integer.toString(c) + Integer.toString(i));
+					SeatButton[c][i].setPrefWidth(50);
+					SeatButton[c][i].setPrefHeight(50);
+					SeatButton[c][i].setDisable(true);
+					SeatButton[c][i].setStyle("-fx-border-color: transparent;-fx-background-color: transparent;");    				
+					SeatButton[c][i].setGraphic(new ImageView(new Image("MovieInterfaceResource/Seat_Available.png")));	
+					seatGridPane.add(SeatButton[c][i],c,i);
+					available++;
+				}
+			}
+					
+					
+		}
 		seatGridPane.setLayoutX(200);
 		seatGridPane.setLayoutY(300);
-		Pane pane = new Pane();
 		pane.getChildren().add(seatGridPane);
-		
+
+		/**
+	     * The iamgeview for the blue line
+	     * 
+	     * 
+	     * 
+	      */
 		
 		
 		
@@ -151,17 +259,20 @@ public class Seat extends Application{
 		
 		hbox1.getChildren().add(BlueLine);
 	
-		
-		ImageView imageview = new ImageView(new Image(Directory));
-		imageview.setFitWidth(150);
-		imageview.setFitHeight(120);
-		imageview.setLayoutX(400);
+		System.out.println(Directory);
+		//"file:" + new String(Directory)
+		ImageView imageview = new ImageView(new Image("file:" + Directory));
+		imageview.setFitWidth(250);
+		imageview.setFitHeight(180);
+		imageview.setLayoutX(450);
 		vbox1.getChildren().add(imageview);
-		vbox1.getChildren().add(new Label(MovieName));
+		vbox1.getChildren().add(new Label("Movie Name:" + MovieName));
 		
-		HBox hbox2 = new HBox();
+		HBox hbox2 = new HBox(20);
 		hbox2.getChildren().add(new ImageView(new Image("MovieInterfaceResource/timeicon.png")));
-		hbox2.getChildren().add(new Label(time));
+		Label Movietime = new Label(time);
+		Movietime.setPadding(new Insets(20,0,0,0));
+		hbox2.getChildren().add(Movietime);
 		vbox1.getChildren().add(hbox2);
 		
 		HBox hbox3 = new HBox(20);
@@ -171,6 +282,13 @@ public class Seat extends Application{
 		hbox3.getChildren().add( new Label(sdf.format(date)));
 		hbox3.setAlignment(Pos.CENTER_LEFT);
 		vbox1.getChildren().add(hbox3);
+		
+		HBox hbox7 = new HBox();
+		hbox7.getChildren().add(new ImageView(new Image("MovieInterfaceResource/hallicon.png")));
+		Label halllabel = new Label(hall);
+		halllabel.setPadding(new Insets(15,0,0,0));
+		hbox7.getChildren().add(halllabel);
+		vbox1.getChildren().add(hbox7);
 		
 		HBox hbox4 = new HBox(20);
 		hbox4.getChildren().add(new Label("Enter Adult"));
@@ -190,13 +308,23 @@ public class Seat extends Application{
 		vbox1.getChildren().add(adult);
 		vbox1.getChildren().add(children);
 		
-		
+		/**
+	     *Refresh button 
+	     *
+	     *Function: To refresh the interface after wreitting the number of adult and children
+	     *
+	     *Note; button will be disable after writting once 
+	     *
+	      */
 		
 		Button b2 = new Button("Refresh");
 		vbox1.getChildren().add(b2);
 		
 		
 		TextField[] seatPosition = new TextField[18];
+		
+		int totalAdult = (Integer.parseInt(adult.getText().replace("Adult: ", "")));
+		int totalChild = (Integer.parseInt(children.getText().replace("Children: ", "")));
 		
 		
 		b2.setOnAction(e->{
@@ -208,6 +336,14 @@ public class Seat extends Application{
 			HBox hbox[] = new HBox[totalpeople];
 			VBox vbox = new VBox(10);
 			
+			
+			/**
+		     * 
+		     * This section generate the detail about the booking being made
+		     * 
+		     * Ticket Number	Ticket Type		Price		SeatPosition (TextField)
+		     * 
+		     */
 			
 			
 			int i=0;
@@ -226,19 +362,75 @@ public class Seat extends Application{
 				hbox[b].getChildren().addAll(ticketdetail[b], seatPosition[b]);
 				vbox.getChildren().add(hbox[b]);
 			}
-			
+			double total =  10 * (Integer.parseInt(children.getText().replace("Children: ", "")));
+			total += 15*(Integer.parseInt(adult.getText().replace("Adult: ", "")));
+			vbox.getChildren().add(new Label("Total: " + Double.toString(total) ));
 			root.getChildren().add(vbox);
-			vbox.setLayoutX(1480);
-			vbox.setLayoutY(580);
+			vbox.setLayoutX(1030);
+			vbox.setLayoutY(780);
 		});
 			
-	
+		
+		
+		double total =  10 * (Integer.parseInt(children.getText().replace("Children: ", "")));
+		total += 15*(Integer.parseInt(adult.getText().replace("Adult: ", "")));
+		
+		HBox hbox6 = new HBox(50);
+		Button back = new Button("Back");
+		
+		
+		/**
+		 * 
+		 * The back button is function to allows the transition of the previous page
+		 * 
+		 * 
+		 * The button goes to userscene interface
+		 * 
+		 */
+		
+		back.setOnAction(e->{
+			UserScene userscene = new UserScene();
+			try {
+				stage.setScene(userscene.getUserScene(stage));
+				
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
+		
+		/**
+		 * The Confirm button confirm the detail of the booking being made
+		 * 
+		 * Will maje tge transition from here to purchase confirmation page
+	      */
 	
 		Button b1 = new Button("Confirm");
-		vbox1.getChildren().add(b1);
+
+		hbox6.getChildren().add(back);
+		hbox6.getChildren().add(b1);
+		vbox1.getChildren().add(hbox6);
+		
 		
 		b1.setOnAction(e->{
-		//generate event	
+			PurchaseConfirmation purchaseConfirmation = new PurchaseConfirmation();
+			char[] seat = new char[32];
+			int totalpeople = totalAdult+totalChild;
+			for(int i=0; i>totalpeople; i++){
+				seat[i] = seatPosition[i].getText().charAt(0);
+			}
+			double total2 =  10 * (Integer.parseInt(children.getText().replace("Children: ", "")));
+			total2 += 15*(Integer.parseInt(adult.getText().replace("Adult: ", "")));
+			
+			System.out.println(new String(seat));
+			
+		try {
+			stage.setScene(purchaseConfirmation.generatePurchaseConfirmation(stage, MovieName, Directory, time, hall, new String(seat), totalAdult, totalChild, total2));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		});
 		
 		Add.setOnAction(e->{
@@ -264,31 +456,52 @@ public class Seat extends Application{
 	
 		
 		
-		VBox SeatHorizontalPosition = new VBox(110);
-		SeatHorizontalPosition.getChildren().add(new Label("A"));
-		SeatHorizontalPosition.getChildren().add(new Label("B"));
-		SeatHorizontalPosition.getChildren().add(new Label("C"));
-		SeatHorizontalPosition.getChildren().add(new Label("D"));
-	
 		
-		root.getChildren().add(SeatHorizontalPosition);
-		SeatHorizontalPosition.setLayoutX(180);
-		SeatHorizontalPosition.setLayoutY(350);
+		GridPane gp = new GridPane();
+		for(int b=0; b<8; b++){
+			for(int i=0; i<4;i++){
+				gp.add(new Label(Integer.toString(b+i)), b, i);
+			}			
+		}
 		
-		HBox seatVerticlePosition = new HBox(140);
-		seatVerticlePosition.getChildren().add(new Label("1"));
-		seatVerticlePosition.getChildren().add(new Label("2"));
-		seatVerticlePosition.getChildren().add(new Label("3"));
-		seatVerticlePosition.getChildren().add(new Label("4"));
-		seatVerticlePosition.getChildren().add(new Label("5"));
-		seatVerticlePosition.getChildren().add(new Label("6"));
-		seatVerticlePosition.getChildren().add(new Label("7"));
-		seatVerticlePosition.getChildren().add(new Label("8"));
-		seatVerticlePosition.setLayoutX(260);
-		seatVerticlePosition.setLayoutY(270);
-		root.getChildren().add(seatVerticlePosition);
-		
+		gp.setLayoutX(230);
+		gp.setLayoutY(320);
+		gp.setHgap(83);
+		gp.setVgap(43);
+		root.getChildren().add(gp);	
 
+	
+		HBox hbox9 = new HBox(200);
+		
+		VBox vbox2 = new VBox();
+		VBox vbox3 = new VBox();
+
+		
+		ImageView noticeview = new ImageView(new Image("MovieInterfaceResource/Seat_Reserve.png"));
+		noticeview.setFitWidth(100);
+		noticeview.setFitHeight(100);
+		vbox2.getChildren().add(noticeview);
+		vbox2.getChildren().add(new Label("Reserve Seat"));
+		hbox9.getChildren().add(vbox2);
+		
+		ImageView noticeview2 = new ImageView(new Image("MovieInterfaceResource/Seat_Available.png"));
+		noticeview2.setFitWidth(100);
+		noticeview2.setFitHeight(100);
+	
+		vbox3.getChildren().add(noticeview2);
+		hbox9.setLayoutX(300);
+		hbox9.setLayoutY(700);
+		vbox3.getChildren().add(new Label ("Available seat"));
+		hbox9.getChildren().add(vbox3);
+				
+		VBox seatdetail = new VBox();
+		seatdetail.getChildren().add(new Label("Available seat: " + available));
+		seatdetail.getChildren().add(new Label("Reserve seat: " + reserve));
+		seatdetail.setLayoutX(100);
+		seatdetail.setLayoutY(100);
+		root.getChildren().add(seatdetail);
+		
+		root.getChildren().add(hbox9);
 		return root;
 		
 	}

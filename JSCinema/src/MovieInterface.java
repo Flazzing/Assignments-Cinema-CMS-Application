@@ -49,8 +49,28 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * A movie interface class is used to generate the movie interface page
+ * 
+ *	it act as a generator for the stage to make a scene transition 
+ * When clicking on it, it will switch to editable mode
+ * 
+ * 
+ * 
+ */
+
 public class MovieInterface{
 
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method
+     * To return a scene for the stage to receive
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
+	
 	public Scene generateMovieScreen(Stage MovieStage) throws FileNotFoundException{
 		BorderPane MovieBorderPane = new BorderPane();
 		setBackground(MovieBorderPane);	
@@ -68,7 +88,16 @@ public class MovieInterface{
 		return MovieScene;
 	}
 	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method to set the background of the border pange
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
 
+	
+	
 	public void setBackground(BorderPane borderpane){
 		Image MovieImage = new Image("MovieInterfaceResource/Background.jpg",1440,960, false,false);
         BackgroundImage MovieBackgroundImage= new BackgroundImage(MovieImage,
@@ -76,6 +105,14 @@ public class MovieInterface{
         Background MovieBackground = new Background(MovieBackgroundImage);
         borderpane.setBackground(MovieBackground);
 	}
+	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method to set the background of the pange
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
 	
 	public void setBackground(Pane pane){
 		Image MovieImage = new Image("MovieInterfaceResource/Background.jpg",1440,960, false,false);
@@ -85,8 +122,18 @@ public class MovieInterface{
         pane.setBackground(MovieBackground);
 	}
 	
-
+	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * Method: Set the top of the border pane
+     * 
+     * 
 	//The method below set the first row of the interface
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
 	public void setTopMovieBorderPane(BorderPane MovieBorderPane, Stage stage){
 		Pane TopMoviePane = new Pane();
 		HBox TopMovieHBox = new HBox();		
@@ -144,9 +191,17 @@ public class MovieInterface{
 	
 
 	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                             *
+    	* 	//The method below set the centre of the border pane
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
 
 
-	//The method below set the centre of the borderpane
+	
 	public void setCenterBorderPane(BorderPane MovieBorderPane, Stage stage){
 
 		VBox MovieCenterVBox = new VBox();		
@@ -220,6 +275,15 @@ public class MovieInterface{
 	        
 	}
 	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                            *
+  	// The method split the list object into different component
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
 	public static <T extends Object> List<List<T>> split(List<T> list, int targetSize) {
 		List<List<T>> lists = new ArrayList<List<T>>();
 	    for (int i = 0; i < list.size(); i += targetSize) {
@@ -228,7 +292,19 @@ public class MovieInterface{
 	    return lists;
 	}
 	
-	// The mehtod below read the file and return the entire data in list
+	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                            *
+  	// The mehtod below read the file and return the entire data in list
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
+	
+	
+	
 	public List<String> ReadFunction(String FileDirectory) throws FileNotFoundException{
 		File MovieFile = new File(FileDirectory);
 		Scanner readMovieFile = new Scanner(MovieFile);
@@ -256,9 +332,18 @@ public class MovieInterface{
 	
 
 	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                              *
+     * The method below create table view by reading the resoruce txt file                  *
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
+	
 	
 
-	//The method below create table view by reading the resoruce txt file
 	public void MovieTableView(Pane MovieTypePane, String Directory){
 		List <String> MovieData = new ArrayList<String>();
 		List<List<String>> lists = null;
@@ -340,6 +425,20 @@ public class MovieInterface{
 		MovieTypePane.getChildren().add(MovieTableView);
 	}
 	
+	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method to generate the tableview
+     * 
+     * Collection of Movie object 
+     * and collection of ComingSoonMovie Object
+     * 
+     * Will sort the data accordingly and display on the program table view
+     * 
+     * @{                                                                   *
+     ***********************************************************************/
+
 	
 	
 	public void ComingSoonMovieTableView(Pane MovieTypePane, String Directory){

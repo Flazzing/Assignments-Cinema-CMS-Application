@@ -1,6 +1,28 @@
 
+/**
+	 * A object class serve for collectible framework
+	 *
+	 *It acts to facilitate the graphical display of the coming soon Movie table
+	 *
+	 *This section will sort the data accordingly to 2NF format
+	 *
+	 *
+	 *
+	 */
+
 public class ComingSoonMovie {
 
+	
+	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Constructors                                               *
+     * Constructors to help create the object 
+     * super to call object class                    *
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
 
 	public ComingSoonMovie(String movieName, String releaseDay, String releaseMonth, String movieDescription,
 			String movieImageDirectory) {

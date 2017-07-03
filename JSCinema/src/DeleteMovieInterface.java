@@ -31,6 +31,23 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * An interface, that generate Delete interface which allows the deletion of  new movies
+ *
+ * It acts as a delete movie interface generator.
+ * It deletes the data by reading the data, remove the uneeded data and writing it again
+ *
+ *
+ *The deletion is comepleted by taking the movies id
+ *
+ * Each respective file got their own ID
+ *Movie.txt ID : (e.g. 001,002,003)
+ * ComingSoonMove.txt ID: (e.g. power ranger, spiderman, batman) [MovieName]
+ * 
+ * 
+ * 
+ */
+
 public class DeleteMovieInterface extends Application{
 
 	public static void main(String[]args){
@@ -42,6 +59,16 @@ public class DeleteMovieInterface extends Application{
 		// TODO Auto-generated method stub
 		GenerateDeletePage(arg0);
 	}
+	
+	  /************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup   method                                       *
+     * method to set the top of the border pane                       *
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
 	
 	public void setTopMovieBorderPane(BorderPane MovieBorderPane, Stage stage){
 		  Pane TopMoviePane = new Pane();
@@ -90,6 +117,15 @@ public class DeleteMovieInterface extends Application{
 	      TopMovieVBox.getChildren().add(TopMovieHBox);      
 	      TopMoviePane.getChildren().add(TopMovieVBox);
 	        
+	      /**
+	       * The back button in this page will be functioning to allows the interface 
+	       * transition of the previous page whic his movieinteface
+	       * 
+	       * MovieInterface - central interface which allows user to choose to edit,delete or add movies
+	       * 
+	       * 
+	       */
+	      
 	      Button MovieBackButton = new Button("Back");
 	      MovieBackButton.setStyle("-fx-border-color: transparent; -fx-border-width: 0; -fx-background-radius: 0; -fx-background-color: transparent; -fx-font-size: 30; /* 30 */ -fx-text-fill: #ffffff;");    
 	      MovieBackButton.setPrefHeight(200);
@@ -110,6 +146,25 @@ public class DeleteMovieInterface extends Application{
 	                
 	      MovieBorderPane.setTop(TopMoviePane);	
 	}
+	
+	  /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Method                                                *
+     * The method below will read the Movie.txt file only                                                                 
+     *                                                   
+     * It will remove the "[" and "]" sign within the text file                                                                     
+     * 
+     *              
+     * Note: the "["and  "]" symbol is used to represent the Id of the movie within the text file
+     * 
+     *              
+     *              
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
+  
 	
 	public List<String> ReadFunction(String FileDirectory) throws FileNotFoundException{
 		File MovieFile = new File(FileDirectory);
@@ -136,6 +191,24 @@ public class DeleteMovieInterface extends Application{
 		return MovieIDTemp;
 	}
 	
+	  /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Method                                                *
+     * The mthod below will function to split list or arraylist  according to the traget size*
+     *
+     * Note: it's use to seperate an arraylist 
+     *   
+     *                                                                      
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
+    /**
+     * 
+      */
+	
+	
 	public static <T extends Object> List<List<T>> split(List<T> list, int targetSize) {
 		List<List<T>> lists = new ArrayList<List<T>>();
 	    for (int i = 0; i < list.size(); i += targetSize) {
@@ -143,6 +216,24 @@ public class DeleteMovieInterface extends Application{
 	    }
 	    return lists;
 	}
+	
+	  /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Method                                                *
+     * The method below will read the file and remove the file after 
+     * storing into variable and rewrite it again*
+     *
+     *Note the split method is use to split the arraylist object by limiting
+     *arraylist to a total of 21 values   
+     *                                                                      
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+
+    /**
+     * 
+      */
 	
 	public void DeleteMovie(String MovieFileDirectory, String MovieID) throws IOException{
 		List <String> MovieData = new ArrayList<String>();
@@ -160,6 +251,19 @@ public class DeleteMovieInterface extends Application{
 		}
 		PrintWriter pw = new PrintWriter(new File(MovieFileDirectory));		
 		for(int i=0; i<lists.size(); i++){
+			
+			 /**
+		     * 
+		     * Divided by 21 to obtain the rows 
+		     * Formula : TotalTableBox/ TotalColumn = row
+		     * 
+		     * Will eliminate data at after the reading stage
+		     * and before the rewriting function
+		     * Will write accordingly to txt file
+		     * 
+		     * 
+		      */
+			
 			for(int b=0; b<lists.get(i).size()/21; b++){
 				if(lists.get(i).get(b).equals(MovieID)){
 					if(MovieID.equals("")){
@@ -169,8 +273,7 @@ public class DeleteMovieInterface extends Application{
 				}
 				else{
 					String time = new String(lists.get(i).get(b+2) + "-" + lists.get(i).get(b+3) + "," + lists.get(i).get(b+4) + "-" + lists.get(i).get(b+5) + "," + lists.get(i).get(b+6) + "-" + lists.get(i).get(b+7)+"," + lists.get(i).get(b+8) + "-" + lists.get(i).get(b+9) + "," +lists.get(i).get(b+10) + "-" + lists.get(i).get(b+11) + "," + lists.get(i).get(b+12) + "-" + lists.get(i).get(b+13) + ",");
-					String hall = new String(lists.get(i).get(b+14) + "," + lists.get(i).get(b+15) + "," + lists.get(i).get(b+16) + "," + lists.get(i).get(b+17) + "," + lists.get(i).get(b+18) + "," + lists.get(i).get(b+19) );
-//	        		WriteMovie(MovieFileDirectory, ,lists.get(i).get(b+1), time, hall, lists.get(i).get(b+20));										
+					String hall = new String(lists.get(i).get(b+14) + "," + lists.get(i).get(b+15) + "," + lists.get(i).get(b+16) + "," + lists.get(i).get(b+17) + "," + lists.get(i).get(b+18) + "," + lists.get(i).get(b+19) );									
 					pw.write("[" + lists.get(i).get(b) + "]" + "," + lists.get(i).get(b+1) + ","+ time + hall+ "," + lists.get(i).get(b+20) + "\n");	
 				}
 			}
@@ -179,6 +282,17 @@ public class DeleteMovieInterface extends Application{
 
 	}
 
+	
+	 /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Methods                                                    *
+     *     
+     *    Method to delete coming soon Movies                                                                  
+     *                                                                      
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
 	public void DeleteComingSoonMovie(String MovieFileDirectory, String MovieName) throws IOException{
 		List <String> MovieData = new ArrayList<String>();
 		List<List<String>> lists = null;
@@ -211,6 +325,18 @@ public class DeleteMovieInterface extends Application{
 		pw.close();
 
 	}
+	
+	 /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Methods                                                    *
+     *                 
+     * The method will generate the delete coming soon Movie interface                                                                 
+     *                                                                      
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
 	
 	public Pane GeneRateDeleteComingSoongMoviePange( Label Deletestatus, Stage DeleteMovieStage){
 		Pane DeleteComingSoongMoviePane = new Pane();
@@ -246,7 +372,17 @@ public class DeleteMovieInterface extends Application{
 		
 		return DeleteComingSoongMoviePane;		
 	}
-	
+	 /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Methods                                                    *
+     *             
+     *  The mthod will generate the delete airing movie interface
+     *  
+     *                                                                      
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
 	
 	public Pane GenerateDeleteAiringMoviePage( Label Deletestatus, Stage DeleteMovieStage){
 		Pane DeleteAiringMoviePane = new Pane();
@@ -269,6 +405,14 @@ public class DeleteMovieInterface extends Application{
 			}
 			else{
 				try{
+					 /************************************************************************
+				     * @}                                                                   *
+				     *                                                                      *
+				     * Calling the delete file within the confirm button                                                   *
+				     *                                                                      *
+				     * @{                                                                   *
+				     ***********************************************************************/
+					
 					DeleteMovie("MovieDataSource/Movie.txt", DeleteMovieID.getText());
 					Deletestatus.setText("Delete Success");
 					DeleteMovieStage.setScene(new MovieInterface().generateMovieScreen(DeleteMovieStage));
@@ -282,6 +426,15 @@ public class DeleteMovieInterface extends Application{
 		
 		return DeleteAiringMoviePane;
 	}
+	
+	 /************************************************************************
+     * @}                                                                   *
+     *                                                                      *
+     * \defgroup Properties                                                 *
+     * Declaration, getters and setters for the properties of this control  *
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
 	
 	
 

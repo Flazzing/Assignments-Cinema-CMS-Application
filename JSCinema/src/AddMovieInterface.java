@@ -31,6 +31,19 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * An interface, that generate add interface which allows adding new movies
+ *
+ * It acts as a add movie interface generator.
+ * It write the file (append) by adding movie
+ *
+ *The value are written into Movie.txt file or ComingSoonMovie.txt
+ * When pressing the back button above it will escape
+ * 
+ *
+ * 
+ */
+
 public class AddMovieInterface extends Application{
 
 	
@@ -40,6 +53,16 @@ public class AddMovieInterface extends Application{
 		// TODO Auto-generated method stub
 		GenerateAddPage(arg0);
 	}
+	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \def Method                                             *
+     * Method to generate the top of the borderpane                     *
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
 	
 	public void setTopMovieBorderPane(BorderPane MovieBorderPane, Stage stage){
 		  Pane TopMoviePane = new Pane();
@@ -58,6 +81,12 @@ public class AddMovieInterface extends Application{
 	      Image MovieIconImage = new Image("MovieInterfaceResource/MovieIcon.png");
 	      ImageView MovieIconImageView = new ImageView(MovieIconImage);
 	        
+	      
+	      /**
+	       * This will create the background variable and set it into the background of border pane
+	       * Serve to set background and create a back button as well
+	       * the back button redirect user to the previous page
+	       */
 	        
 	      String MovieTittleBlackBoxStringDirectory = "MovieInterfaceResource/MovieTittleBlackBox.jpg";
 	      Image MovieTittleBlackBoxImage = new Image(MovieTittleBlackBoxStringDirectory,1980,398, false, false);
@@ -95,7 +124,13 @@ public class AddMovieInterface extends Application{
 	      MovieBackButton.setPrefWidth(200);
 	      MovieBackButton.setLayoutX(1200);
 	      MovieBackButton.setLayoutY(120); 
-	      
+	      /**
+	       * back Button redirec to Previous page
+	       * 
+	       * 
+	       * 
+	       * 
+	       */
 	      MovieBackButton.setOnAction(e -> {
 	    	  try {
 	    		  MovieInterface movieinterface = new MovieInterface();
@@ -110,7 +145,22 @@ public class AddMovieInterface extends Application{
 	      MovieBorderPane.setTop(TopMoviePane);			
 	}
 	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                               *
+     * Method too write into the file                  *
+     * Will be written in to Movie.txt/ComingSoonMovie.txt                                                                     *
+     * @{                                                                   *
+     ***********************************************************************/
+	
 	public void AddMovie( String MovieTextFileDirectory, String MovieID, String MovieName, String Time1,String Time2, String Time3,String Time4, String Time5, String Time6, String Hall1, String Hall2, String Hall3, String Hall4, String Hall5, String Hall6,String MovieImageFileDirectory) throws IOException{
+		 /**
+	       * Write into text file append mode
+	       * the code will add null string value to any empy value variable
+	       * 
+	       * 
+	       */		
 		PrintWriter pw = new PrintWriter(new FileOutputStream( new File(MovieTextFileDirectory),  true /* append = true */));
 		MovieImageFileDirectory = MovieImageFileDirectory.replace('\\' , '/');
 		
@@ -167,6 +217,16 @@ public class AddMovieInterface extends Application{
 		pw.close();
 	}
 	
+
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                             *
+     * Method which generate the interface for adding airing movie interface                   *
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
 	public Pane GenerateAddAiringMoviePage(String filedirectory, Stage stage){
 		Pane AiringMoviePane = new Pane();
 		
@@ -202,7 +262,7 @@ public class AddMovieInterface extends Application{
         		FileChooser fileChooser = new FileChooser();
         		File selectedFile = fileChooser.showOpenDialog(null);
         		if (selectedFile != null) {
-        			MovieImageDirectoryButton.setText(selectedFile.getPath());
+        			MovieImageDirectoryButton.setText(new String("UserPage/" + selectedFile.getName()) );
         		}
         		else {
         			MovieImageDirectoryButton.setText("File selection cancelled.");
@@ -213,7 +273,16 @@ public class AddMovieInterface extends Application{
         MovieImageDirectoryButton.setPrefWidth(200);
         MovieImageDirectoryButton.setPrefHeight(50);
         
- 
+		 /**
+	       * The code below define the action of add button
+	       *
+	       * Add button is supposed to help u add the text field value into the respective text file
+	       * It will call admovie function which located above
+	       * 
+	       */
+
+        
+        
         AddMovieConfirmButton.setOnAction(d->{
         	try {
         		AddMovie(filedirectory, AddMovieTextField[0].getText(), AddMovieTextField[1].getText(), AddMovieTextField[2].getText(), AddMovieTextField[3].getText(), AddMovieTextField[4].getText(), AddMovieTextField[5].getText(), AddMovieTextField[6].getText(), AddMovieTextField[7].getText(), AddMovieTextField[8].getText(), AddMovieTextField[9].getText(), AddMovieTextField[10].getText(), AddMovieTextField[11].getText(), AddMovieTextField[12].getText(),AddMovieTextField[13].getText(), MovieImageDirectoryButton.getText());
@@ -233,7 +302,14 @@ public class AddMovieInterface extends Application{
         MovieImageDirectoryButton.setPrefWidth(200);
         MovieImageDirectoryButton.setPrefHeight(50);
         AddMovieGridPane.add(MovieImageDirectoryButton, 3,6);
-      
+	
+        /**
+	       * 
+	       * Set the Label text
+	       * 
+	       * 
+	       */
+
         
         AddMovieLabel[0].setText("Movie ID");
         AddMovieLabel[1].setText("Movie Name");
@@ -261,7 +337,23 @@ public class AddMovieInterface extends Application{
 		return AiringMoviePane;
 	}
 	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                             *
+     * Methods which write into ComingSoonMovie.txt                     *
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
 	public void AddComingSoonMovie( String MovieTextFileDirectory, String MovieName, String StartDay, String StartMonth, String MovieImageFileDirectory, String MovieDescription) throws IOException{
+		 /**
+	       *  The function is responsible to add movie into coming soon movie
+	       *  All empty value variable will be replace with null string value
+	       *  Write in append mode
+	       * 
+	       */
+
 		PrintWriter pw = new PrintWriter(new FileOutputStream( new File(MovieTextFileDirectory),  true /* append = true */));
 		if (MovieTextFileDirectory.equals("Movie Image Directory")){
 			MovieTextFileDirectory = "null";
@@ -290,6 +382,15 @@ public class AddMovieInterface extends Application{
 		pw.close();
 	}
 	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                             *
+     * Method to generate label and text field to add into ComingSoonMovie.txt file                     *
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
+	
 	public GridPane GenerateAddComingSoonMoviePage(Stage stage){
 		GridPane AddComingSoonMovieGridPane = new GridPane();
 		AddComingSoonMovieGridPane.setHgap(50);
@@ -301,6 +402,17 @@ public class AddMovieInterface extends Application{
 		AddComingSoonMovieGridPane.add(new Label("Image Directory"), 0, 3);
 		AddComingSoonMovieGridPane.add(new Label("Description"), 0, 4);
 
+		 /**
+	       * Declaring an array of textfield 
+	       * The text field is responsible for storing the value of coming soon movie
+	       * Soon will be used to write into the textfile by obtaining it from the variable
+	       * 
+	       * 
+	       * 
+	       */
+
+		
+		
 		TextField[] AddComingSoonMovieData = new TextField[4];
 		for(int i=0; i<AddComingSoonMovieData.length; i++){
 			AddComingSoonMovieData[i] = new TextField();
@@ -310,6 +422,13 @@ public class AddMovieInterface extends Application{
 	        MovieImageDirectoryButton.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
+	            	
+	       		 /**
+	      	       * File chooser 
+	      	       * will get the file directory from here
+	      	       * 
+	      	       */
+
          			FileChooser fileChooser = new FileChooser();
 	            			File selectedFile = fileChooser.showOpenDialog(null);
 	            			if (selectedFile != null) {
@@ -352,9 +471,25 @@ public class AddMovieInterface extends Application{
 		return AddComingSoonMovieGridPane;
 	}
 	
-	
+	/************************************************************************
+     *                                                                      *
+     *                                                                      *
+     * \defgroup Method                                          *
+     *Method to generate the add interface                   *
+     *                                                                      *
+     * @{                                                                   *
+     ***********************************************************************/
 	public Scene GenerateAddPage(Stage AddStage){
 
+		 /**
+	       * 
+	       * The method will generate the adding interface
+	       * This section will call every addpage related method
+	       * It will return a scene to help the transition of next or previous page
+	       * 
+	       */
+
+		
         BorderPane AddMovieBorderPane = new BorderPane();	
         Image AddMovieImage = new Image("MovieInterfaceResource/Background.jpg",2000,1500, false,false);
         BackgroundImage AddMovieBackgroundImage= new BackgroundImage(AddMovieImage,
@@ -403,6 +538,16 @@ public class AddMovieInterface extends Application{
         Pane leftpane = new Pane();
         leftpane.setPadding(new Insets(0,50,0,50));
         AddMovieBorderPane.setLeft(leftpane);
+        
+		 /**
+	       * Notice: this page require no stage of its own
+	       * 
+	       * 
+	       * the scene is declare here
+	       * 
+	       * 
+	       */
+
         
         Scene scene = new Scene(AddMovieBorderPane);
         AddStage.setScene(scene);
