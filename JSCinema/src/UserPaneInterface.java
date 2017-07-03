@@ -1,14 +1,7 @@
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
 import com.sun.prism.impl.Disposer.Record;
 
 import javafx.beans.property.SimpleBooleanProperty;
@@ -330,19 +323,22 @@ public class UserPaneInterface {
 				}
 				//If there was no duplicate, add it into the file. Else, throw an error prompt at the user
 				if(usernameIsNotDuplicate){
-					String uniqueID = User.generateUniqueID(type.equals("Admin"));
-					temp.add(
-							new User(uniqueID, username, pword)
-							);
-					MainApplication.setListOfUsers(temp);
-					User.saveUsersToUserFile(temp);
-					JOptionPane.showMessageDialog(null, 
-							"A new user was created. Details: \n\n" 
-									+ "Unique ID : " + uniqueID + "\n"
-									+ "Username : " + username + "\n"
-									+ "Password : " + pword + "\n", 
-									"New User Created", 
-									JOptionPane.INFORMATION_MESSAGE);
+					int dialogButton = JOptionPane.YES_NO_OPTION;
+		    		dialogButton = JOptionPane.showConfirmDialog(null, "Are You sure?", "Warning", dialogButton);
+		    		if(dialogButton == JOptionPane.YES_OPTION){
+		    			String uniqueID = User.generateUniqueID(type.equals("Admin"));
+		    			temp.add(
+								new User(uniqueID, username, pword)
+								);
+						MainApplication.updateUserArrayListAndSaveToFile(temp);
+						JOptionPane.showMessageDialog(null, 
+								"A new user was created. Details: \n\n" 
+										+ "Unique ID : " + uniqueID + "\n"
+										+ "Username : " + username + "\n"
+										+ "Password : " + pword + "\n", 
+										"New User Created", 
+										JOptionPane.INFORMATION_MESSAGE);
+		    		}
 				}
 				else{
 					JOptionPane.showMessageDialog(null, 
@@ -675,13 +671,17 @@ public class UserPaneInterface {
 									JOptionPane.ERROR_MESSAGE);
 				}
 				else{
-					//Remove the selected item from the table list
-					userData.remove(currentUser);
-					//Remove the user from the main ArrayList as well 
-					ArrayList<User> temp = MainApplication.getListOfUsers();
-					temp.remove(currentUser);
-					//Update and save
-					MainApplication.updateUserArrayListAndSaveToFile(temp);
+					int dialogButton = JOptionPane.YES_NO_OPTION;
+		    		dialogButton = JOptionPane.showConfirmDialog(null, "Are You sure?", "Warning", dialogButton);
+		    		if(dialogButton == JOptionPane.YES_OPTION){
+						//Remove the selected item from the table list
+						userData.remove(currentUser);
+						//Remove the user from the main ArrayList as well 
+						ArrayList<User> temp = MainApplication.getListOfUsers();
+						temp.remove(currentUser);
+						//Update and save
+						MainApplication.updateUserArrayListAndSaveToFile(temp);
+		    		}
 				}
 			});
 		}

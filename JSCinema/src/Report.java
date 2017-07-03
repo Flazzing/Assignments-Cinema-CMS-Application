@@ -62,36 +62,6 @@ public class Report {
 		return scene;
 	}
 	
-	// Store the data of booking made into a Map and return the map
-	public Map<String, List<Integer>> getMoviesBooked() throws Exception{
-		Map<String,List<Integer>> movieBooked = new HashMap<String,List<Integer>>();
-		File file = new File("MovieDataSource/bookingmade.txt");
-		
-		String movieName = "";
-		
-		if(file.exists()){
-    		System.out.println("File Opened! Calculating number of movies booked");
-    		Scanner input = new Scanner(file);
-
-    		while(input.hasNextLine()){
-    			String line = input.nextLine();	// Store a line from txt file
-    			String[] section = line.split(";");	// Split each line with regex ";" to each section store in an element of array
-    			movieName = section[0];	// Movie name is the first section for each line
-    			List<Integer> numberBooked = new ArrayList<Integer>();
-    			
-    			for(int i = 1; i < section.length; i++){
-    				numberBooked.add(Integer.parseInt(section[i]));
-    			}
-    			movieBooked.put(movieName, numberBooked);
-    		}
-    	input.close();
-    	}else{
-    		System.out.println("File not found, No graph to be shown");
-    	}
-		System.out.println(movieBooked);
-		return movieBooked;
-	}
-	
 	public HBox displayBarGraph() throws Exception{
 		HBox graph = new HBox();
     	
@@ -114,9 +84,9 @@ public class Report {
     	bc.setStyle("-fx-font-size: 20px; -fx-text-fill: BLUE;"
     			+ "-fx-background-color : transparent; -fx-background: transparent; ");
     	
-		Map<String,List<Integer>> data = getMoviesBooked(); // Get the map of data
+		Map<String,List<Integer>> data = CommonElements.getMoviesBooked(); // Get the map of data
     	
-    	// 3 Key set, loop 3 times
+    	// loop through movie booked 
     	for(String key : data.keySet()){
 			int valueCounter = 0;	// set counter to default
 			//Each key have 2 values, yesterday and today's booking

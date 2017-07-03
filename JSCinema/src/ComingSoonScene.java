@@ -195,12 +195,22 @@ public class ComingSoonScene {
 				//to hold the scrollPane 
 				HBox holder = new HBox(20);
 					holder.setPadding(new Insets(290,0,0,680));
-					holder.setMaxWidth(1400);
+					holder.setMaxWidth(1390);
 					holder.getChildren().add(Handler);
+					
+				//another border
+				HBox newBorder = new HBox();
+					newBorder.setPadding(new Insets(200,0,0,660));
+					FileInputStream imageStream13 = new FileInputStream("UserPage/SceneBorder3.png");
+					Image image13 = new Image(imageStream13);
+					ImageView Img13 = new ImageView(image13);
+					Img13.setFitHeight(750);
+					Img13.setFitWidth(750);
+					newBorder.getChildren().add(Img13);
 				
 				//Title for coming soon display
 				HBox Title = new HBox();
-					Title.setPadding(new Insets(230,0,0,890));
+					Title.setPadding(new Insets(230,0,0,900));
 					Label lbl = new Label("Coming Soon");
 					lbl.setFont(Font.font("Arial Black", 35));
 					lbl.setTextFill(Color.LIGHTBLUE);
@@ -209,12 +219,12 @@ public class ComingSoonScene {
 				//Fits the Movie Name followed by the MovieDescription
 				VBox Description = new VBox(25);
 				
-					Description.setPadding(new Insets(600,0,0,680));
+					Description.setPadding(new Insets(600,0,0,700));
 					Label movDescTitle = new Label("			   Movie Description");
 					movDescTitle.setFont(Font.font("Arial Black", 25));
 					movDescTitle.setTextFill(Color.LIGHTBLUE);
 					Label movDesc = new Label("Click the list of movies above to view details and the description of the movie !!!");
-					movDesc.setMaxWidth(600);
+					movDesc.setMaxWidth(580);
 					movDesc.setFont(Font.font("Arial Black", 15));
 					movDesc.setTextFill(Color.LIGHTBLUE);
 					movDesc.setWrapText(true);
@@ -595,7 +605,7 @@ public class ComingSoonScene {
 				    });
 				
 					
-					rootPane2.getChildren().addAll(backgroundPane,Footer,BorderClassPane,NowShowingMov,Description,CommingSoonMov,Title,holder,banner2,MenuBar2);
+					rootPane2.getChildren().addAll(backgroundPane,Footer,BorderClassPane,NowShowingMov,Description,newBorder,CommingSoonMov,Title,holder,banner2,MenuBar2);
 					Scene scene = new Scene(rootPane2, 1440 , 960 );
 					stage.setTitle("JSC");
 					return scene;

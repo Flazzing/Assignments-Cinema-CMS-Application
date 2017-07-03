@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  */
 
 /**
- * @author Ong Jun Quan, Kwan Juen Wen (Steve)
+ * @author Kwan Juen Wen (Steve)
  */
 
 public class MainApplication extends Application {

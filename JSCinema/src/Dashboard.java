@@ -1,5 +1,12 @@
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -259,8 +266,7 @@ public class Dashboard{
 	 * This method checks which movie is in fast Selling
 	 */
 	public static boolean isFastSellingMovie(String movieName) throws Exception{
-		Report report = new Report();
-		Map<String,List<Integer>> data = report.getMoviesBooked(); // Get the map of data
+		Map<String,List<Integer>> data = CommonElements.getMoviesBooked(); // Get the map of data
 		int diff = 0;
 		int[] value = new int[2];
 		
