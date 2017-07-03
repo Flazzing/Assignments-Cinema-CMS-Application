@@ -127,6 +127,11 @@ public class UserPaneInterface {
 			label.setFont(Font.font(null, FontWeight.BOLD, 25));
 		}
 		
+		for(RadioButton rb : userTypeRadioButtons){
+			rb.setFont(Font.font(null, FontWeight.BOLD, 25));
+			rb.setTextFill(Color.WHITE);
+		}
+		
 		for(TextField tf : newUserInput){
 			//tf.setFont(Font.font(12));
 			CommonElements.setStandardTextFieldStyle(tf);
@@ -205,7 +210,7 @@ public class UserPaneInterface {
 						JOptionPane.ERROR_MESSAGE);
 			}
 			else{
-				ArrayList<User> temp = AdminPage.getListOfUsers();
+				ArrayList<User> temp = MainApplication.getListOfUsers();
 				//One last check: The check for identical usernames!
 				boolean usernameIsNotDuplicate = true; //True by default (we didn't find any yet)
 				for(User user : temp){
@@ -221,7 +226,7 @@ public class UserPaneInterface {
 					temp.add(
 							new User(User.generateUniqueID(type.equals("Admin")), username, pword)
 							);
-					AdminPage.setListOfUsers(temp);
+					MainApplication.setListOfUsers(temp);
 					User.saveUsersToUserFile(temp);
 				}
 				else{
