@@ -1,6 +1,12 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -91,64 +97,9 @@ public class CommonElements {
 		return getElementView("PageLayout/3.png");
 	}
 	
-	/*
-	 * This function calculate number movies that is airing
-	 */
-	public static int getNowShowingNo() throws Exception{
-		int num = 0;
-		File file = new File("MovieDataSource/Movie.txt");
-		
-		if(file.exists()){
-    		System.out.println("File Opened! Calculating number of movies.");
-    		Scanner input = new Scanner(file);
-    		
-    		while(input.hasNextLine()){
-    			num++;
-    			input.nextLine();
-    		}// end of while ( calculate lines in text file, 1 line = 1 movie showing)
-    		
-    		input.close();// close input 
-    	}else{
-    		System.out.println("File not found!");
-    	}
-		System.out.println("Movies Available: " +num);
-		return num;// return number of movie showing
-	}
 	
 	/*
-	 * This function changes the style of buttons 
-	 */
-	public static void changeButtonProperty(Button btn) throws Exception{
-    	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
-    	
-    	
-    	// Mouse Hover Effect
-		DropShadow buttonGlow = new DropShadow();
-		buttonGlow.setOffsetX(0.0);
-		buttonGlow.setOffsetY(0.0);
-		buttonGlow.setColor(Color.rgb(0, 176, 240));
-		buttonGlow.setWidth(70);
-		buttonGlow.setHeight(70);
-		
-		btn.setOnMouseEntered(e -> {
-    		btn.setStyle("-fx-background-color: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
-    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-    			+ "-fx-background-color: transparent;");
-    		btn.setEffect(buttonGlow);
-    	});
-    		
-    	btn.setOnMouseExited(e -> {
-    		btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px; -fx-padding: 3 20 3 30; "
-        			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
-        			+ "-fx-background-color: transparent;");
-    		btn.setEffect(null);
-    	});
-	}
-	
-	/*
-	 * This function sets the left menubar for admin pages
+	 * This method sets the left menubar for admin pages
 	 */
 	
 	public static Pane getMenuBar(Stage stage) throws Exception{
@@ -276,4 +227,97 @@ public class CommonElements {
 		return left;
 	}
 	
+	/*
+	 * This method changes the style of buttons 
+	 */
+	public static void changeButtonProperty(Button btn) throws Exception{
+    	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+    			+ "-fx-background-color: transparent;");
+    	
+    	
+    	// Mouse Hover Effect
+		DropShadow buttonGlow = new DropShadow();
+		buttonGlow.setOffsetX(0.0);
+		buttonGlow.setOffsetY(0.0);
+		buttonGlow.setColor(Color.rgb(0, 176, 240));
+		buttonGlow.setWidth(70);
+		buttonGlow.setHeight(70);
+		
+		btn.setOnMouseEntered(e -> {
+    		btn.setStyle("-fx-background-color: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
+    			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+    			+ "-fx-background-color: transparent;");
+    		btn.setEffect(buttonGlow);
+    	});
+    		
+    	btn.setOnMouseExited(e -> {
+    		btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px; -fx-padding: 3 20 3 30; "
+        			+ "-fx-background-radius: 7,2,1; -fx-border-color: transparent; "
+        			+ "-fx-background-color: transparent;");
+    		btn.setEffect(null);
+    	});
+	}
+	
+	
+	/*
+	 * This method calculate number movies that is airing
+	 */
+	public static int getNowShowingNo() throws Exception{
+		int num = 0;
+		File file = new File("MovieDataSource/Movie.txt");
+		
+		if(file.exists()){
+    		System.out.println("File Opened! Calculating number of movies.");
+    		Scanner input = new Scanner(file);
+    		
+    		while(input.hasNextLine()){
+    			num++;
+    			input.nextLine();
+    		}// end of while ( calculate lines in text file, 1 line = 1 movie showing)
+    		
+    		input.close();// close input 
+    	}else{
+    		System.out.println("File not found!");
+    	}
+		System.out.println("Movies Available: " +num);
+		return num;// return number of movie showing
+	}
+
+	/*
+	 * This method store the data of booking made into a Map and return the map
+	 */
+	public static Map<String, List<Integer>> getMoviesBooked() throws Exception{
+		
+		String movieName = "";
+		
+		try{
+			Map<String,List<Integer>> movieBooked = new HashMap<String,List<Integer>>();
+			File file = new File("MovieDataSource/bookingmade.txt");
+    		System.out.println("File Opened! Calculating number of movies booked");
+    		Scanner input = new Scanner(file);
+
+    		while(input.hasNextLine()){
+    			String line = input.nextLine();	// Store a line from txt file
+    			String[] section = line.split(";");	// Split each line with regex ";" to each section store in an element of array
+    			movieName = section[0];	// Movie name is the first section for each line
+    			List<Integer> numberBooked = new ArrayList<Integer>();
+    			List<String> movieChecker = new ArrayList<String>();
+    			
+    			if(!movieChecker.contains(movieName)){
+    				movieChecker.add(movieName);
+    				for(int i = 1; i < section.length; i++){
+        				numberBooked.add(Integer.parseInt(section[i]));
+        			}
+        			movieBooked.put(movieName, numberBooked);
+    			}
+    		}
+    	input.close();
+		System.out.println(movieBooked);
+		return movieBooked;
+    	}catch(Exception ex){
+    		System.out.println("File not found");
+    	}
+		return null;
+	}
 }
