@@ -51,10 +51,17 @@ public class MainApplication extends Application {
 		MainApplication.loginScene = loginScene;
 	}
 	
+	/*
+	 * This function is used to update the ArrayList in MainApplication, and save that list to 'user.dat'.
+	 */
+	public static void updateUserArrayListAndSaveToFile(ArrayList<User> newListOfUsers){
+		// Update main ArrayList
+    	MainApplication.setListOfUsers(newListOfUsers);
+    	// Save to user.dat
+    	User.saveUsersToUserFile(MainApplication.getListOfUsers());
+	}
+	
 	public void start(Stage primaryStage) throws Exception{
-		for(User user: getListOfUsers()){
-			System.out.println(user.getUniqueID() + " " + user.getUsername() + " " + user.getPassword());
-		}
 		setLoginScene(LoginPage.generateLoginScreen());
 		
 		setMainStage(primaryStage);

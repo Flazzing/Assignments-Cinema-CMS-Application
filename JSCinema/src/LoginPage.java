@@ -129,7 +129,6 @@ public class LoginPage {
 		});
 		
 		loginButton.setOnAction(e -> {
-			System.out.println("Login Button Pushed");
 			ArrayList<User> users = MainApplication.getListOfUsers();
 			boolean foundUser = false; //false by default
 			for(User user : users){
@@ -148,12 +147,10 @@ public class LoginPage {
 						System.err.println("Somehting went horribly wrong. Printing out stack trace.");
 						e1.printStackTrace();
 					}
-					System.out.println(MainApplication.getUserLoggedIn());
 					break;
 				}
 			}
 			if(foundUser == false){
-				System.out.println("Incorrect username/password");
 				loginError.setVisible(true);
 			}
 			loginInputs[0].setText("");

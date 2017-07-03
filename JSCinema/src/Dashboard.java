@@ -35,7 +35,6 @@ public class Dashboard{
 	
 	public Scene getDashboard(Stage stage) throws Exception{
 		stage.setTitle("Dashboard");
-		System.out.println("Entered Admin's Dashboard!");
 		Pane root = new Pane();// root pane 
 		
 		//Setting Background Image
