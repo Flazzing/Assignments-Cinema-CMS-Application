@@ -138,7 +138,7 @@ public class User implements Serializable {
 	 */
 	public static String generateUniqueID(boolean makeAdmin){
 		ArrayList<String> uniqueIDsThatHaveBeenUsed = new ArrayList<String>();
-		for(User user : AdminPage.getListOfUsers()){
+		for(User user : MainApplication.getListOfUsers()){
 			String temp = user.getUniqueID();
 			if(temp.startsWith(makeAdmin ? "Admin" : "User")){
 				uniqueIDsThatHaveBeenUsed.add(temp);

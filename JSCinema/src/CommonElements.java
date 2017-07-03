@@ -255,7 +255,7 @@ public class CommonElements {
     		if(dialogButton == JOptionPane.YES_OPTION){
     			System.out.println("You have logged out!");
     			//Go back to login screen
-    			stage.setScene(AdminPage.getLoginScene());
+    			stage.setScene(MainApplication.getLoginScene());
     		}
     	});
     	

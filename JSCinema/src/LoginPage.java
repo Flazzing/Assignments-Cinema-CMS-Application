@@ -130,15 +130,15 @@ public class LoginPage {
 		
 		loginButton.setOnAction(e -> {
 			System.out.println("Login Button Pushed");
-			ArrayList<User> users = AdminPage.getListOfUsers();
+			ArrayList<User> users = MainApplication.getListOfUsers();
 			boolean foundUser = false; //false by default
 			for(User user : users){
 				if(user.verifyUser(loginInputs[0].getText(), loginInputs[1].getText()) == true){
 					foundUser = true;
-					AdminPage.setUserLoggedIn(user);
+					MainApplication.setUserLoggedIn(user);
 					try {
 						if(user.isAdmin() == true){
-							AdminPage.getMainStage().setScene(new Dashboard().getDashboard(AdminPage.getMainStage()));
+							MainApplication.getMainStage().setScene(new Dashboard().getDashboard(MainApplication.getMainStage()));
 						}
 						else{
 							
@@ -147,7 +147,7 @@ public class LoginPage {
 						System.err.println("Somehting went horribly wrong. Printing out stack trace.");
 						e1.printStackTrace();
 					}
-					System.out.println(AdminPage.getUserLoggedIn());
+					System.out.println(MainApplication.getUserLoggedIn());
 					break;
 				}
 			}
