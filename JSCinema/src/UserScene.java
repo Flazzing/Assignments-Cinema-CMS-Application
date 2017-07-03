@@ -896,7 +896,7 @@ import javafx.stage.Stage;
 	            
 	            public void handle(ActionEvent event) {
 	            	
-	            	if(time.matches("-") ||time.matches("0.00-0.00")){
+	            	if(time.matches("") ||time.matches("0.00-0.00")){
 	            		int dialogButton = JOptionPane.CLOSED_OPTION;
 	            		dialogButton = JOptionPane.showConfirmDialog(null, "Please select an available time slot?", "Time slot not found", dialogButton);
 	            		if(dialogButton == JOptionPane.OK_OPTION){
