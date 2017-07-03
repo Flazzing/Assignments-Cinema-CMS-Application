@@ -180,48 +180,62 @@ import javafx.stage.Stage;
 				hbox1.setPadding(new Insets(200,0,0,30));
 				hbox1.getChildren().add(sp1);
 		
-			//borderImages
+			//Design 1 Border (removed)
 			HBox border = new HBox();
 		
-				border.setPadding(new Insets(600,0,0,18));
-				FileInputStream imageStream7 = new FileInputStream("UserPage/border.png");
+				border.setPadding(new Insets(670,0,0,40));
+				FileInputStream imageStream7 = new FileInputStream("UserPage/BorderStyle.png");
 				Image blueBorder = new Image(imageStream7);
 				ImageView Bord1 = new ImageView(blueBorder);
-				Bord1.setFitHeight(220);
-				Bord1.setFitWidth(1394);
+				Bord1.setFitHeight(200);
+				Bord1.setFitWidth(720);
 				border.getChildren().add(Bord1);
 			
+				
 			//time schedule pane	
-			GridPane showingTime = new GridPane();
-				showingTime.setPadding(new Insets(650,0,0,50));
-				showingTime.setHgap(30);
-				showingTime.setVgap(30);	
+			HBox showingTime = new HBox(50);
+				showingTime.setPadding(new Insets(640,0,0,50));
+				Label Movie_Name = new Label("Movie Selected : ");
+				Movie_Name.setFont(Font.font("Arial Black", 24));
+				Movie_Name.setTextFill(Color.LIGHTBLUE);
+				Label Movie_Time = new Label("Airing Time :");
+				Movie_Time.setFont(Font.font("Arial Black", 24));
+				Movie_Time.setTextFill(Color.LIGHTBLUE);
+				
+				showingTime.getChildren().addAll(Movie_Name,Movie_Time);
+					
 			
+				GridPane showingTime2 = new GridPane();
+				showingTime2.setPadding(new Insets(695,0,0,60));
+				showingTime2.setHgap(230);
+				showingTime2.setVgap(35);
 			//togglegroup the time button (user can only select one time at any given moment)
 			ToggleGroup group = new ToggleGroup();
 			RadioButton time1 = new RadioButton("Not Applicable");
-				time1.setFont(Font.font("Times New Roman", 20));
-				time1.setTextFill(Color.AQUA);
+				time1.setFont(Font.font("Arial", 20));
+				time1.setTextFill(Color.LIGHTBLUE);
 			
 			RadioButton time2 = new RadioButton("Not Applicable");
-				time2.setFont(Font.font("Times New Roman", 20));
-				time2.setTextFill(Color.AQUA);
+				time2.setFont(Font.font("Arial", 20));
+				time2.setTextFill(Color.LIGHTBLUE);
 			
 			RadioButton time3 = new RadioButton("Not Applicable");
-				time3.setFont(Font.font("Times New Roman", 20));
-				time3.setTextFill(Color.AQUA);
+				time3.setFont(Font.font("Arial", 20));
+				time3.setTextFill(Color.LIGHTBLUE);
 			
 			RadioButton time4 = new RadioButton("Not Applicable");
-				time4.setFont(Font.font("Times New Roman", 20));
-				time4.setTextFill(Color.AQUA);
+				time4.setFont(Font.font("Arial", 20));
+				time4.setTextFill(Color.LIGHTBLUE);
 			
 			RadioButton time5 = new RadioButton("Not Applicable");
-				time5.setFont(Font.font("Times New Roman", 20));
-				time5.setTextFill(Color.AQUA);
+				time5.setFont(Font.font("Arial", 20));
+				time5.setTextFill(Color.LIGHTBLUE);
 				
 			RadioButton time6 = new RadioButton("Not Applicable");
-				time6.setFont(Font.font("Times New Roman", 20));
-				time6.setTextFill(Color.AQUA);
+				time6.setFont(Font.font("Arial", 20));
+				time6.setTextFill(Color.LIGHTBLUE);
+				
+			
 			
 				time1.setToggleGroup(group);
 				time2.setToggleGroup(group);
@@ -229,30 +243,29 @@ import javafx.stage.Stage;
 				time4.setToggleGroup(group);
 				time5.setToggleGroup(group);
 				time6.setToggleGroup(group);
+				showingTime2.add(time1, 0, 0);
+				showingTime2.add(time2, 0, 1);
+				showingTime2.add(time3, 0, 2);
+				showingTime2.add(time4, 1, 0);
+				showingTime2.add(time5, 1, 1);
+				showingTime2.add(time6, 1, 2);
 				
 				
-				
-				Label ShowingTimeAvailable = new Label("Showing Time Available");
-				ShowingTimeAvailable.setFont(Font.font("Times New Roman",FontWeight.BOLD, 25));
-				ShowingTimeAvailable.setTextFill(Color.AQUA);
+			VBox LabelPane = new VBox(10);
+			LabelPane.setPadding(new Insets(700,0,0,940));
+			Label MovieSelected = new Label("Movie Name");
+			MovieSelected.setFont(Font.font("Arial Black", 24));
+			MovieSelected.setTextFill(Color.LIGHTBLUE);
+			Label TimeSelected = new Label("Movie Time");
+			TimeSelected.setFont(Font.font("Arial Black", 24));
+			TimeSelected.setTextFill(Color.LIGHTBLUE);
 			
-				Label Movie_Name = new Label("Cinema Name");
-				Movie_Name.setFont(Font.font("Times New Roman", 22));
-				Movie_Name.setTextFill(Color.AQUA);
-				
-				showingTime.add(ShowingTimeAvailable, 0, 0);
-				showingTime.add(Movie_Name, 0, 1);
-				showingTime.add(time1, 1, 1);
-				showingTime.add(time2, 2, 1);
-				showingTime.add(time3, 3, 1);
-				showingTime.add(time4, 1, 2);
-				showingTime.add(time5, 2, 2);
-				showingTime.add(time6, 3, 2);
+			LabelPane.getChildren().addAll(MovieSelected,TimeSelected);
 			
 			//Proceed button Pane - movie seating pane
 			HBox BtnPane = new HBox(20);
 			
-				BtnPane.setPadding(new Insets(830,0,0,980));
+				BtnPane.setPadding(new Insets(830,0,0,940));
 				Button Back = new Button("Back");
 				Button Proceed = new Button("Proceed");
 				Back.setMinWidth(200);
@@ -276,7 +289,7 @@ import javafx.stage.Stage;
 		            	time5.setText("Not Applicable");
 		            	time6.setText("Not Applicable");
 		            	
-		            	Movie_Name.setText(movieNames[0]);
+		            	Movie_Name.setText("Movie Selected : " + movieNames[0]);
 		            	try{
 		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
@@ -322,7 +335,7 @@ import javafx.stage.Stage;
 		            	time5.setText("Not Applicable");
 		            	time6.setText("Not Applicable");
 		            	
-		            	Movie_Name.setText(movieNames[1]);
+		            	Movie_Name.setText("Movie Selected : " + movieNames[1]);
 		            	try{
 		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
@@ -368,7 +381,7 @@ import javafx.stage.Stage;
 		            	time5.setText("Not Applicable");
 		            	time6.setText("Not Applicable");
 		            	
-		            	Movie_Name.setText(movieNames[2]);
+		            	Movie_Name.setText("Movie Selected : " + movieNames[2]);
 		            	try{
 		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
@@ -413,7 +426,7 @@ import javafx.stage.Stage;
 		            	time5.setText("Not Applicable");
 		            	time6.setText("Not Applicable");
 		            	
-		            	Movie_Name.setText(movieNames[3]);
+		            	Movie_Name.setText("Movie Selected : " + movieNames[3]);
 		            	try{
 		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
@@ -458,7 +471,7 @@ import javafx.stage.Stage;
 		            	time5.setText("Not Applicable");
 		            	time6.setText("Not Applicable");
 		            	
-		            	Movie_Name.setText(movieNames[4]);
+		            	Movie_Name.setText("Movie Selected : " + movieNames[4]);
 		            	try{
 		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
@@ -503,7 +516,7 @@ import javafx.stage.Stage;
 		            	time5.setText("Not Applicable");
 		            	time6.setText("Not Applicable");
 		            	
-		            	Movie_Name.setText(movieNames[5]);
+		            	Movie_Name.setText("Movie Selected : " + movieNames[5]);
 		            	try{
 		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
@@ -548,7 +561,7 @@ import javafx.stage.Stage;
 		            	time5.setText("Not Applicable");
 		            	time6.setText("Not Applicable");
 		            	
-		            	Movie_Name.setText(movieNames[6]);
+		            	Movie_Name.setText("Movie Selected : " + movieNames[6]);
 		            	try{
 		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
@@ -593,7 +606,7 @@ import javafx.stage.Stage;
 		            	time5.setText("Not Applicable");
 		            	time6.setText("Not Applicable");
 		            	
-		            	Movie_Name.setText(movieNames[7]);
+		            	Movie_Name.setText("Movie Selected : " + movieNames[7]);
 		            	try{
 		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
@@ -638,7 +651,7 @@ import javafx.stage.Stage;
 		            	time5.setText("Not Applicable");
 		            	time6.setText("Not Applicable");
 		            	
-		            	Movie_Name.setText(movieNames[8]);
+		            	Movie_Name.setText("Movie Selected : " + movieNames[8]);
 		            	try{
 		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
@@ -683,7 +696,7 @@ import javafx.stage.Stage;
 		            	time5.setText("Not Applicable");
 		            	time6.setText("Not Applicable");
 		            	
-		            	Movie_Name.setText(movieNames[9]);
+		            	Movie_Name.setText("Movie Selected : " + movieNames[9]);
 		            	try{
 		            	java.io.File file = new java.io.File("MovieDataSource/Movie.txt");
 		            	Scanner input = new Scanner(file);
@@ -759,6 +772,9 @@ import javafx.stage.Stage;
 	            			
 	            			time = time1.getText();
 	            			hall = splitter[8];
+	            			MovieSelected.setText("Selected : " + MovieName);
+	            			TimeSelected.setText("Showing Time : " + time);
+	            			
 	            			
 	            		}
 	            		
@@ -784,7 +800,8 @@ import javafx.stage.Stage;
 	            			
 	            			time = time2.getText();
 	            			hall = splitter[9];
-	            			
+	            			MovieSelected.setText("Selected : " + MovieName);
+	            			TimeSelected.setText("Showing Time : " + time);
 	            		}
 	            		
 	            		}
@@ -808,7 +825,8 @@ import javafx.stage.Stage;
 	            			
 	            			time = time3.getText();
 	            			hall = splitter[10];
-	            			
+	            			MovieSelected.setText("Selected : " + MovieName);
+	            			TimeSelected.setText("Showing Time : " + time);
 	            		}
 	            		
 	            		}
@@ -832,7 +850,8 @@ import javafx.stage.Stage;
     			
 							time = time4.getText();
 							hall = splitter[11];
-    			
+							MovieSelected.setText("Selected : " + MovieName);
+	            			TimeSelected.setText("Showing Time : " + time);
 						}
     		
 					}
@@ -856,7 +875,8 @@ import javafx.stage.Stage;
     			
 							time = time5.getText();
 							hall = splitter[12];
-    			
+							MovieSelected.setText("Selected : " + MovieName);
+	            			TimeSelected.setText("Showing Time : " + time);
 						}
     		
 					}
@@ -880,7 +900,8 @@ import javafx.stage.Stage;
 			    			
 			    			time = time6.getText();
 			    			hall = splitter[13];
-			    			
+			    			MovieSelected.setText("Selected : " + MovieName);
+	            			TimeSelected.setText("Showing Time : " + time);
 			    		}
 			    		
 			    		}
@@ -904,21 +925,18 @@ import javafx.stage.Stage;
 	            		}
 	            	}else{
 	            		
-	            		Seat seat = new Seat();
-	            		seat.GenerateSeat(stage, MovieName, time, hall, Directory);
-	            		
 	            		//------------TO CHING SCENE-------------
 	            		
-	            		//Ching ching = new Ching(MovieName,time,hall,Directory);
-	            		//stage.setScene(ching.ChingMethod(stage));
+	            		Seat ching = new Seat();
+	            		stage.setScene(ching.GenerateSeat(stage,MovieName,time,hall,Directory));
 	            		
-	            		//------------EDIT TO HERE---------------
+	            		
 	            	}
 	            } 
 	            });
 			
 			//adding all the pane in to RootPane for UserScene 
-			rootPane.getChildren().addAll(backgroundPane,Footer,banner,border,BtnPane,showingTime,hbox1,MenuBar);
+			rootPane.getChildren().addAll(backgroundPane,Footer,banner,border,LabelPane,BtnPane,showingTime,showingTime2,hbox1,MenuBar);
 			Scene scene = new Scene(rootPane, 1440 , 960 );
 			scene.getStylesheets().add("style.css");
 			stage.setTitle("JSC");
@@ -926,4 +944,3 @@ import javafx.stage.Stage;
 		}
 		
 }
-	
