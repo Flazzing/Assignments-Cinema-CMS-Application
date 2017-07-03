@@ -141,7 +141,9 @@ public class LoginPage {
 							MainApplication.getMainStage().setScene(new Dashboard().getDashboard(MainApplication.getMainStage()));
 						}
 						else{
-							
+						// edited by jon for non _ admin
+						UserScene userScene = new UserScene();
+							stage.setScene(userScene.getUserScene(stage));
 						}
 					} catch (Exception e1) {
 						System.err.println("Somehting went horribly wrong. Printing out stack trace.");
