@@ -19,6 +19,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -203,13 +204,15 @@ public class Dashboard{
 				if(i == 1){
 					if(isFastSellingMovie(lbl.toString())){
 						Label lbl2 = new Label("Fast Selling!");
-						lbl.setStyle("-fx-text-fill : Cyan");
-						lbl2.setStyle("-fx-text-fill : Cyan");
+						lbl.setStyle("-fx-text-fill : Yellow");
+						lbl.setFont(Font.font(null, FontWeight.BOLD, 20));
+						lbl2.setStyle("-fx-text-fill : Yellow");
+						lbl2.setFont(Font.font(null, FontWeight.BOLD, 20));
 						gpane[j].add(lbl2, 3,0);
 					}
 					gpane[j].add(lbl, 0, 0);
 					
-					GridPane.setColumnSpan(lbl, 2);
+					GridPane.setColumnSpan(lbl, 3);
 				}
 				else{
 					gpane[j].add(lbl, i-1, 1);
