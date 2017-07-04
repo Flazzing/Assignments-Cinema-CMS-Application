@@ -39,6 +39,11 @@ import javafx.stage.Stage;
 public class ComingSoonScene {
 
 	String [] comingSoonMovieNames = new String [10];
+	/**
+	* This method displays coming soon movies as well as total overall movies
+	* @param stage : method receives a stage
+	* @return scene : returns scene to display interface
+	*/
 	
 	//SCENE 2 - ComingSoon Scene
 			public Scene getComingSoon(Stage stage) throws Exception{
