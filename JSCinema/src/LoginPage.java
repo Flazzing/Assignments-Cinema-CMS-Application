@@ -137,9 +137,11 @@ public class LoginPage {
 					MainApplication.setUserLoggedIn(user);
 					try {
 						if(user.isAdmin() == true){
+							loginError.setVisible(false);
 							MainApplication.getMainStage().setScene(new Dashboard().getDashboard(MainApplication.getMainStage()));
 						}
 						else{
+							loginError.setVisible(false);
 							UserScene userScene = new UserScene();
 							MainApplication.getMainStage().setScene(userScene.getUserScene(MainApplication.getMainStage()));
 						}
