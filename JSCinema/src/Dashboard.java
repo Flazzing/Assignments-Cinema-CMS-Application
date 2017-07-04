@@ -31,7 +31,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * This class is used to generate the Dashboard.
+ * This class is used to generate the Dashboard page.
  */
 
 /**
@@ -39,7 +39,14 @@ import javafx.stage.Stage;
  */
 
 public class Dashboard{
-	
+	/**
+	* This method generate the dashboard scene
+	*
+	* @param stage
+	*	method receives stage 
+	* @return scene
+	* 	scene for stage
+	*/
 	public Scene getDashboard(Stage stage) throws Exception{
 		stage.setTitle("Dashboard");
 		Pane root = new Pane();// root pane 
@@ -68,8 +75,8 @@ public class Dashboard{
 		
 		// Center content
 		Pane centTop = new Pane();
-    	StackPane centerTop = new StackPane();
-    	centerTop.setPadding(new Insets(185,50,50,400));	
+    		StackPane centerTop = new StackPane();
+    		centerTop.setPadding(new Insets(185,50,50,400));	
 		GridPane ctop1 = new GridPane();
 		ctop1.setPadding(new Insets(70, 50,50,15));
 		ctop1.setHgap(40);
@@ -172,8 +179,11 @@ public class Dashboard{
 		Scene scene = new Scene(root, 1440, 960);
 		return scene;
 	}
+	
 	/*
 	 * This method create the content of nowshowing in dashboard
+	 *
+	 * @return moviesInfo : a VBox
 	 */
 	public VBox displayNowShowing() throws Exception{
 		System.out.println("Getting Movies Information...");
@@ -234,6 +244,8 @@ public class Dashboard{
 	
 	/*
 	 * This method Calculate the total booking made 
+	 *
+	 * @return tot : total with int as data type
 	 */
 	public int getTotalBookingMade() throws Exception{
 		int tot = 0;
@@ -251,7 +263,7 @@ public class Dashboard{
     			movieName = section[0];	// Movie name is the first section for each line
     			
     			for(int i = 1; i < section.length; i++){
-    				tot += Integer.parseInt(section[i]);
+    				tot += Integer.parseInt(section[i]);// increament total
     			}
     		}
     	input.close();
@@ -264,9 +276,15 @@ public class Dashboard{
 
 	/*
 	 * This method checks which movie is in fast Selling
+	 * 
+	 * @param movieName 
+	 * 	mtehod receive name of movie
+	 * @return checkIsSellingFast : a boolean flag
+	 *
 	 */
 	public static boolean isFastSellingMovie(String movieName) throws Exception{
 		Map<String,List<Integer>> data = CommonElements.getMoviesBooked(); // Get the map of data
+		boolean checkIsSellingFast = false;
 		int diff = 0;
 		int[] value = new int[2];
 		
@@ -287,11 +305,11 @@ public class Dashboard{
 			 */
 			if(movieName.contains(key) && diff >= 30){
 				System.out.println("Fast Selling movie are: " +key);
-				return true;
+				return checkIsSellingFast = true;
 			}
 			else
 				continue;
 		}
-		return false;
+		return checkIsSellingFast;
 	}
 }
