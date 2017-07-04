@@ -932,7 +932,15 @@ import javafx.stage.Stage;
 	            	}else{
 	            		
 	            		//------------TO CHING SCENE-------------
-	            		
+	            		/**
+				* To send parameters to another class's method
+				* @parameters sent:
+				*		   stage : stage
+				*		   MovieName : String
+				*		   time : String
+				*		   hall : String
+				*		   Directory : String
+				*/
 	            		Seat ching = new Seat();
 	            		stage.setScene(ching.GenerateSeat(stage,MovieName,time,hall,Directory));
 	            		
