@@ -35,6 +35,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PurchaseConfirmation extends Application {
+	/**
+		* This method is to display final booking summary that include movie name, movie directory, show time, hall booked and many more
+		*
+		*@param  stage : method receives variables and stage
+		*@return scene : a scene to show interface.
+		*/
+	
 	
 	public Scene generatePurchaseConfirmation(Stage stage, String MovieName ,String MovieDirectory , String ShowTime , String BookedHall ,String BookedSeats, String TotalAdult , String TotalChildren, double TotalPrice)throws FileNotFoundException{
 		
@@ -241,6 +248,13 @@ public class PurchaseConfirmation extends Application {
 			
 	}
 	
+	
+	/**
+		* This method is to update the total booking made after the confirmation of booking is done
+		*
+		*@param  stage : method receives variables and stage
+		*@return scene : a scene to show interface.
+		*/
 	public static void updateBookingMade(String movieName, int bookingmade) throws Exception{
 		
 		try{
