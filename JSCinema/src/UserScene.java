@@ -48,6 +48,12 @@ import javafx.stage.Stage;
 		String hall ="";
 		String Directory = "";
 		
+		/**
+		* This method is to display movies available and the available time for the selected movies
+		*
+		*@param  stage : method receives stage
+		*@return scene : a scene to show interface.
+		*/
 		
 		public Scene getUserScene(Stage stage) throws Exception{
 		
