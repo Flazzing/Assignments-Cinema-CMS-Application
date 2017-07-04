@@ -348,6 +348,7 @@ public class Seat extends Application{
 			int i=0;
 			for( ; i< totalpeople-(Integer.parseInt(children.getText().replace("Children: ", ""))); i++){
 				ticketdetail[i] = new Label(Integer.toString(Integer.parseInt(adult.getText().replace("Adult: ", "")) -i) + "\t\t\t\tAdult: " + "\t\t  "+ ticket.getTicketAdultPrice());
+				System.out.println(i);
 				hbox[i] = new HBox(50);
 				seatPosition[i] = new TextField();
 				hbox[i].getChildren().addAll(ticketdetail[i],seatPosition[i]);
@@ -356,6 +357,7 @@ public class Seat extends Application{
 			int b =+ i;
 			for( ; b<totalpeople; b++){
 				ticketdetail[b] = new Label(b+1 + "\t\t\t\tChildren: " + "\t\t  "+ ticket.getTicketChildPrice());
+				System.out.println(b);
 				hbox[b] = new HBox(50);
 				seatPosition[b] = new TextField();
 				hbox[b].getChildren().addAll(ticketdetail[b], seatPosition[b]);
@@ -363,9 +365,13 @@ public class Seat extends Application{
 			}
 			double total =  10 * (Integer.parseInt(children.getText().replace("Children: ", "")));
 			total += 15*(Integer.parseInt(adult.getText().replace("Adult: ", "")));
-			vbox.getChildren().add(new Label("Total: " + Double.toString(total) ));
+			
+			Label templabel = new Label("Total: " + Double.toString(total));
+			templabel.setLayoutX(800);
+			templabel.setLayoutY(600);
+			vbox.getChildren().add(templabel);
 			root.getChildren().add(vbox);
-			vbox.setLayoutX(1030);
+			vbox.setLayoutX(1130);
 			vbox.setLayoutY(780);
 		});
 			
@@ -425,9 +431,9 @@ public class Seat extends Application{
 			
 			
 			
-			double total24 =  10 * (Integer.parseInt(children.getText().replace("Children: ", "")));
-			total24 += 15*(Integer.parseInt(adult.getText().replace("Adult: ", "")));
-			System.out.println(new String(seat)+ ","+total24+ ","+Integer.toString(totalAdult)+ ","+ Double.toString(totalChild));
+			double totalprice =  10 * (Integer.parseInt(children.getText().replace("Children: ", "")));
+			totalprice += 15*(Integer.parseInt(adult.getText().replace("Adult: ", "")));
+			System.out.println(new String(seat)+ ","+ totalpeople +"," + totalprice+ ","+Integer.toString(totalAdult)+ ","+ Double.toString(totalChild));
 			/**
 			 * set the scene to abother scebe
 			 * 
@@ -436,7 +442,7 @@ public class Seat extends Application{
 			
 		try {
 						
-			stage.setScene(purchaseConfirmation.generatePurchaseConfirmation(stage, MovieName, Directory, time, hall, new String(seat), adult.getText().replace("Adult: ", ""), children.getText().replace("Children: ", ""), total24));
+			stage.setScene(purchaseConfirmation.generatePurchaseConfirmation(stage, MovieName, Directory, time, hall, new String(seat), adult.getText().replace("Adult: ", ""), children.getText().replace("Children: ", ""), totalprice));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -455,7 +461,7 @@ public class Seat extends Application{
 			if(Adult.getText().matches("[0-9]")){
 				adult.setText("Adult: " +Adult.getText());
 				Adult.setEditable(false);
-				
+				System.out.println(				seatPosition[0].getText());
 			}
 			if(Children.getText().matches("[0-9]")){
 				children.setText("Children: "+ Children.getText());
@@ -488,7 +494,7 @@ public class Seat extends Application{
 		}
 		gp.setLayoutX(230);
 		gp.setLayoutY(320);
-		gp.setHgap(70);
+		gp.setHgap(80);
 		gp.setVgap(43);
 		root.getChildren().add(gp);	
 
