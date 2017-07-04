@@ -100,8 +100,11 @@ public class CommonElements {
 	
 	/*
 	 * This method sets the left menubar for admin pages
+	 * 
+	 * @param stage 
+	 *	method receive stage
+	 * @return left : a Pane
 	 */
-	
 	public static Pane getMenuBar(Stage stage) throws Exception{
 		
 		Pane left = new Pane();
@@ -117,7 +120,8 @@ public class CommonElements {
 	    
 	    VBox leftOutline = new VBox(45);
 	    leftOutline.setPadding(new Insets(240,50,50,85));
-	    
+		
+	    // For Dashboard button
 	    HBox hb1 = new HBox();
 	    ImageView imageView5 = getElementView("LeftDashboard/1.png");
     	imageView5.setFitHeight(62);
@@ -136,6 +140,7 @@ public class CommonElements {
 			}
     	});
     	
+	//For Movies button
     	HBox hb2 = new HBox();
     	ImageView imageView6 = getElementView("LeftDashboard/3.png");
     	imageView6.setFitHeight(62);
@@ -153,7 +158,8 @@ public class CommonElements {
 				System.out.println("Scene not found");
 			}
     	});
-        	
+        
+	// For Report Button
     	HBox hb3 = new HBox();
     	ImageView imageView7 =getElementView("LeftDashboard/4.png");
     	imageView7.setFitHeight(62);
@@ -172,6 +178,7 @@ public class CommonElements {
 			}
     	});
     	
+	// For User button
     	HBox hb4 = new HBox();
     	ImageView imageView8 = getElementView("LeftDashboard/6.png");
     	imageView8.setFitHeight(62);
@@ -191,6 +198,7 @@ public class CommonElements {
 			}
     	});
     	
+	// For Logout Button
     	HBox hb5 = new HBox();
     	ImageView imageView9 = getElementView("LeftDashboard/8.png");
     	imageView9.setFitHeight(62);
@@ -229,6 +237,8 @@ public class CommonElements {
 	
 	/*
 	 * This method changes the style of buttons 
+	 *
+	 * @param btn : a Button
 	 */
 	public static void changeButtonProperty(Button btn) throws Exception{
     	btn.setStyle("-fx-text-fill: white;-fx-font-size: 35px;  -fx-padding: 3 20 3 30; "
@@ -262,6 +272,8 @@ public class CommonElements {
 	
 	/*
 	 * This method calculate number movies that is airing
+	 *
+	 * @return num : an int
 	 */
 	public static int getNowShowingNo() throws Exception{
 		int num = 0;
@@ -286,6 +298,9 @@ public class CommonElements {
 
 	/*
 	 * This method store the data of booking made into a Map and return the map
+	 *
+	 * @return movieBooked : a Map that receive String as first argument and List of
+	 * 	Integer for Second Argument
 	 */
 	public static Map<String, List<Integer>> getMoviesBooked() throws Exception{
 		
@@ -303,7 +318,9 @@ public class CommonElements {
     			movieName = section[0];	// Movie name is the first section for each line
     			List<Integer> numberBooked = new ArrayList<Integer>();
     			List<String> movieChecker = new ArrayList<String>();
-    			
+    			/**
+			* For loop starts to loop the array index of one as 1 and 2 is the number of booking made
+			*/
     			if(!movieChecker.contains(movieName)){
     				movieChecker.add(movieName);
     				for(int i = 1; i < section.length; i++){
@@ -314,10 +331,10 @@ public class CommonElements {
     		}
     	input.close();
 		System.out.println(movieBooked);
-		return movieBooked;
+		return movieBooked;// return the map if everything is running perfectly
     	}catch(Exception ex){
     		System.out.println("File not found");
     	}
-		return null;
+		return null; // Return null if the map is failed to create
 	}
 }
