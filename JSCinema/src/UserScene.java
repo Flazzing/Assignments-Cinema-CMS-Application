@@ -7,7 +7,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import javax.swing.JOptionPane;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -37,32 +39,22 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-	/** 
-	
-	@author : Jonathan Foongo
-	@function : Main staff scene / first scene for user site
-	@task : Interface, call ComingSoonScene and Login Scene
-	
-	**/
-
-	//UserScene class for selection of movie and time interface
 	public class UserScene {
 		
-		
-		int no_Movies =0;				//movie calculate
-		String [] movieNames = new String [10];		//store movie names
-		String MovieName = "";				//movie name to send as arguement for next class
-		String time ="";				//time as arguement
-		String hall ="";				//hall as arguement
-		String Directory = "";				//image directory as arguement
+		int no_Movies =0;
+		String [] movieNames = new String [10];
+		String MovieName = "";
+		String time ="";
+		String hall ="";
+		String Directory = "";
 		
 		
 		public Scene getUserScene(Stage stage) throws Exception{
 		
-			//rootpane as the mainpane to be set on scene
+			//SCENE 1 - NOW SHOWING
 			Pane rootPane = new Pane();
 			
-			//background pane - display backgroundimage
+			//background pane
 			Pane backgroundPane = new Pane();
 				
 				FileInputStream imageStream = new FileInputStream("UserPage/Background.png");
@@ -70,7 +62,7 @@ import javafx.stage.Stage;
 				Image image = new Image(imageStream);
 				backgroundPane.getChildren().add(new ImageView(image));
 			
-			//footer pane,logo pane
+			//footer pane
 			HBox Footer = new HBox();
 			
 				FileInputStream imageStream2 = new FileInputStream("UserPage/Logo.png");
@@ -78,8 +70,7 @@ import javafx.stage.Stage;
 				Image image2 = new Image(imageStream2);
 				Footer.getChildren().add(new ImageView(image2));
 				
-			//menu bar background pane 
-			//blackstrip
+			//menu bar background pane
 			HBox banner = new HBox();
 				
 				FileInputStream imageStream3 = new FileInputStream("UserPage/banner.png");
@@ -91,7 +82,6 @@ import javafx.stage.Stage;
 				banner.getChildren().addAll(Img);
 					
 			//menu bar pane
-			//that allows mobility to ComingSoonPane
 			HBox MenuBar = new HBox(25);
 			
 				MenuBar.setPadding(new Insets(135,0,0,50));
@@ -112,7 +102,6 @@ import javafx.stage.Stage;
 				MenuBar.getChildren().addAll(lblNowShowing,lblOption1,lbl,lblOption2);
 				
 			//movies pane
-			//display all movies in a HBox based on text file
 			HBox MoviesImage = new HBox(0);
 			
 				MoviesImage.setStyle("-fx-background: transparent");
@@ -135,7 +124,6 @@ import javafx.stage.Stage;
 			input.close();
 			
 			//moviesLbl
-			//generate movie button for every movie in text file
 			HBox MovieTitle = new HBox(0);
 			
 				MovieTitle.setStyle("-fx-background: transparent");
@@ -166,7 +154,6 @@ import javafx.stage.Stage;
 				MoviesPane.getChildren().addAll(MoviesImage,MovieTitle);
 			
 			//scroll through movies pane
-			//horizontal type pane
 			ScrollPane sp1 = new ScrollPane();
 			
 				sp1.setContent(MoviesPane);
@@ -185,7 +172,7 @@ import javafx.stage.Stage;
 				});
 				sp1.setMaxSize(1370, 750);
 		
-			//pane to hold scrollpane and mitigate excess scrollbar
+			//pane to fit more pane :0(scroll Pane)
 			HBox hbox1 = new HBox();
 		
 				hbox1.setStyle("-fx-background: transparent");
@@ -193,7 +180,7 @@ import javafx.stage.Stage;
 				hbox1.setPadding(new Insets(200,0,0,30));
 				hbox1.getChildren().add(sp1);
 		
-			//Design 1 Border for radiobutton options
+			//Design 1 Border (removed)
 			HBox border = new HBox();
 		
 				border.setPadding(new Insets(670,0,0,40));
@@ -249,7 +236,7 @@ import javafx.stage.Stage;
 				time6.setTextFill(Color.LIGHTBLUE);
 				
 			
-				//fit into gridpane
+			
 				time1.setToggleGroup(group);
 				time2.setToggleGroup(group);
 				time3.setToggleGroup(group);
@@ -946,18 +933,6 @@ import javafx.stage.Stage;
 	            		
 	            	}
 	            } 
-	            });
-			
-			
-	            	Back.setOnAction(e -> {
-	            		int dialogButton = JOptionPane.YES_NO_OPTION;
-	            		dialogButton = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning", dialogButton);
-	            		if(dialogButton == JOptionPane.YES_OPTION){
-	            			System.out.println("You have logged out!");
-	            			//Go back to login screen
-	            			stage.setScene(MainApplication.getLoginScene());
-	            		}
-	            	
 	            });
 			
 			//adding all the pane in to RootPane for UserScene 
