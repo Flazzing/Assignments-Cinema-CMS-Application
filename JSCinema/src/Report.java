@@ -26,6 +26,15 @@ import javafx.stage.Stage;
  */
 
 public class Report {
+	
+	/**
+	 * This method is used to generate the Report page.
+	 *
+	 * @param stage 
+	 * 	method receive stage
+	 * @return scene
+	 * 	scene for stage 
+ 	*/
 	public Scene getReport(Stage stage) throws Exception{
 		stage.setTitle("Report");
 		System.out.println("Entered report page!");
@@ -62,6 +71,11 @@ public class Report {
 		return scene;
 	}
 	
+	/*
+	 * This method display the bar graph of booking summary
+	 *
+	 * @return graph : a HBox
+	 */
 	public HBox displayBarGraph() throws Exception{
 		HBox graph = new HBox();
     	
@@ -111,6 +125,15 @@ public class Report {
 		return graph;
 	}
 	
+	/*
+	 * This method Creates the series for the bar graph
+	 *
+	 * @param bc : a BarChart<String, Number>
+	 * @param key : a String
+	 * @param i : an Integer
+	 *
+	 * @return series : a XYChart.Series
+	 */
 	private XYChart.Series getSeries(BarChart<String, Number> bc, String key, Integer i) {
     	XYChart.Series series = new XYChart.Series();
     	
